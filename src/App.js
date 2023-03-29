@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import NavBar from './componants/nav';
+import HomePage from './pages/home';
+import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
+// Main App function - calls all componants and routes for the app 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+// declare variables
+    const [authenticated, setAuthenticated] = useState(false);
+    const [update,setUpdated] = useState(0);
+    const handleUpdate = () => {setUpdated(update+1)}
+    const [booking, setBooking] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+// retrieve appointments from API
+    useEffect( () => {
+        const database = "http://localhost:1337/api/appointments?populate=*";
+        fetch(database)
+        .then(response => response.json())
+        .then(json => {
+            setBooking(json.data);
+            console.log(json.data);
+            }
+        )
+        .catch(err => {
+            console.log(err.message);
+        });
+    }, [update]);
+
+// return routes to index.js for the different pages of the web-app while calling relevant functions 
+    return (
+            <div className="App">
+                <NavBar />
+                <Routes>
+                    <Route path="/" element={<HomePage booking={booking}/>} />
+                </Routes>
+            </div>
+    );
 }
 
-export default App;
+export default App
