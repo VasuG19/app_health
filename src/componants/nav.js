@@ -14,18 +14,16 @@ function NavBar(){
 const handleClick = event => {};
 
   return(
-    <div>
+    
           <Navbar style={{padding:' 10px'}} bg="dark" variant='dark' expand="lg" fixed="top">
               <Navbar.Brand>Health+</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <LinkContainer onClick={handleClick} to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-                  <LinkContainer onClick={handleClick} to="/admin"><Nav.Link>Admin</Nav.Link></LinkContainer>
                 </Nav>
               </Navbar.Collapse>
         </Navbar>
-    </div>
   )
 }
 export default NavBar

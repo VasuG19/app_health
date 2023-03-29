@@ -8,34 +8,41 @@ import { useState, useEffect } from 'react';
 function App() {
 
 // declare variables
-    const [authenticated, setAuthenticated] = useState(false);
-    const [update,setUpdated] = useState(0);
-    const handleUpdate = () => {setUpdated(update+1)}
-    const [booking, setBooking] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [bookings, setBooking] = useState([]);
 
 // retrieve appointments from API
-    useEffect( () => {
-        const database = "http://localhost:1337/api/appointments?populate=*";
-        fetch(database)
-        .then(response => response.json())
-        .then(json => {
+  const database = "http://localhost:1337/api/appointments?populate=*";
+
+  useEffect( () => {
+    fetch(database)
+    .then(
+        (response) => response.json()
+    )
+    .then(
+         (json) => {
             setBooking(json.data);
-            console.log(json.data);
-            }
-        )
-        .catch(err => {
-            console.log(err.message);
-        });
-    }, [update]);
+            console.log(json.data)
+        }
+    )
+    .catch((err) => {
+        console.log(err.message);
+    });
+}, []);
+
 
 // return routes to index.js for the different pages of the web-app while calling relevant functions 
     return (
             <div className="App">
-                <NavBar />
+              
+              <div className='nav'>
+                  <NavBar />
+              </div>
+
+              <div className='content'>     
                 <Routes>
-                    <Route path="/" element={<HomePage booking={booking}/>} />
+                    <Route path="/" element={<HomePage bookings={bookings}/>} />
                 </Routes>
+              </div>   
             </div>
     );
 }
