@@ -18,3 +18,32 @@ code {
   margin: 70px;
 }
 
+.upcoming
+{
+  padding-left: 200px;
+  padding-right: 200px;
+  height: 200px;
+}
+
+.card{
+  background: #f00;
+}
+
+.appointmentCard{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.carousel-control-prev svg,
+.carousel-control-next svg {
+  width: 30px;
+  height: 30px;
+  color: #000;
+}
+
+.carousel-control-prev svg:hover,
+.carousel-control-next svg:hover {
+  color: #f00;
+}
+
+

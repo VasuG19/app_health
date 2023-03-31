@@ -11,7 +11,6 @@ import { LinkContainer } from 'react-router-bootstrap';
  */
 
 function NavBar(){
-const handleClick = event => {};
 
   return(
     
@@ -20,7 +19,7 @@ const handleClick = event => {};
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <LinkContainer onClick={handleClick} to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
+                  <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
                 </Nav>
               </Navbar.Collapse>
         </Navbar>
