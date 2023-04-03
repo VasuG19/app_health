@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-
 /**
  * Home Page
  * 
@@ -23,10 +22,10 @@ function HomePage(props){
                     <Card.Title>{value.attributes.Date}</Card.Title>
                     <Card.Title>{value.attributes.patient.data.attributes.first_name}</Card.Title>
                     <Card.Text>{value.attributes.Context}</Card.Text>
+                      <Link to={`/Appointment`}>
+                        <Button type="submit" export={value.id}> View Product </Button>
+                      </Link>
                 </Card.Body>
-                <Card.Footer>
-                <Link to="/Appointment"><Button>Home</Button></Link>
-                </Card.Footer>
             </Card> 
         </Carousel.Item>
     )
