@@ -50,4 +50,10 @@ code {
   padding: 0px;
 }
 
+.loginForm{
+  min-height: 500px;
+  align-items: center;
+  justify-content: center;
+}
+
 

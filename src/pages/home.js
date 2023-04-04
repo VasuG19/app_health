@@ -1,4 +1,4 @@
-import React from 'react';
+import {React} from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Carousel } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,7 +32,6 @@ function HomePage(props){
 
     return(
         <div className='home'>
-            <h1>Welcome to Health+!</h1>                
             <Carousel className='upcoming' 
                       prevIcon={<FontAwesomeIcon 
                       icon={faChevronLeft} />} 
