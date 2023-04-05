@@ -12,26 +12,9 @@ code {
     monospace;
 }
 
-
 .content
 {
   margin: 70px;
-}
-
-.upcoming
-{
-  padding-left: 200px;
-  padding-right: 200px;
-  height: 200px;
-}
-
-.card{
-  background: #f00;
-}
-
-.appointmentCard{
-  margin-left: 100px;
-  margin-right: 100px;
 }
 
 .carousel-control-prev svg,
@@ -43,17 +26,26 @@ code {
 
 .carousel-control-prev svg:hover,
 .carousel-control-next svg:hover {
-  color: #f00;
-}
-
-.viewappointment{
-  padding: 0px;
+  color: rgb(0, 149, 255);
 }
 
 .loginForm{
-  min-height: 500px;
   align-items: center;
   justify-content: center;
 }
 
+.loginForm h6{
+  margin-top: 15px;
+}
 
+.formcard{
+  padding: 40px;
+}
+
+.carousel{
+  padding: 100px;
+}
+
+.logout{
+  float: right;
+}

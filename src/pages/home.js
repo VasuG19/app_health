@@ -17,7 +17,7 @@ function HomePage(props){
 
     const bookings = props.bookings.map((value) =>
         <Carousel.Item key={value.id}>
-            <Card className='card'>
+            <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
                     <Card.Title>{value.attributes.Date}</Card.Title>
                     <Card.Title>{value.attributes.patient.data.attributes.first_name}</Card.Title>
@@ -32,12 +32,12 @@ function HomePage(props){
 
     return(
         <div className='home'>
-            <Carousel className='upcoming' 
+            <Carousel 
                       prevIcon={<FontAwesomeIcon 
                       icon={faChevronLeft} />} 
                       nextIcon={<FontAwesomeIcon 
                       icon={faChevronRight} />}>
-                {bookings}
+                      {bookings}
             </Carousel>
         </div>
     )}

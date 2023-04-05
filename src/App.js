@@ -10,11 +10,14 @@ import Register from './componants/register';
 import Login from './componants/login';
 import Logout from './componants/logout';
 
-// Main App function - calls all componants and routes for the app 
-function App() {
+ // Main App function - calls all componants and routes for the app 
+function App({ component: Component, isLoggedIn, ...rest }) {
 
 // declare variables
 const [bookings, setBooking] = useState([]);
+const [authenticated, setAuthenticated] = useState(false);
+const [update,setUpdated] = useState(0);
+const handleUpdate = () => {setUpdated(update+1)}
     
 // retrieve appointments from API
   const database = "http://localhost:1337/api/appointments?populate=*";
@@ -37,10 +40,13 @@ const [bookings, setBooking] = useState([]);
                   <Route path="/" element={<HomePage bookings={bookings}/>} />
                   <Route path="/appointment" element={<Appointment/>} />
                   <Route path="/services" element={<ServicesPage/>} />
-                  <Route path="/Profile" element={<Profile />} />
-                  <Route path="/Register" element={<Register />} />
-                  <Route path="/Login" element={<Login />} />
-                  <Route path="/Logout" element={<Logout />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login 
+                                  authenticated={authenticated}
+                                  handleAuthenticated={setAuthenticated}
+                                  handleUpdate={handleUpdate}/>} />
+                  <Route path="/logout" element={<Logout />} />
                 </Routes>
               </div>
             </div>
