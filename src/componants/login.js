@@ -46,7 +46,7 @@ const Login = (props) => {
       <div>
         { props.authenticated && 
           <div>
-            <div><Button classname="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
+            <div><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
             <Profile />
           </div>
         }
@@ -54,21 +54,21 @@ const Login = (props) => {
           <Row className="loginForm">
               <Col sm="12" md="5" >
                   <Card className="text-center" border='dark'>
-                      <div className='formcard'>
-                      <h1><strong>Login</strong></h1>
-                          <Form className="loginForm" onSubmit={handleSubmit}>
-                              <Form.Group className="mb-3" controlId="formBasicUsername">
-                                  <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                              </Form.Group><br/>
-                              <Form.Group className="mb-3" controlId="formBasicPassword">
-                                  <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                              </Form.Group><br/>
-                              <Button type="submit">Login</Button>
-                          </Form>
-                          <h6>
-                            Click <Link to="/register">Here</Link> to register
-                          </h6>
-                      </div>
+                    <div className='formcard'>
+                    <h1><strong>Login</strong></h1>
+                      <Form className="loginForm" onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        </Form.Group><br/>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </Form.Group><br/>
+                        <Button type="submit">Login</Button>
+                      </Form>
+                      <h6>
+                        Click <Link to="/register">Here</Link> to register
+                      </h6>
+                    </div>
                   </Card>
               </Col>
           </Row>
