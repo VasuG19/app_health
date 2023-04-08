@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import Profile from '../pages/profile';
 
 const Login = (props) => {
   const [username, setUsername] = useState('');
@@ -35,22 +36,20 @@ const Login = (props) => {
   useEffect(() => {
     if (localStorage.getItem('token')) {
       props.handleAuthenticated(true)
+      const getUserData = async () => {
+        try {
+          const response = await axios.get('http://localhost:1337/api/users/me', {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          });
+          setUser(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      getUserData();
     }
-    const getUserData = async () => {
-      try {
-        const response = await axios.get('http://localhost:1337/api/users/me', {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
-
-        setUser(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getUserData();
   }, [userToken, props]);
 
   return (
@@ -59,7 +58,7 @@ const Login = (props) => {
           <div>
             <div><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
             <div>
-              <h1>Welcome! {user.username}</h1>
+              <Profile user={user}/>
             </div>
           </div>
         }
