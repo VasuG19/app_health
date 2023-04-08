@@ -15,16 +15,16 @@ import { Link } from 'react-router-dom';
 
 function HomePage(props){
 
-    const bookings = props.bookings.map((value) =>
+    const accountData = props.data.map((value) =>
         <Carousel.Item key={value.id}>
             <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
                     <Card.Title>{value.attributes.Date}</Card.Title>
                     <Card.Title>{value.attributes.patient.data.attributes.name}</Card.Title>
                     <Card.Text>{value.attributes.Context}</Card.Text>
-                      <Link to={`/Appointment`}>
+                        <Link to={`/Appointment`}>
                         <Button type="submit" export={value.id}> View Product </Button>
-                      </Link>
+                        </Link>
                 </Card.Body>
             </Card> 
         </Carousel.Item>
@@ -37,7 +37,7 @@ function HomePage(props){
                       icon={faChevronLeft} />} 
                       nextIcon={<FontAwesomeIcon 
                       icon={faChevronRight} />}>
-                      {bookings}
+                      {accountData}
             </Carousel>
         </div>
     )}

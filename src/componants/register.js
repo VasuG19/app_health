@@ -37,6 +37,7 @@ const Register = () => {
 
       const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
       console.log(result.data)
+
     } catch (error) {
       console.error(error);
     }
