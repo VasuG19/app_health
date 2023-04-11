@@ -38,12 +38,13 @@ const Login = (props) => {
       props.handleAuthenticated(true)
       const getUserData = async () => {
         try {
-          const response = await axios.get('http://localhost:1337/api/users/me', {
+          const response = await axios.get('http://localhost:1337/api/users/me?populate=profile.appointments', {
             headers: {
               Authorization: `Bearer ${userToken}`,
             },
           });
           setUser(response.data);
+          console.log(response.data);
         } catch (error) {
           console.error(error);
         }
