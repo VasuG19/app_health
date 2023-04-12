@@ -8,7 +8,6 @@ import ServicesPage from './pages/services';
 import Profile from './pages/profile';
 import Register from './componants/register';
 import Login from './componants/login';
-import Logout from './componants/logout';
 
 // Main App function - calls all componants and routes for the app 
 function App({ component: Component, isLoggedIn, ...rest }) {
@@ -16,8 +15,6 @@ function App({ component: Component, isLoggedIn, ...rest }) {
 // declare variables
 const [data, setData] = useState([]);
 const [authenticated, setAuthenticated] = useState(false);
-const [update,setUpdated] = useState(0);
-const handleUpdate = () => {setUpdated(update+1)}
 
 // retrieve appointments from API
   const database = "http://localhost:1337/api/appointments?populate=*";
@@ -43,9 +40,7 @@ const handleUpdate = () => {setUpdated(update+1)}
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login 
                                       authenticated={authenticated}
-                                      handleAuthenticated={setAuthenticated}
-                                      handleUpdate={handleUpdate}/>} />
-                  <Route path="/logout" element={<Logout />} />
+                                      handleAuthenticated={setAuthenticated}/>} />
                 </Routes>
               </div>
             </div>

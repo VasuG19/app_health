@@ -20,7 +20,7 @@ function HomePage(props){
             <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
                     <Card.Title>{value.attributes.Date}</Card.Title>
-                    <Card.Title>{value.attributes.patient.data.attributes.name}</Card.Title>
+                    <Card.Title>{value.attributes.patients.data.attributes.first_name}</Card.Title>
                     <Card.Text>{value.attributes.Context}</Card.Text>
                         <Link to={`/Appointment`}>
                         <Button type="submit" export={value.id}> View Product </Button>
@@ -32,7 +32,7 @@ function HomePage(props){
 
     return(
         <div className='home'>
-            <Carousel 
+            <Carousel
                       prevIcon={<FontAwesomeIcon 
                       icon={faChevronLeft} />} 
                       nextIcon={<FontAwesomeIcon 
