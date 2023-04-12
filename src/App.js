@@ -10,7 +10,7 @@ import Register from './componants/register';
 import Login from './componants/login';
 
 // Main App function - calls all componants and routes for the app 
-function App({ component: Component, isLoggedIn, ...rest }) {
+function App() {
 
 // declare variables
 const [data, setData] = useState([]);
