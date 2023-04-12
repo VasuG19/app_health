@@ -13,18 +13,17 @@ import { LinkContainer } from 'react-router-bootstrap';
 function NavBar(){
 
   return(
-    
-          <Navbar style={{padding:' 10px'}} bg="dark" variant='dark' expand="lg" fixed="top">
-              <Navbar.Brand>Health+</Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                  <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-                  <LinkContainer to="/Services"><Nav.Link>Services</Nav.Link></LinkContainer>
-                  <LinkContainer to="/Login"><Nav.Link>Profile</Nav.Link></LinkContainer>
-                </Nav>
-              </Navbar.Collapse>
-        </Navbar>
+    <Navbar style={{padding:' 10px'}} bg="dark" variant='dark' expand="lg" fixed="top">
+        <Navbar.Brand>Health+</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
+            <LinkContainer to="/Services"><Nav.Link>Services</Nav.Link></LinkContainer>
+            <LinkContainer to="/Login"><Nav.Link>Profile</Nav.Link></LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+    </Navbar>
   )
 }
 export default NavBar

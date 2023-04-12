@@ -28,19 +28,34 @@ const [authenticated, setAuthenticated] = useState(false);
 // return routes to index.js for the different pages of the web-app while calling relevant functions 
   return (
     <div className="App">
-      <div className='nav'>
-          <NavBar />
-      </div>
-      <div className='content'>     
+       <div className='nav'>
+            <NavBar />
+        </div>
+      { authenticated &&
+        <div className='content'>     
+          <Routes>
+            <Route path="/" element={<HomePage data={data}/>} />
+            <Route path="/appointment" element={<Appointment/>} />
+            <Route path="/services" element={<ServicesPage/>} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          </Routes>
+        </div>
+      } 
+      {!authenticated &&
+        <div className='content'>     
         <Routes>
-          <Route path="/" element={<HomePage data={data}/>} />
-          <Route path="/appointment" element={<Appointment/>} />
-          <Route path="/services" element={<ServicesPage/>} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/appointment"element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/services" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/profile" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
         </Routes>
       </div>
+      }
     </div>
   );
 }
