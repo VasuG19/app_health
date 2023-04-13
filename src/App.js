@@ -35,7 +35,7 @@ const [authenticated, setAuthenticated] = useState(false);
         <div className='content'>     
           <Routes>
             <Route path="/" element={<HomePage data={data}/>} />
-            <Route path="/appointment" element={<Appointment/>} />
+            <Route path="/appointment" element={<Appointment data={data}/>} />
             <Route path="/services" element={<ServicesPage/>} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />
