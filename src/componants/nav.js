@@ -19,8 +19,9 @@ function NavBar(){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-            <LinkContainer to="/Services"><Nav.Link>Services</Nav.Link></LinkContainer>
-            <LinkContainer to="/Login"><Nav.Link>Profile</Nav.Link></LinkContainer>
+            <LinkContainer to="/services"><Nav.Link>Services</Nav.Link></LinkContainer>
+            <LinkContainer to="/appointment"><Nav.Link>Appointments</Nav.Link></LinkContainer>
+            <LinkContainer to="/login"><Nav.Link>Profile</Nav.Link></LinkContainer>
           </Nav>
         </Navbar.Collapse>
     </Navbar>

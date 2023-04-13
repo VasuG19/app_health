@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
 function Appointment(props) {
   const [events, setEvents] = useState([]);
@@ -28,16 +29,16 @@ function Appointment(props) {
   const dummyEvents = [
     {
       title: 'Event 1',
-      start: '2023-04-23T10:00:00',
+      start: '2023-04-23T10:00:00.00Z',
       end: '2023-04-23T12:00:00'
     },
     {
       title: 'Event 2',
-      start: '2023-04-13T13:00:00',
+      start: '2023-04-13T13:00:00Z',
       end: '2023-04-13T15:00:00'
     },
   ];
-  setEvents(dummyEvents);
+  setEvents(appointment);
   },[props.data]);
 
 
@@ -50,7 +51,7 @@ function Appointment(props) {
   return (
     <div className='calender'>
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin]}
         initialView="dayGridMonth"
         selectable={true}
         selectMirror={true}
@@ -59,6 +60,7 @@ function Appointment(props) {
         events={events}
         dateClick={handleDateSelect}
         eventClick={handleEventClick}
+        themeSystem= "bootstrap5"
       />
     </div>
   );

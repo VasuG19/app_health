@@ -21,7 +21,7 @@ code {
 .carousel-control-next svg {
   width: 30px;
   height: 30px;
-  color: #000;
+  color: #efe7e7;
 }
 
 .carousel-control-prev svg:hover,
@@ -49,3 +49,13 @@ code {
 .logout{
   float: right;
 }
+
+/* 
+  background-color:rgb(33, 37, 41);
+
+body > #root > div {
+  height: 200vh;
+  background-color:rgb(33, 37, 41);
+}
+
+*/
