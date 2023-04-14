@@ -10,7 +10,8 @@ function Appointment(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [book, setBook] = useState({title:'', start:''});
+  const [formData, setFormData] = useState({title:'', start:''});
+  const {title, start} = formData
   
   useEffect(() => {
     const appointment = props.data.map((value) => ({
@@ -53,13 +54,11 @@ function Appointment(props) {
           start: arg.date,
         },
       ]);
-      setBook([
-        ...book,
-        {
-          title: title,
-          start: arg.date,
-        },
-      ]);
+      setFormData({
+        title: title,
+        start: arg.date.toISOString(),
+      });
+      
     }
   };
 
@@ -68,29 +67,17 @@ function Appointment(props) {
     setIsBooking(true);
     try {
       const config = {headers: {'Content-Type': 'application/json'}};
-      const body = JSON.stringify( book )
+      const body = JSON.stringify({title, start} )
       const response = await axios.post('http://localhost:1337/api/appointments', body, config);
       console.log(response.data)
-      if (response.ok) {
-        const appointment = await response.json();
-        setEvents([
-          ...events,
-          {
-            id: appointment.id,
-            title: 'New Booking',
-            start: appointment.attributes.start,
-          },
-        ]);
         alert('Your booking has been confirmed!');
-      } else {
-        alert('There was an error making your booking.');
-      }
     } catch (error) {
       console.error(error);
       alert('There was an error making your booking.');
     } finally {
       setIsBooking(false);
     }
+    console.log(formData)
   };
 
   return (
