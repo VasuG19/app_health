@@ -67,7 +67,7 @@ function Appointment(props) {
     try {
       const config = {headers: {'Content-Type': 'application/json'}};
       const body = JSON.stringify({title, start} )
-      console.log(body)
+      console.log("body",body)
       const response = await axios.post('http://localhost:1337/api/appointments', body, config);
       console.log(response.data)
         alert('Your booking has been confirmed!');
