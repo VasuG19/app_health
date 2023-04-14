@@ -14,7 +14,7 @@ function Appointment(props) {
   useEffect(() => {
     const appointment = props.data.map((value) => ({
       id: value.id,
-      start: new Date(value.attributes.date_start),
+      start: new Date(value.attributes.start),
       title: value.attributes.context,
     }));    
     setEvents(appointment);
@@ -48,6 +48,7 @@ function Appointment(props) {
       setEvents([
         ...events,
         {
+          title: title,
           start: arg.date,
         },
       ]);
@@ -65,7 +66,7 @@ function Appointment(props) {
         }
       };
 
-      const body = JSON.stringify({ date_start: selectedDate })
+      const body = JSON.stringify({ start: selectedDate })
       
       const response = await axios.post('http://localhost:1337/api/appointments', body, config);
       console.log(response.data)
@@ -77,7 +78,7 @@ function Appointment(props) {
           {
             id: appointment.id,
             title: 'New Booking',
-            date_start: appointment.attributes.start,
+            start: appointment.attributes.start,
           },
         ]);
 

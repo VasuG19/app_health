@@ -20,7 +20,6 @@ function HomePage(props){
             <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
                     <Card.Title>{value.attributes.date}</Card.Title>
-                    <Card.Title>{value.attributes.patients.data.attributes.first_name}</Card.Title>
                     <Card.Text>{value.attributes.context}</Card.Text>
                         <Link to={`/Appointment`}>
                         <Button type="submit" export={value.id}> View Product </Button>
