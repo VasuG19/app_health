@@ -5,7 +5,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import axios from 'axios';
 
-
 function Appointment(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
@@ -48,11 +47,11 @@ function Appointment(props) {
     const title = prompt('Enter a title for the booking:');
     if (title) {
       setEvents([
-        ...events,
-        {
-          title: title,
-          start: arg.date,
-        },
+      ...events,
+      {
+        title: title,
+        start: arg.date,
+      },
       ]);
       setFormData({
         title: title,
@@ -68,6 +67,7 @@ function Appointment(props) {
     try {
       const config = {headers: {'Content-Type': 'application/json'}};
       const body = JSON.stringify({title, start} )
+      console.log(body)
       const response = await axios.post('http://localhost:1337/api/appointments', body, config);
       console.log(response.data)
         alert('Your booking has been confirmed!');
@@ -77,7 +77,7 @@ function Appointment(props) {
     } finally {
       setIsBooking(false);
     }
-    console.log(formData)
+    console.log("formdata",formData)
   };
 
   return (
