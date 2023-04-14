@@ -1,37 +1,22 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import axios from 'axios';
+
 
 function Appointment(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const bookingDate = new Date();
-
-
-  const handleDateSelect = (arg) => {
-    setSelectedDate(arg.start);
-    const title = prompt('Enter a title for the booking:');
-    if (title) {
-      setEvents([
-        ...events,
-        {
-          title,
-          start: arg.start,
-          end: arg.end,
-        },
-      ]);
-    }
-  };
-
+  
   useEffect(() => {
     const appointment = props.data.map((value) => ({
       id: value.id,
-      start: `${value.attributes.date_start}`,
-      title: `${value.attributes.patients.data.attributes.patient_name}`,
-    }));
+      start: new Date(value.attributes.date_start),
+      title: value.attributes.context,
+    }));    
     setEvents(appointment);
   }, [props.data]);
 
@@ -55,28 +40,47 @@ function Appointment(props) {
     }
   };
 
+  const handleDateSelect = (arg) => {
+    console.log("handleDateSelect called with arg: ", arg);
+    setSelectedDate(arg.date);
+    const title = prompt('Enter a title for the booking:');
+    if (title) {
+      setEvents([
+        ...events,
+        {
+          start: arg.date,
+        },
+      ]);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsBooking(true);
     try {
-      const response = await fetch('http://localhost:1337/api/appointments', {
-        method: 'POST',
-        body: JSON.stringify({ date: bookingDate.toISOString() }),
+
+      const config = {
         headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const body = JSON.stringify({ date_start: selectedDate })
+      
+      const response = await axios.post('http://localhost:1337/api/appointments', body, config);
+      console.log(response.data)
   
       if (response.ok) {
         const appointment = await response.json();
         setEvents([
           ...events,
           {
-            id: appointment.data.id,
+            id: appointment.id,
             title: 'New Booking',
-            start: appointment.data.attributes.date_start,
+            date_start: appointment.attributes.start,
           },
         ]);
+
         alert('Your booking has been confirmed!');
       } else {
         alert('There was an error making your booking.');
@@ -88,8 +92,6 @@ function Appointment(props) {
       setIsBooking(false);
     }
   };
-  
-  
 
   return (
     <div className='calender'>
@@ -105,11 +107,13 @@ function Appointment(props) {
         eventClick={handleEventClick}
         themeSystem='bootstrap5'
       />
-      <form onSubmit={(e) => handleSubmit(e, selectedDate)}>
-        <button type='submit' disabled={isBooking}>
-          {isBooking ? 'Booking...' : 'Book Appointment'}
-        </button>
-      </form>
+      {selectedDate && (
+        <form onSubmit={handleSubmit}>
+          <button type='submit' disabled={isBooking}>
+            {isBooking ? 'Booking...' : 'Book Appointment'}
+          </button>
+        </form>
+      )}
     </div>
   );
 }
