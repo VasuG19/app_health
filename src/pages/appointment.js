@@ -81,6 +81,7 @@ function Appointment(props) {
       alert('There was an error making your booking.');
     } finally {
       setIsBooking(false);
+      window.location.reload(false);
     }
     console.log("formdata",formData)
   };
@@ -90,11 +91,11 @@ function Appointment(props) {
       <div className='calender'>
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
-          initialView='dayGridMonth'
+          initialView='timeGridWeek'
           selectable={true}
           selectMirror={true}
           dayMaxEvents={true}
-          weekends={true}
+          weekends={false}
           events={events}
           dateClick={handleDateSelect}
           eventClick={handleEventClick}
@@ -102,16 +103,18 @@ function Appointment(props) {
           headerToolbar={{
             left: 'prev,next',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'timeGridWeek,timeGridDay'
           }}
           aspectRatio={2}
           businessHours={{
             // days of week. an array of zero-based day of week integers (0=Sunday)
             daysOfWeek: [ 1, 2, 3, 4, 5 ], // Monday - Friday
-
             startTime: '09:00', // a start time (9am in this example)
             endTime: '18:00', // an end time (6pm in this example)
           }}
+          slotMinTime={'09:00'}
+          slotMaxTime={'18:00'}
+
         />
       </div>
       {selectedDate && (

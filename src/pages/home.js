@@ -19,11 +19,11 @@ function HomePage(props){
         <Carousel.Item key={value.id}>
             <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
-                    <Card.Title>{value.attributes.date}</Card.Title>
-                    <Card.Text>{value.attributes.context}</Card.Text>
-                        <Link to={`/Appointment`}>
+                    <Card.Title>{value.attributes.start}</Card.Title>
+                    <Card.Text>{value.attributes.title}</Card.Text>
+                    <Link to={`/Appointment`}>
                         <Button type="submit" export={value.id}> View Product </Button>
-                        </Link>
+                    </Link>
                 </Card.Body>
             </Card> 
         </Carousel.Item>
