@@ -16,7 +16,7 @@ function Appointment(props) {
     const appointment = props.data.map((value) => ({
       id: value.id,
       start: new Date(value.attributes.start),
-      title: value.attributes.context,
+      title: value.attributes.title,
     }));    
     setEvents(appointment);
   }, [props.data]);
@@ -66,7 +66,13 @@ function Appointment(props) {
     setIsBooking(true);
     try {
       const config = {headers: {'Content-Type': 'application/json'}};
-      const body = JSON.stringify({title, start} )
+      const body = JSON.stringify({
+        "data": {
+          "title": "thetester",
+          "start": "2023-04-10T23:00:00.000Z",
+        }
+      }
+      )
       console.log("body",body)
       const response = await axios.post('http://localhost:1337/api/appointments', body, config);
       console.log(response.data)

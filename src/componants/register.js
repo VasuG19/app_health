@@ -35,6 +35,8 @@ const Register = () => {
           userType: 'patient'
         });
 
+      console.log("body",body)
+
       const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
       console.log(result.data)
 
