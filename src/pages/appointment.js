@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 function Appointment(props) {
   const [events, setEvents] = useState([]);
@@ -82,25 +83,29 @@ function Appointment(props) {
   };
 
   return (
-    <div className='calender'>
-      <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin]}
-        initialView='dayGridMonth'
-        selectable={true}
-        selectMirror={true}
-        dayMaxEvents={true}
-        weekends={true}
-        events={events}
-        dateClick={handleDateSelect}
-        eventClick={handleEventClick}
-        themeSystem='bootstrap5'
-      />
+    <div>
+      <div className='calender'>
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin]}
+          initialView='dayGridMonth'
+          selectable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          weekends={true}
+          events={events}
+          dateClick={handleDateSelect}
+          eventClick={handleEventClick}
+          themeSystem='bootstrap5'
+        />
+      </div>
       {selectedDate && (
-        <form onSubmit={handleSubmit}>
-          <button type='submit' disabled={isBooking}>
-            {isBooking ? 'Booking...' : 'Book Appointment'}
-          </button>
-        </form>
+        <div>
+          <form onSubmit={handleSubmit} className='bookButton'>
+            <Button type='submit' disabled={isBooking}>
+              {isBooking ? 'Booking...' : 'Book Appointment'}
+            </Button>
+          </form>
+        </div>
       )}
     </div>
   );

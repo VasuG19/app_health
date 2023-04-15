@@ -50,12 +50,10 @@ code {
   float: right;
 }
 
-/* 
-  background-color:rgb(33, 37, 41);
-
-body > #root > div {
-  height: 200vh;
-  background-color:rgb(33, 37, 41);
+.calender{
+  padding: 20px;
 }
 
-*/
+.bookButton{
+  text-align: center;
+}
