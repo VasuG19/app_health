@@ -4,7 +4,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import timeGridPlugin from '@fullcalendar/timegrid'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function Appointment(props) {
   const [events, setEvents] = useState([]);
@@ -86,7 +89,7 @@ function Appointment(props) {
     <div>
       <div className='calender'>
         <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin]}
+          plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
           initialView='dayGridMonth'
           selectable={true}
           selectMirror={true}
@@ -96,15 +99,28 @@ function Appointment(props) {
           dateClick={handleDateSelect}
           eventClick={handleEventClick}
           themeSystem='bootstrap5'
+          headerToolbar={{
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          }}
+          aspectRatio={2}
+          businessHours={{
+            // days of week. an array of zero-based day of week integers (0=Sunday)
+            daysOfWeek: [ 1, 2, 3, 4, 5 ], // Monday - Friday
+
+            startTime: '10:00', // a start time (10am in this example)
+            endTime: '18:00', // an end time (6pm in this example)
+          }}
         />
       </div>
       {selectedDate && (
         <div>
-          <form onSubmit={handleSubmit} className='bookButton'>
+          <Form onSubmit={handleSubmit} className='bookButton'>
             <Button type='submit' disabled={isBooking}>
               {isBooking ? 'Booking...' : 'Book Appointment'}
             </Button>
-          </form>
+          </Form>
         </div>
       )}
     </div>
