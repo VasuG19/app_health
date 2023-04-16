@@ -16,12 +16,11 @@ function Appointment(props) {
   const [formData, setFormData] = useState({title:'', start:'', patient:''});
   const [data, setData] = useState([]);
 
-
   // retrieve appointments from API
   useEffect( () => {
     fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
     .then((response) => response.json())
-    .then((json) => {setData(json.data); console.log(json.data)})
+    .then((json) => {setData(json.data)})
     .catch((err) => {console.log(err.message)});
   }, [props.user.id]);
   
@@ -56,7 +55,6 @@ function Appointment(props) {
   };
 
   const handleDateSelect = (arg) => {
-    console.log("handleDateSelect called with arg: ", arg);
     setSelectedDate(arg.date);
     const title = prompt('Enter a title for the booking:');
     if (title) {
@@ -65,6 +63,7 @@ function Appointment(props) {
       {
         title: title,
         start: arg.date,
+        patient: props.user.id
       },
       ]);
       setFormData({
@@ -84,7 +83,6 @@ function Appointment(props) {
     try {
       const config = {headers: {'Content-Type': 'application/json'}};
       const body = JSON.stringify(formData)
-      console.log("body",body)
       const response = await axios.post('http://localhost:1337/api/appointments', body, config);
       console.log(response)
         alert('Your booking has been confirmed!');
@@ -95,7 +93,6 @@ function Appointment(props) {
       setIsBooking(false);
       window.location.reload(false);
     }
-    console.log("formdata",formData)
   };
 
   return (

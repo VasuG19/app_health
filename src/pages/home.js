@@ -6,7 +6,6 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-
 /**
  * Home Page
  * 
@@ -16,7 +15,6 @@ import { useState, useEffect } from 'react';
  */
 
 function HomePage(props){
-
 const [data, setData] = useState([]);
 
 // retrieve appointments from API
@@ -33,9 +31,9 @@ const [data, setData] = useState([]);
                 <Card.Body className='appointmentCard'>
                     <Card.Title>{value.attributes.start}</Card.Title>
                     <Card.Text>{value.attributes.title}</Card.Text>
-                    <Link to={`/Appointment`}>
-                        <Button type="submit" export={value.id}> View Product </Button>
-                    </Link>
+                        <Link to={`/Appointment`}>
+                            <Button type="submit" export={value.id}> View calendar </Button>
+                        </Link>
                 </Card.Body>
             </Card> 
         </Carousel.Item>
