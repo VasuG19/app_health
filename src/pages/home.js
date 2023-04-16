@@ -18,7 +18,6 @@ import { useState, useEffect } from 'react';
 function HomePage(props){
 
 const [data, setData] = useState([]);
-console.log(props.user.id)
 
 // retrieve appointments from API
   useEffect( () => {
@@ -26,7 +25,7 @@ console.log(props.user.id)
     .then((response) => response.json())
     .then((json) => {setData(json.data); console.log(json.data)})
     .catch((err) => {console.log(err.message)});
-}, []);
+}, [props.user.id]);
 
     const accountData = data.map((value) =>
         <Carousel.Item key={value.id}>

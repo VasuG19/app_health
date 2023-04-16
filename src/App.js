@@ -14,7 +14,6 @@ import axios from 'axios';
 function App() {
 
 // declare variables
-const [data, setData] = useState([]);
 const [authenticated, setAuthenticated] = useState(false);
 const [user, setUser] = useState({});
 
@@ -51,7 +50,7 @@ useEffect(() => {
         <div className='content'>     
           <Routes>
             <Route path="/" element={<HomePage user={user} />} />
-            <Route path="/appointment" element={<Appointment data={data}/>} />
+            <Route path="/appointment" element={<Appointment user={user}/>} />
             <Route path="/services" element={<ServicesPage/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/register" element={<Register />} />

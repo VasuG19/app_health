@@ -13,16 +13,27 @@ function Appointment(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [formData, setFormData] = useState({title:'', start:''});
+  const [formData, setFormData] = useState({title:'', start:'', patient:''});
+  const [data, setData] = useState([]);
+
+
+  // retrieve appointments from API
+  useEffect( () => {
+    fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
+    .then((response) => response.json())
+    .then((json) => {setData(json.data); console.log(json.data)})
+    .catch((err) => {console.log(err.message)});
+  }, [props.user.id]);
   
   useEffect(() => {
-    const appointment = props.data.map((value) => ({
+    const appointment = data.map((value) => ({
       id: value.id,
       start: new Date(value.attributes.start),
       title: value.attributes.title,
+      patient: props.user.id
     }));    
     setEvents(appointment);
-  }, [props.data]);
+  }, [data, props.user.id]);
 
   const handleEventClick = async (arg) => {
     if (window.confirm(`Are you sure you want to delete the booking '${arg.event.title}'?`)) {
@@ -60,6 +71,7 @@ function Appointment(props) {
         data:{
         title: title,
         start: arg.date.toISOString(),
+        patient: props.user.id
       }
       });
       
