@@ -21,7 +21,7 @@ code {
 .carousel-control-next svg {
   width: 30px;
   height: 30px;
-  color: #efe7e7;
+  color: rgb(33, 37, 41);
 }
 
 .carousel-control-prev svg:hover,
