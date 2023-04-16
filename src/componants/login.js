@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import Profile from '../pages/profile';
@@ -7,7 +7,6 @@ import Profile from '../pages/profile';
 const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,35 +30,13 @@ const Login = (props) => {
     setUsername("");
   }
 
-  const userToken = localStorage.getItem('token');
- 
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      props.handleAuthenticated(true)
-      const getUserData = async () => {
-        try {
-          const response = await axios.get('http://localhost:1337/api/users/me?populate=profile.appointments', {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-            },
-          });
-          setUser(response.data);
-          console.log(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      getUserData();
-    }
-  }, [userToken, props]);
-
   return (
       <div>
         { props.authenticated && 
           <div>
             <div><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
             <div>
-              <Profile user={user}/>
+              <Profile user={props.user}/>
             </div>
           </div>
         }

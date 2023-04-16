@@ -4,6 +4,8 @@ import { Carousel } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 
 /**
  * Home Page
@@ -15,7 +17,18 @@ import { Link } from 'react-router-dom';
 
 function HomePage(props){
 
-    const accountData = props.data.map((value) =>
+const [data, setData] = useState([]);
+console.log(props.user.id)
+
+// retrieve appointments from API
+  useEffect( () => {
+    fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
+    .then((response) => response.json())
+    .then((json) => {setData(json.data); console.log(json.data)})
+    .catch((err) => {console.log(err.message)});
+}, []);
+
+    const accountData = data.map((value) =>
         <Carousel.Item key={value.id}>
             <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
