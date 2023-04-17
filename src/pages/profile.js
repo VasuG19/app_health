@@ -29,6 +29,7 @@ const Profile = (props) => {
           birthday={props.user.birthday}
           address={props.user.address}
           diet={props.user.diet}
+          user={props.user}
           current_conditions={props.user.current_conditions}
           onProfileUpdate={""}
           onClose={() => setIsEditing(false)}

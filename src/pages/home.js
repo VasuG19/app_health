@@ -21,13 +21,13 @@ const [data, setData] = useState([]);
   useEffect( () => {
     fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
     .then((response) => response.json())
-    .then((json) => {setData(json.data); console.log(json.data)})
+    .then((json) => {setData(json.data)})
     .catch((err) => {console.log(err.message)});
     }, [props.user.id]);
 
     const accountData = data.map((value) =>
         <Carousel.Item key={value.id}>
-            <div className="text-center">
+            <Card className="text-center" border='dark'>
                 <Card.Body className='appointmentCard'>
                     <Card.Title>{value.attributes.title}</Card.Title>
                     <Card.Text>{value.attributes.start}</Card.Text>
@@ -35,14 +35,14 @@ const [data, setData] = useState([]);
                             <Button type="submit"> View calendar </Button>
                         </Link>
                 </Card.Body>
-            </div> 
+            </Card> 
         </Carousel.Item>
     )
 
     return(
         <div className='home'>
             <Carousel prevIcon={<FontAwesomeIcon icon={faChevronLeft} />} nextIcon={<FontAwesomeIcon icon={faChevronRight}/>} indicators={false} >
-                      {accountData}
+                        {accountData}
             </Carousel>
         </div>
     )}
