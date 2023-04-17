@@ -29,18 +29,7 @@ code {
   color: rgb(0, 149, 255);
 }
 
-.loginForm{
-  align-items: center;
-  justify-content: center;
-}
 
-.loginForm h6{
-  margin-top: 15px;
-}
-
-.formcard{
-  padding: 40px;
-}
 
 .carousel{
   padding-top: 40px;
@@ -56,4 +45,29 @@ code {
 
 .profileButton{
   padding: 5px;
+}
+
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.loginForm{
+  align-items: center;
+  justify-content: center;
+}
+
+.formcard{
+  padding: 40px;
+  align-items: center;
+}
+
+.formcard h6{
+  margin-top: 20px;
+}
+
+.formcard h1{
+  padding-bottom: 20px;
 }
