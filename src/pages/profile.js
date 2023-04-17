@@ -1,10 +1,40 @@
 import React from 'react';
-import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage,MDBBtn} from 'mdb-react-ui-kit';
+import { useState } from 'react';
+import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
+import EditProfile from '../componants/edit';
+import { Button } from 'react-bootstrap';
 
 const Profile = (props) => {
 
+  const [isEditing, setIsEditing]  = useState(false);
+  const handleSignOut = () => {
+    props.handleAuthenticated(false)
+    localStorage.removeItem('token')
+  }
+
   return (
     <div>
+      {isEditing && 
+        <EditProfile
+          username={props.user.username}
+          email={props.user.email}
+          first_name={props.user.first_name}
+          last_name={props.user.last_name}
+          prescriptions={props.user.prescriptions}
+          allergies={props.user.allergies}
+          blood_type={props.user.blood_type}
+          height={props.user.height}
+          weight={props.user.weight}
+          phone={props.user.phone}
+          birthday={props.user.birthday}
+          address={props.user.address}
+          diet={props.user.diet}
+          current_conditions={props.user.current_conditions}
+          onProfileUpdate={""}
+          onClose={() => setIsEditing(false)}
+        />
+      }
+      {!isEditing &&
       <MDBContainer className="py-5">
         <MDBRow>
 
@@ -13,15 +43,12 @@ const Profile = (props) => {
               <MDBCardBody className="text-center">
                 <MDBCardImage
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                  alt="avatar"
-                  className="rounded-circle"
-                  style={{ width: '150px' }}
-                  fluid />
+                  alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
                 <p className="text-muted mb-1">{props.user.username}</p>
                 <p className="text-muted mb-1">{props.user.username}</p>
                 <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn>Follow</MDBBtn>
-                  <MDBBtn outline className="ms-1">Message</MDBBtn>
+                <Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button>
+                <Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -75,7 +102,7 @@ const Profile = (props) => {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          
+
           <MDBCol lg="8">
             <MDBCard className="mb-4">
               <MDBCardBody>
@@ -151,6 +178,7 @@ const Profile = (props) => {
 
         </MDBRow>
       </MDBContainer>
+      }
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { LinkContainer } from 'react-router-bootstrap';
  * @author Mehtab Gill
  */
 
-function NavBar(){
+function NavBar(props){
 
   return(
     <Navbar style={{padding:' 10px'}} bg="dark" variant='dark' expand="lg" fixed="top">
@@ -18,10 +18,11 @@ function NavBar(){
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
-            <LinkContainer to="/services"><Nav.Link>Services</Nav.Link></LinkContainer>
-            <LinkContainer to="/appointment"><Nav.Link>Appointments</Nav.Link></LinkContainer>
-            <LinkContainer to="/login"><Nav.Link>Profile</Nav.Link></LinkContainer>
+           {props.authenticated &&<LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>}
+           {props.authenticated && <LinkContainer to="/services"><Nav.Link>Services</Nav.Link></LinkContainer>}
+           {props.authenticated && <LinkContainer to="/appointment"><Nav.Link>Appointments</Nav.Link></LinkContainer>}
+           {props.authenticated && <LinkContainer to="/profile"><Nav.Link>{props.user.username}</Nav.Link></LinkContainer> }
+           {!props.authenticated && <LinkContainer to="/login"><Nav.Link>Login</Nav.Link></LinkContainer> }
           </Nav>
         </Navbar.Collapse>
     </Navbar>

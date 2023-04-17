@@ -20,27 +20,17 @@ const Login = (props) => {
       console.log(response);
     } catch (error) {
       console.error(error);
+    } finally{
+      
     }
-  }
-
-  const handleSignOut = () => {
-    props.handleAuthenticated(false)
-    localStorage.removeItem('token')
-    setPassword("");
-    setUsername("");
   }
 
   return (
       <div>
-        { props.authenticated && 
-          <div>
-            <div><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
-            <div>
-              <Profile user={props.user}/>
-            </div>
-          </div>
+         { props.authenticated && 
+              <Profile/>
         }
-        {!props.authenticated && 
+        {!props.authenticated &&
           <Row className="loginForm">
               <Col sm="12" md="5" >
                   <Card className="text-center" border='dark'>
@@ -61,8 +51,8 @@ const Login = (props) => {
                     </div>
                   </Card>
               </Col>
-          </Row>
-        }
+            </Row>
+          }
       </div>
     );
   };

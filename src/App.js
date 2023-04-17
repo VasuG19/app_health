@@ -44,7 +44,7 @@ useEffect(() => {
   return (
     <div className="App">
        <div className='nav'>
-            <NavBar />
+            <NavBar authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>
         </div>
       { authenticated &&
         <div className='content'>     
@@ -52,7 +52,7 @@ useEffect(() => {
             <Route path="/" element={<HomePage user={user} />} />
             <Route path="/appointment" element={<Appointment user={user}/>} />
             <Route path="/services" element={<ServicesPage/>} />
-            <Route path="/profile" element={<Profile/>} />
+            <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           </Routes>
