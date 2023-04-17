@@ -57,3 +57,7 @@ code {
 .bookButton{
   text-align: center;
 }
+
+.profileButton{
+  padding: 5px;
+}

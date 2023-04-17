@@ -27,8 +27,8 @@ const Login = (props) => {
 
   return (
       <div>
-         { props.authenticated && 
-              <Profile/>
+        { props.authenticated && 
+          <Profile/>
         }
         {!props.authenticated &&
           <Row className="loginForm">

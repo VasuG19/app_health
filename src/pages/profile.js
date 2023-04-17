@@ -44,11 +44,10 @@ const Profile = (props) => {
                 <MDBCardImage
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                   alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
-                <p className="text-muted mb-1">{props.user.username}</p>
-                <p className="text-muted mb-1">{props.user.username}</p>
+                <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
                 <div className="d-flex justify-content-center mb-2">
-                <Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button>
-                <Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button>
+                <div className='profileButton'><Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button></div>
+                <div className='profileButton'><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
                 </div>
               </MDBCardBody>
             </MDBCard>
