@@ -32,7 +32,7 @@ const [data, setData] = useState([]);
                     <Card.Title>{value.attributes.start}</Card.Title>
                     <Card.Text>{value.attributes.title}</Card.Text>
                         <Link to={`/Appointment`}>
-                            <Button type="submit" export={value.id}> View calendar </Button>
+                            <Button type="submit"> View calendar </Button>
                         </Link>
                 </Card.Body>
             </Card> 
