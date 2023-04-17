@@ -29,6 +29,8 @@ const Profile = (props) => {
           birthday={props.user.birthday}
           address={props.user.address}
           diet={props.user.diet}
+          smoke={props.user.smoke}
+          pregnant={props.user.pregnant}
           user={props.user}
           current_conditions={props.user.current_conditions}
           onProfileUpdate={""}
@@ -93,10 +95,19 @@ const Profile = (props) => {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="4">
-                    <MDBCardText>Address</MDBCardText>
+                    <MDBCardText>Pregnant</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.address}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.user.pregnant}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="4">
+                    <MDBCardText>Smoke</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="8">
+                    <MDBCardText className="text-muted">{props.user.smoke}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
@@ -106,7 +117,6 @@ const Profile = (props) => {
           <MDBCol lg="8">
             <MDBCard className="mb-4">
               <MDBCardBody>
-
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Full Name</MDBCardText>
@@ -165,6 +175,17 @@ const Profile = (props) => {
               </MDBCol>
 
               <MDBCol md="6">
+                <MDBCard className="mb-4 mb-md-0">
+                  <MDBCardBody>
+                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Conditions</span></MDBCardText>
+                    <MDBCardText className="text-muted">{props.user.current_conditions}</MDBCardText>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+
+            <MDBRow>
+              <MDBCol className="mb-4">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Allergies</span></MDBCardText>

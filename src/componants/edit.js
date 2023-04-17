@@ -4,35 +4,36 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 
 const EditProfile = (props) => {
   const [updateData, setUpdateData] = useState({
-        username:props.username, email: props.email, blood_type: props.blood_type, first_name:props.user.first_name,
-        last_name:props.user.last_name, prescriptions:props.user.prescriptions, allergies:props.user.allergies,
-        height:props.user.height, weight:props.user.weight, phone:props.user.phone,birthday:props.user.birthday, 
-        address:props.user.address, diet:props.user.diet, current_conditions:props.user.current_conditions
+        username:props.username, email: props.email, blood_type: props.blood_type, first_name:props.first_name,
+        last_name:props.last_name, prescriptions:props.prescriptions, allergies:props.allergies,
+        height:props.height, weight:props.weight, phone:props.phone,birthday:props.birthday, 
+        address:props.address, diet:props.diet, current_conditions:props.current_conditions, smoke:props.smoke,
+        pregnant:props.pregnant
   });
 
   const { 
     username, email, blood_type, first_name , last_name , prescriptions , allergies ,
-    height , weight , phone , birthday, address , diet , current_conditions 
+    height , weight , phone , birthday, address , diet , current_conditions, smoke, pregnant
     } = updateData; 
 
-  const handleChange = e =>
-  setUpdateData({ ...updateData, [e.target.name]: e.target.value });
- 
+  const handleChange = e => setUpdateData({ ...updateData, [e.target.name]: e.target.value });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-    const config = {
-        headers: {
-        'Content-Type': 'application/json'
-        }
-    };
-    const body = JSON.stringify({username, email, blood_type, first_name , last_name , prescriptions , allergies ,
-        height , weight , phone , birthday, address , diet , current_conditions });
-      const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
-      console.log(result.data)
-
+    try {
+        const config = {
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        };
+        const body = JSON.stringify({
+            username, email, blood_type, first_name, last_name, prescriptions, allergies, height , 
+            weight, phone, birthday, address, diet, current_conditions, smoke, pregnant 
+        });
+        const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
+        console.log(result.data)
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
     props.onClose();
     window.location.reload(false);
@@ -130,6 +131,19 @@ const EditProfile = (props) => {
             <Col>
                 <Form.Group className="mb-3" controlId="formBasicBlood">
                 Current conditions:<Form.Control type="text" name='current_conditions' value={current_conditions} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+        </Row>
+
+        <Row>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                Pregnant:<Form.Control type="text" name='pregnant' value={pregnant} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicBlood">
+                Smoke:<Form.Control type="text" name='smoke' value={smoke} onChange={handleChange}/>
                 </Form.Group>
             </Col>
         </Row>
