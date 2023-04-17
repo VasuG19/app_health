@@ -23,29 +23,25 @@ const [data, setData] = useState([]);
     .then((response) => response.json())
     .then((json) => {setData(json.data); console.log(json.data)})
     .catch((err) => {console.log(err.message)});
-}, [props.user.id]);
+    }, [props.user.id]);
 
     const accountData = data.map((value) =>
         <Carousel.Item key={value.id}>
-            <Card className="text-center" border='dark'>
+            <div className="text-center">
                 <Card.Body className='appointmentCard'>
-                    <Card.Title>{value.attributes.start}</Card.Title>
-                    <Card.Text>{value.attributes.title}</Card.Text>
+                    <Card.Title>{value.attributes.title}</Card.Title>
+                    <Card.Text>{value.attributes.start}</Card.Text>
                         <Link to={`/Appointment`}>
                             <Button type="submit"> View calendar </Button>
                         </Link>
                 </Card.Body>
-            </Card> 
+            </div> 
         </Carousel.Item>
     )
 
     return(
         <div className='home'>
-            <Carousel
-                      prevIcon={<FontAwesomeIcon 
-                      icon={faChevronLeft} />} 
-                      nextIcon={<FontAwesomeIcon 
-                      icon={faChevronRight} />}>
+            <Carousel prevIcon={<FontAwesomeIcon icon={faChevronLeft} />} nextIcon={<FontAwesomeIcon icon={faChevronRight}/>} indicators={false} >
                       {accountData}
             </Carousel>
         </div>

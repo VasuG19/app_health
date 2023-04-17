@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Register = () => {
   });
 
   const { username, email, password, confirmPassword } = formData; 
+  const nav = useNavigate();
 
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,13 +34,13 @@ const Register = () => {
           username,
           email,
           password,
-          userType: 'patient'
         });
 
       console.log("body",body)
 
       const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
       console.log(result.data)
+      nav("/");
 
     } catch (error) {
       console.error(error);
