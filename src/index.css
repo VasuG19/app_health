@@ -29,8 +29,6 @@ code {
   color: rgb(0, 149, 255);
 }
 
-
-
 .carousel{
   padding-top: 40px;
 }
@@ -70,4 +68,8 @@ code {
 
 .formcard h1{
   padding-bottom: 20px;
+}
+
+.carousel-item {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
