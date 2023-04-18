@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function HomePage(props) {
   const [data, setData] = useState([]);
-  const [itemsPerSlide, setItemsPerSlide] = useState(3);
+  const [itemsperslide, setitemsperslide] = useState(3);
 
   useEffect(() => {
     fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
@@ -18,11 +18,11 @@ function HomePage(props) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setItemsPerSlide(1);
+        setitemsperslide(1);
       } else if (window.innerWidth < 992) {
-        setItemsPerSlide(2);
+        setitemsperslide(2);
       } else {
-        setItemsPerSlide(3);
+        setitemsperslide(3);
       }
     };
     window.addEventListener('resize', handleResize);
@@ -31,7 +31,7 @@ function HomePage(props) {
   }, []);
 
   const chunks = data.reduce((acc, curr, i) => {
-    if (i % itemsPerSlide === 0) acc.push([]);
+    if (i % itemsperslide === 0) acc.push([]);
     acc[acc.length - 1].push(curr);
     return acc;
   }, []);
@@ -61,7 +61,7 @@ function HomePage(props) {
         prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
         nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
         indicators={false}
-        itemsPerSlide={itemsPerSlide}
+        itemsperslide={itemsperslide}
       >
         {accountData}
       </Carousel>
