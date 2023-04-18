@@ -165,7 +165,7 @@ const Profile = (props) => {
             </MDBCard>
 
             <MDBRow>
-              <MDBCol md="6">
+              <MDBCol md="4">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Prescriptions</span></MDBCardText>
@@ -174,7 +174,7 @@ const Profile = (props) => {
                 </MDBCard>
               </MDBCol>
 
-              <MDBCol md="6">
+              <MDBCol md="4">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Conditions</span></MDBCardText>
@@ -182,10 +182,8 @@ const Profile = (props) => {
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
-            </MDBRow>
 
-            <MDBRow>
-              <MDBCol className="mb-4">
+              <MDBCol md="4">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Allergies</span></MDBCardText>

@@ -29,10 +29,6 @@ code {
   color: rgb(0, 149, 255);
 }
 
-.carousel{
-  padding-top: 40px;
-}
-
 .calender{
   padding: 20px;
 }
@@ -72,4 +68,8 @@ code {
 
 .carousel-item {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.homeheader{
+  padding: 20px;
 }

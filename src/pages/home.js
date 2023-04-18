@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 function HomePage(props) {
   const [data, setData] = useState([]);
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
 
   useEffect(() => {
     fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
@@ -14,8 +15,23 @@ function HomePage(props) {
       .catch((err) => console.log(err.message));
   }, [props.user.id]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerSlide(1);
+      } else if (window.innerWidth < 992) {
+        setItemsPerSlide(2);
+      } else {
+        setItemsPerSlide(3);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const chunks = data.reduce((acc, curr, i) => {
-    if (i % 3 === 0) acc.push([]);
+    if (i % itemsPerSlide === 0) acc.push([]);
     acc[acc.length - 1].push(curr);
     return acc;
   }, []);
@@ -26,13 +42,13 @@ function HomePage(props) {
         {chunk.map((value) => (
           <Card className="text-center" border="dark" key={value.id}>
             <Card.Body className="appointmentCard">
-                <Card.Title>{value.attributes.title}</Card.Title>
-                <Card.Text>{value.attributes.start}</Card.Text>
-                <Link to={`/Appointment`}>
+              <Card.Title>{value.attributes.title}</Card.Title>
+              <Card.Text>{value.attributes.start}</Card.Text>
+              <Link to={`/Appointment`}>
                 <Button type="submit"> View calendar </Button>
-                </Link>
+              </Link>
             </Card.Body>
-          </Card>        
+          </Card>
         ))}
       </div>
     </Carousel.Item>
@@ -40,11 +56,12 @@ function HomePage(props) {
 
   return (
     <div className="home">
+        <h4 className='homeheader'>Upcoming appointments</h4>
       <Carousel
         prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
         nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
         indicators={false}
-        interval={null} // Set interval to null to display all items at once
+        itemsPerSlide={itemsPerSlide}
       >
         {accountData}
       </Carousel>
