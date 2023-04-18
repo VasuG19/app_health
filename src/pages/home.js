@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Button, Card, Carousel, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,6 @@ function HomePage(props) {
       .catch((err) => console.log(err.message));
   }, [props.user.id]);
   
-
   useEffect(() => {
     const today = new Date().toISOString();
     fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
@@ -60,7 +59,7 @@ function HomePage(props) {
           <Card className="text-center" border="dark" key={value.id}>
             <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.title}</Card.Title>
-              <Card.Text>{value.attributes.start}</Card.Text>
+              <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
               <Link to={`/Appointment`}>
                 <Button type="submit"> View calendar </Button>
               </Link>
@@ -78,7 +77,7 @@ function HomePage(props) {
           <Card className="text-center" border="dark" key={value.id}>
             <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.title}</Card.Title>
-              <Card.Text>{value.attributes.start}</Card.Text>
+              <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
               <Link to={`/Appointment`}>
                 <Button type="submit"> View calendar </Button>
               </Link>
@@ -91,27 +90,30 @@ function HomePage(props) {
 
   return (
     <div className="home">
-        <h4 className='homeheader'>Upcoming appointments</h4>
-      <Container>
-      <Carousel
-        prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
-        nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
-        indicators={false}
-        itemsperslide={itemsperslide}
-      >
-        {upcomingBooking}
-      </Carousel>
-      </Container>
-      <Container>
-      <Carousel
-        prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
-        nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
-        indicators={false}
-        itemsperslide={itemsperslide}
-      >
-        {previousBooking}
-      </Carousel>
-      </Container>
+
+      <h4 className='homeheader'>Upcoming appointments</h4>
+      <div className='appointments'>
+        <Carousel
+          prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
+          nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
+          indicators={false}
+          itemsperslide={itemsperslide}
+        >
+          {upcomingBooking}
+        </Carousel>
+      </div>
+
+      <h4 className='homeheader'>Previous appointments</h4>
+      <div>
+        <Carousel className='appointments'
+          prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
+          nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
+          indicators={false}
+          itemsperslide={itemsperslide}
+        >
+          {previousBooking}
+        </Carousel>
+      </div>
 
     </div>
   );
