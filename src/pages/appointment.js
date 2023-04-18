@@ -51,6 +51,7 @@ function Appointment(props) {
         console.error(error);
         alert('There was an error deleting the booking.');
       }
+      window.location.reload(false);
     }
   };
 
