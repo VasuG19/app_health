@@ -149,8 +149,8 @@ const EditProfile = (props) => {
         </Row>
 
         <div className="d-flex justify-content-center mb-2">
-            <Button type="submit" className='profileButton'>Save</Button>
-            <Button type="button" className='profileButton' onClick={props.onClose}>Cancel</Button>
+            <div className='profileButton'><Button type="submit" >Save</Button></div>
+            <div className='profileButton'><Button type="button"  onClick={props.onClose}>Cancel</Button></div>
         </div>
       </Form>
     </div>

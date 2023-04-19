@@ -33,7 +33,7 @@ const Login = (props) => {
         {!props.authenticated &&
           <div className='login'>
                     <div className="text-center">
-                      <div className='formcard'>
+                      <Card className='formcard'>
                       <h1><strong>Login</strong></h1>
                         <Form className="loginForm" onSubmit={handleSubmit}>
                           <Form.Group className="mb-3" controlId="formBasicUsername">
@@ -47,7 +47,7 @@ const Login = (props) => {
                         <h6>
                           Click <Link to="/register">Here</Link> to register
                         </h6>
-                      </div>
+                      </Card>
                     </div>
             </div>
           }

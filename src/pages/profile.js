@@ -42,7 +42,7 @@ const Profile = (props) => {
         <MDBRow>
 
           <MDBCol lg="4">
-            <MDBCard className="mb-4">
+            <MDBCard className="mb-4 profile">
               <MDBCardBody className="text-center">
                 <MDBCardImage
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
@@ -55,7 +55,7 @@ const Profile = (props) => {
               </MDBCardBody>
             </MDBCard>
 
-            <MDBCard className="mb-4 mb-lg-0">
+            <MDBCard className="mb-4 mb-lg-0 profile">
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="4">
@@ -115,7 +115,7 @@ const Profile = (props) => {
           </MDBCol>
 
           <MDBCol lg="8">
-            <MDBCard className="mb-4">
+            <MDBCard className="mb-4 profile">
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="3">
@@ -166,7 +166,7 @@ const Profile = (props) => {
 
             <MDBRow>
               <MDBCol md="4">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Prescriptions</span></MDBCardText>
                     <MDBCardText className="text-muted">{props.user.prescriptions}</MDBCardText>
@@ -175,7 +175,7 @@ const Profile = (props) => {
               </MDBCol>
 
               <MDBCol md="4">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Conditions</span></MDBCardText>
                     <MDBCardText className="text-muted">{props.user.current_conditions}</MDBCardText>
@@ -184,7 +184,7 @@ const Profile = (props) => {
               </MDBCol>
 
               <MDBCol md="4">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Allergies</span></MDBCardText>
                     <MDBCardText className="text-muted">{props.user.allergies}</MDBCardText>

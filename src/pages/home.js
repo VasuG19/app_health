@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Button, Card, Carousel, Container } from 'react-bootstrap';
+import { Button, Card, Carousel } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -56,7 +56,7 @@ function HomePage(props) {
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
-          <Card className="text-center" border="dark" key={value.id}>
+          <Card className="text-center" key={value.id}>
             <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
@@ -74,7 +74,7 @@ function HomePage(props) {
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
-          <Card className="text-center" border="dark" key={value.id}>
+          <Card className="text-center" key={value.id}>
             <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>

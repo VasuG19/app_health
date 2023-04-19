@@ -9,6 +9,7 @@ import Profile from './pages/profile';
 import Register from './componants/register';
 import Login from './componants/login';
 import axios from 'axios';
+import Footer from './componants/footer';
 
 // Main App function - calls all componants and routes for the app 
 function App() {
@@ -71,6 +72,7 @@ useEffect(() => {
         </Routes>
       </div>
       }
+      <Footer/>
     </div>
   );
 }
