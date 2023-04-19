@@ -23,13 +23,13 @@ function Footer() {
             <div className='footer-row'>
             <div className='footer-col'>
                 <a href="https://www.instagram.com/" >
-                <i class="bi bi-instagram"></i>
+                <i className="bi bi-instagram"></i>
                 </a>
                 <a href="https://www.facebook.com/" >
-                <i class="bi bi-facebook"></i>
+                <i className="bi bi-facebook"></i>
                 </a>
                 <a href="https://www.whatsapp.com/" >
-                <i class="bi bi-whatsapp"></i>
+                <i className="bi bi-whatsapp"></i>
                 </a>
             </div>
             <div className='footer-col'>

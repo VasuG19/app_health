@@ -15,7 +15,6 @@ import Footer from './componants/footer';
 function App() {
 
 // declare variables
-const [admin, setAdmin] = useState(false);
 const [authenticated, setAuthenticated] = useState(false);
 const [user, setUser] = useState({});
 
@@ -56,7 +55,7 @@ useEffect(() => {
             <Route path="/services" element={<ServicesPage/>} />
             <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login authenticated={authenticated} admin={admin} handleAdmin={setAdmin} user={user} handleAuthenticated={setAuthenticated}/>} />
+            <Route path="/login" element={<Login authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           </Routes>
         </div>
       } 
