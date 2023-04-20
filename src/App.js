@@ -18,9 +18,10 @@ function App() {
 const [authenticated, setAuthenticated] = useState(false);
 const [user, setUser] = useState({});
 
-// retrieve appointments from API
+// validate whether the user is authenticated
 const userToken = localStorage.getItem('token');
 
+// retrieve the user data from the api
 useEffect(() => {
   if (localStorage.getItem('token')) {
     setAuthenticated(true)
@@ -32,7 +33,6 @@ useEffect(() => {
           },
         });
         setUser(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
