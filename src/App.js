@@ -70,7 +70,7 @@ const nav = useNavigate();
             <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-            <Route path="/admin" element={<Admin user={user} Admin={isAdmin} />} />
+            <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
           </Routes>
         </div>
       } 
@@ -84,6 +84,7 @@ const nav = useNavigate();
           <Route path="/services" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/profile" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/admin" element={<Login authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
         </Routes>
       </div>
       }

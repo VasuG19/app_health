@@ -18,11 +18,19 @@ function Appointment(props) {
 
   // retrieve appointments from API
   useEffect( () => {
-    fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
-    .then((response) => response.json())
-    .then((json) => {setData(json.data)})
-    .catch((err) => {console.log(err.message)});
-  }, [props.user.id]);
+    if (!props.user ||props.user.title!== 'Admin') {
+      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
+      .then((response) => response.json())
+      .then((json) => {setData(json.data)})
+      .catch((err) => {console.log(err.message)});
+     } else {
+      fetch(`http://localhost:1337/api/appointments?populate=*`)
+      .then((response) => response.json())
+      .then((json) => {setData(json.data)})
+      .catch((err) => {console.log(err.message)});
+     }
+    
+  }, [props.user]);
   
   useEffect(() => {
     const appointment = data.map((value) => ({
