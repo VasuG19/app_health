@@ -1,58 +1,17 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React from "react";
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
-import EditProfile from '../componants/edit';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
+function Admin (props){
 
 
-const Profile = (props) => {
 
-  const [isEditing, setIsEditing]  = useState(false);
-  const handleSignOut = () => {
-    props.handleAuthenticated(false)
-    localStorage.removeItem('token')
-  }
-
-  const nav = useNavigate();
-
-  useEffect(() => {
-  if (!props.user ||props.user.title!== 'Admin') {
-     nav("/profile");
-    } else {
-     nav("/admin");
-    }
-  },[nav, props.user]);
-
-  return (
-    <div>
-      {isEditing && 
-        <EditProfile
-          username={props.user.username}
-          email={props.user.email}
-          first_name={props.user.first_name}
-          last_name={props.user.last_name}
-          prescriptions={props.user.prescriptions}
-          allergies={props.user.allergies}
-          blood_type={props.user.blood_type}
-          height={props.user.height}
-          weight={props.user.weight}
-          phone={props.user.phone}
-          birthday={props.user.birthday}
-          address={props.user.address}
-          diet={props.user.diet}
-          smoke={props.user.smoke}
-          pregnant={props.user.pregnant}
-          user={props.user}
-          current_conditions={props.user.current_conditions}
-          onProfileUpdate={""}
-          onClose={() => setIsEditing(false)}
-        />
-      }
-      {!isEditing &&
+    return(
+        <div>
+        {props.Admin &&
       <MDBContainer className="py-5">
+        <h1><strong>Admin</strong></h1>
         <MDBRow>
-
           <MDBCol lg="4">
             <MDBCard className="mb-4 profile">
               <MDBCardBody className="text-center">
@@ -61,8 +20,8 @@ const Profile = (props) => {
                   alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
                 <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
                 <div className="d-flex justify-content-center mb-2">
-                <div className='profileButton'><Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button></div>
-                <div className='profileButton'><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
+                <div className='profileButton'><Button className="logout">Edit</Button></div>
+                <div className='profileButton'><Button className="logout" type="button" value="Sign out">Sign out</Button></div>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -209,9 +168,9 @@ const Profile = (props) => {
 
         </MDBRow>
       </MDBContainer>
-      }
-    </div>
-  );
-};
+        }
+      </div>
+    )
+}
 
-export default Profile
+export default Admin;

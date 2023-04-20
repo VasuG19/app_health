@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Form, Button, Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import Profile from '../pages/profile';
 
 const Login = (props) => {
   const [username, setUsername] = useState('');
@@ -26,31 +25,24 @@ const Login = (props) => {
   }
 
   return (
-      <div>
-        { props.authenticated && 
-          <Profile/>
-        }
-        {!props.authenticated &&
-          <div className='login'>
-                    <div className="text-center">
-                      <Card className='formcard'>
-                      <h1><strong>Login</strong></h1>
-                        <Form className="loginForm" onSubmit={handleSubmit}>
-                          <Form.Group className="mb-3" controlId="formBasicUsername">
-                              <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                          </Form.Group><br/>
-                          <Form.Group className="mb-3" controlId="formBasicPassword">
-                              <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                          </Form.Group><br/>
-                          <Button type="submit">Login</Button>
-                        </Form>
-                        <h6>
-                          Click <Link to="/register">Here</Link> to register
-                        </h6>
-                      </Card>
-                    </div>
-            </div>
-          }
+      <div className='login'>
+        <div className="text-center">
+          <Card className='formcard'>
+          <h1><strong>Login</strong></h1>
+            <Form className="loginForm" onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicUsername">
+                  <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+              </Form.Group><br/>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </Form.Group><br/>
+              <Button type="submit">Login</Button>
+            </Form>
+            <h6>
+              Click <Link to="/register">Here</Link> to register
+            </h6>
+          </Card>
+        </div>
       </div>
     );
   };

@@ -51,7 +51,7 @@ const Register = () => {
 return (
   <Row className="loginForm">
       <Col sm="12" md="5" >
-          <Card className="text-center" border='dark'>
+          <Card className="text-center">
               <div className='formcard'>
               <h1><strong>Register</strong></h1>
                   <Form className="loginForm" onSubmit={handleSubmit}>

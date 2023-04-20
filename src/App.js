@@ -10,6 +10,8 @@ import Register from './componants/register';
 import Login from './componants/login';
 import axios from 'axios';
 import Footer from './componants/footer';
+import Admin from './pages/admin';
+import { useNavigate } from "react-router-dom";
 
 // Main App function - calls all componants and routes for the app 
 function App() {
@@ -17,6 +19,7 @@ function App() {
 // declare variables
 const [authenticated, setAuthenticated] = useState(false);
 const [user, setUser] = useState({});
+const [isAdmin, setIsAdmin]  = useState(false);
 
 // validate whether the user is authenticated
 const userToken = localStorage.getItem('token');
@@ -33,13 +36,24 @@ useEffect(() => {
           },
         });
         setUser(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
-    };
+    }
     getUserData();
   }
 }, [userToken]);
+
+const nav = useNavigate();
+
+  useEffect(() => {
+  if (!user ||user.title!== 'Admin') {
+     setIsAdmin(false)
+    } else {
+      setIsAdmin(true)
+    }
+  },[nav, user]);
 
 // return routes to index.js for the different pages of the web-app while calling relevant functions 
   return (
@@ -56,6 +70,7 @@ useEffect(() => {
             <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+            <Route path="/admin" element={<Admin user={user} Admin={isAdmin} />} />
           </Routes>
         </div>
       } 
