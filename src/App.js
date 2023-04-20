@@ -31,9 +31,7 @@ useEffect(() => {
     const getUserData = async () => {
       try {
         const response = await axios.get('http://localhost:1337/api/users/me?populate=profile', {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
+          headers: { Authorization: `Bearer ${userToken}`,},
         });
         setUser(response.data);
         console.log(response.data);

@@ -29,7 +29,6 @@ function Appointment(props) {
       .then((json) => {setData(json.data)})
       .catch((err) => {console.log(err.message)});
      }
-    
   }, [props.user]);
   
   useEffect(() => {

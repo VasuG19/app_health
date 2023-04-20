@@ -90,7 +90,7 @@ code {
 .footer-container {
   width: 100%;
   padding: 1rem 0;
-  background-color: blanchedalmond;
+  background-color: rgb(33, 37, 41);
 }
 
 .footer {
@@ -165,6 +165,10 @@ code {
  min-height: 100vh;
 }
 
-.healthNav{
-  background-color: blanchedalmond;
+.patientButton{
+  float: right;
+}
+
+footer {
+  color: aliceblue;
 }

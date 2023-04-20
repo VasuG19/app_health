@@ -15,7 +15,6 @@ const Profile = (props) => {
   }
 
   const nav = useNavigate();
-
   useEffect(() => {
   if (!props.user ||props.user.title!== 'Admin') {
      nav("/profile");

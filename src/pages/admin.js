@@ -1,21 +1,62 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
-import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 function Admin (props){
+    const [patients, setPatients] = useState([]);
+    const [patientNo, setPatientsNo] = useState([]);
+
 
     const handleSignOut = () => {
         props.handleAuthenticated(false)
         localStorage.removeItem('token')
-      }
+    }
 
+    const userToken = localStorage.getItem('token');
     const nav = useNavigate()
     useEffect(() => {
-    if (!props.user ||props.user.title!== 'Admin') {
-        nav("/");
+        if (!props.user ||props.user.title!== 'Admin') {
+            nav("/");
+        } else {
+            try {
+            const getUserData = async () => {
+                const response = await axios.get('http://localhost:1337/api/users?populate=*', {
+                headers: { Authorization: `Bearer ${userToken}`,},
+                });
+                setPatients(response.data);
+            }
+
+            const getUserCount = async () => {
+                const response = await axios.get('http://localhost:1337/api/users/count', {
+                headers: { Authorization: `Bearer ${userToken}`,},
+                });
+                setPatientsNo(response.data);
+            }
+
+            getUserCount()
+            getUserData()
+        } catch (error) {
+            console.error(error);
+          }
         }
-    },[nav, props.user]);
+    },[nav, props.user, userToken]);
+
+    const allPatients = patients && patients.map((value) => (
+        <div key={value.id}>
+        <MDBCol sm={true}>
+            <MDBCard>
+                <MDBCardBody>
+                {value.username}
+                <Link className="patientButton" to={`/Appointment`}>
+                    <Button type="submit">View Profile</Button>
+                </Link>
+                </MDBCardBody>
+            </MDBCard>
+        </MDBCol>
+        </div>
+        ));
 
     return(
         <div>
@@ -31,11 +72,12 @@ function Admin (props){
                     alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
                     <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
                     <div className="d-flex justify-content-center mb-2">
-                    <div className='profileButton'><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
+                        <div className='profileButton'>
+                            <Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button>
+                        </div>
                     </div>
                 </MDBCardBody>
                 </MDBCard>
-
                 <MDBCard className="mb-4 mb-lg-0 profile">
                 <MDBCardBody>
                     <MDBRow>
@@ -99,49 +141,15 @@ function Admin (props){
                 <MDBCard className="mb-4 profile">
                 <MDBCardBody>
                     <MDBRow>
-                    <MDBCol sm="3">
-                        <MDBCardText>Full Name</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                        <MDBCardText className="text-muted">{props.user.first_name} {props.user.last_name}</MDBCardText>
+                    <MDBCol>
+                        <MDBCardText> List of patients </MDBCardText>
                     </MDBCol>
                     </MDBRow>
                     <hr />
-                    <MDBRow>
-                    <MDBCol sm="3">
-                        <MDBCardText>Email</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                        <MDBCardText className="text-muted">{props.user.email}</MDBCardText>
-                    </MDBCol>
+                    <MDBRow style={{ height: '200px', overflow: 'scroll' }}>
+                        {allPatients}
                     </MDBRow>
                     <hr />
-                    <MDBRow>
-                    <MDBCol sm="3">
-                        <MDBCardText>Phone</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                        <MDBCardText className="text-muted">+44 {props.user.phone}</MDBCardText>
-                    </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                    <MDBCol sm="3">
-                        <MDBCardText>Birthday</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                        <MDBCardText className="text-muted">{props.user.birthday}</MDBCardText>
-                    </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <MDBRow>
-                    <MDBCol sm="3">
-                        <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                        <MDBCardText className="text-muted">{props.user.address}</MDBCardText>
-                    </MDBCol>
-                    </MDBRow>
                 </MDBCardBody>
                 </MDBCard>
 
@@ -149,8 +157,8 @@ function Admin (props){
                 <MDBCol md="4">
                     <MDBCard className="mb-4 mb-md-0 profile">
                     <MDBCardBody>
-                        <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Prescriptions</span></MDBCardText>
-                        <MDBCardText className="text-muted">{props.user.prescriptions}</MDBCardText>
+                        <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Number of patients</span></MDBCardText>
+                        <MDBCardText className="text-muted">{patientNo}</MDBCardText>
                     </MDBCardBody>
                     </MDBCard>
                 </MDBCol>
