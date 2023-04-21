@@ -1,79 +1,37 @@
 import React from 'react';
-import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
-import { Button } from 'react-bootstrap';
+import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody} from 'mdb-react-ui-kit';
+import { Button, Collapse } from 'react-bootstrap';
+import { useState } from 'react';
 
 function Popup(props) {
 
+  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const showDetails = () => {
+    setVisible(!visible);
+    setOpen(!open)
+  }
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
-    <div className="popup">
+    <div>
+        <Button 
+            className='profileButton' variant="primary" aria-controls="example-collapse-text"
+            aria-expanded={open} onClick={togglePopup}>Show Details
+        </Button>
+    { showPopup &&
+     <div className="popup">
       <div className="popup-content">
+      <Collapse in={open}>
       <MDBContainer className="py-5">
         <MDBRow>
-
-          <MDBCol lg="4">
-          
-            <div className='profileButton'><Button className="logout" type="button" value="Sign out" onClick={props.close}>Close</Button></div>
-
-            <MDBCard className="mb-4 mb-lg-0 profile">
-              <MDBCardBody>
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>Height</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.height}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>Weight</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.weight}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>Blood Type</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.blood_type}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>Diet</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.diet}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>Pregnant</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.pregnant}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>Smoke</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.smoke}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-
-          <MDBCol lg="8">
+        
+          <MDBCol sm="true">
             <MDBCard className="mb-4 profile">
               <MDBCardBody>
                 <MDBRow>
@@ -120,6 +78,61 @@ function Popup(props) {
                     <MDBCardText className="text-muted">{props.user.address}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Height</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{props.user.height}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Weight</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{props.user.weight}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Blood type</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">+44 {props.user.blood_type}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>diet</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{props.user.diet}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>pregnant</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{props.user.pregnant}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>smoke</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{props.user.smoke}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
               </MDBCardBody>
             </MDBCard>
 
@@ -156,7 +169,10 @@ function Popup(props) {
 
         </MDBRow>
       </MDBContainer>
+      </Collapse>
       </div>
+    </div>
+}
     </div>
   );
 }

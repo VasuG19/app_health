@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
 import { Button } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Popup from "../componants/popup";
 
@@ -10,14 +10,9 @@ function Admin (props){
     const [patientNo, setPatientsNo] = useState([]);
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
-    const [showPopup, setShowPopup] = useState(false);
 
     const numberOfEntries = upcoming.data.length;
     const numberOfApp = appointments.data.length;
-
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
-      };
 
     const handleSignOut = () => {
         props.handleAuthenticated(false)
@@ -76,27 +71,20 @@ function Admin (props){
     },[nav, props.user, userToken]);
 
 
-    const allPatients = patients && patients.map((value) => (
-        <div key={value.id}>
-        <MDBCol sm={true}>
-            <MDBCard>
-                <MDBCardBody>
-                {value.username}
-                <div className="patientButton" >
-                    <Button type="submit" onClick={togglePopup}>View Profile</Button>
-                </div>
-                {showPopup &&
-                    <Popup user={value} close={togglePopup} >
-                        <h2>Popup Title</h2>
-                        <p>Popup content goes here...</p>
-                        <Button onClick={togglePopup}>Close Popup</Button>
-                    </Popup>
-                    }
-                </MDBCardBody>
-            </MDBCard>
-        </MDBCol>
+    const allPatients = patients && patients.map(
+        (value) =>  <div key={value.id}>
+            <MDBCol sm={true}>
+                <MDBCard>
+                    <MDBCardBody>
+                    {value.username}
+                    <div className="patientButton" >
+                        <Popup user={value} />
+                    </div>    
+                    </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
         </div>
-        ));
+    );
 
     return(
         <div>
