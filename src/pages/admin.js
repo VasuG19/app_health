@@ -76,10 +76,7 @@ function Admin (props){
             <MDBCol sm={true}>
                 <MDBCard>
                     <MDBCardBody>
-                    {value.username}
-                    <div className="patientButton" >
                         <Popup user={value} />
-                    </div>    
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>

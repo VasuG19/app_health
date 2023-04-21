@@ -7,26 +7,19 @@ function Popup(props) {
 
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
 
   const showDetails = () => {
     setVisible(!visible);
     setOpen(!open)
   }
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
   return (
     <div>
+        {props.user.username}
         <Button 
-            className='profileButton' variant="primary" aria-controls="example-collapse-text"
-            aria-expanded={open} onClick={togglePopup}>Show Details
+            className='patientButton' variant="primary" aria-controls="example-collapse-text"
+            aria-expanded={open} onClick={showDetails}>Show Details
         </Button>
-    { showPopup &&
-     <div className="popup">
-      <div className="popup-content">
       <Collapse in={open}>
       <MDBContainer className="py-5">
         <MDBRow>
@@ -170,9 +163,6 @@ function Popup(props) {
         </MDBRow>
       </MDBContainer>
       </Collapse>
-      </div>
-    </div>
-}
     </div>
   );
 }
