@@ -30,7 +30,7 @@ useEffect(() => {
     setAuthenticated(true)
     const getUserData = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/users/me?populate=profile', {
+        const response = await axios.get('http://localhost:1337/api/users/me?populate=*', {
           headers: { Authorization: `Bearer ${userToken}`,},
         });
         setUser(response.data);

@@ -13,30 +13,30 @@ function HomePage(props) {
     const today = new Date().toISOString();
     const currentDate = new Date().toISOString().split('T')[0]; // Get current date in format yyyy-mm-dd
 
-   if (!props.user ||props.user.title!== 'Admin') {
+    if (!props.user ||props.user.title!== 'Admin') {
 
-    fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$lt]=${currentDate}`)
-      .then((response) => response.json())
-      .then((json) => setPrevious(json.data))
-      .catch((err) => console.log(err.message));
+      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$lt]=${currentDate}`)
+        .then((response) => response.json())
+        .then((json) => setPrevious(json.data))
+        .catch((err) => console.log(err.message));
 
-    fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
-      .then((response) => response.json())
-      .then((json) => setUpcoming(json.data))
-      .catch((err) => console.log(err.message));
+      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
+        .then((response) => response.json())
+        .then((json) => setUpcoming(json.data))
+        .catch((err) => console.log(err.message));
 
-   } else if (props.user ||props.user.title!== 'Admin'){
+    } else if (props.user ||props.user.title!== 'Admin'){
 
-    fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$lt]=${currentDate}`)
-      .then((response) => response.json())
-      .then((json) => setPrevious(json.data))
-      .catch((err) => console.log(err.message));
+      fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$lt]=${currentDate}`)
+        .then((response) => response.json())
+        .then((json) => setPrevious(json.data))
+        .catch((err) => console.log(err.message));
 
-    fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`)
-      .then((response) => response.json())
-      .then((json) => setUpcoming(json.data))
-      .catch((err) => console.log(err.message));
-   }
+      fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`)
+        .then((response) => response.json())
+        .then((json) => setUpcoming(json.data))
+        .catch((err) => console.log(err.message));
+    }
   }, [props.user, props.user.id]);
 
   useEffect(() => {

@@ -1,13 +1,23 @@
 import React, {useEffect, useState} from "react";
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
-import { Button, Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import Popup from "../componants/popup";
 
 function Admin (props){
     const [patients, setPatients] = useState([]);
     const [patientNo, setPatientsNo] = useState([]);
+    const [upcoming, setUpcoming] = useState({ data: [] });
+    const [appointments, setAppointments] = useState({ data: [] });
+    const [showPopup, setShowPopup] = useState(false);
 
+    const numberOfEntries = upcoming.data.length;
+    const numberOfApp = appointments.data.length;
+
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+      };
 
     const handleSignOut = () => {
         props.handleAuthenticated(false)
@@ -16,7 +26,10 @@ function Admin (props){
 
     const userToken = localStorage.getItem('token');
     const nav = useNavigate()
+
     useEffect(() => {
+    const today = new Date().toISOString();
+
         if (!props.user ||props.user.title!== 'Admin') {
             nav("/");
         } else {
@@ -26,6 +39,7 @@ function Admin (props){
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
                 setPatients(response.data);
+                console.log(response.data);
             }
 
             const getUserCount = async () => {
@@ -35,13 +49,32 @@ function Admin (props){
                 setPatientsNo(response.data);
             }
 
+            const getUpcoming = async () => {
+                const response = await axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`, {
+                headers: { Authorization: `Bearer ${userToken}`,},
+                });
+                setUpcoming(response.data);
+                console.log(response.data);
+            }
+
+            const getAppointments = async () => {
+                const response = await axios.get(`http://localhost:1337/api/appointments`, {
+                headers: { Authorization: `Bearer ${userToken}`,},
+                });
+                setAppointments(response.data);
+            }
+
             getUserCount()
             getUserData()
+            getUpcoming()
+            getAppointments()
+
         } catch (error) {
             console.error(error);
           }
         }
     },[nav, props.user, userToken]);
+
 
     const allPatients = patients && patients.map((value) => (
         <div key={value.id}>
@@ -49,9 +82,16 @@ function Admin (props){
             <MDBCard>
                 <MDBCardBody>
                 {value.username}
-                <Link className="patientButton" to={`/Appointment`}>
-                    <Button type="submit">View Profile</Button>
-                </Link>
+                <div className="patientButton" >
+                    <Button type="submit" onClick={togglePopup}>View Profile</Button>
+                </div>
+                {showPopup &&
+                    <Popup user={value} close={togglePopup} >
+                        <h2>Popup Title</h2>
+                        <p>Popup content goes here...</p>
+                        <Button onClick={togglePopup}>Close Popup</Button>
+                    </Popup>
+                    }
                 </MDBCardBody>
             </MDBCard>
         </MDBCol>
@@ -67,48 +107,48 @@ function Admin (props){
 
                 <MDBCol lg="4">
                     <MDBCard className="mb-4 profile">
-                    <MDBCardBody className="text-center">
-                        <MDBCardImage
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                        alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
-                        <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
-                        <div className="d-flex justify-content-center mb-2">
-                            <div className='profileButton'>
-                                <Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button>
+                        <MDBCardBody className="text-center">
+                            <MDBCardImage
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                            alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
+                            <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
+                            <div className="d-flex justify-content-center mb-2">
+                                <div className='profileButton'>
+                                    <Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button>
+                                </div>
                             </div>
-                        </div>
-                    </MDBCardBody>
+                        </MDBCardBody>
                     </MDBCard>
 
                     <MDBCard className="mb-4 mb-lg-0 profile">
-                    <MDBCardBody>
-                        <MDBRow>
-                        <MDBCol sm="4">
-                            <MDBCardText>Patients</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="8">
-                            <MDBCardText className="text-muted">{patientNo}</MDBCardText>
-                        </MDBCol>
-                        </MDBRow>
-                        <hr />
-                        <MDBRow>
-                        <MDBCol sm="5">
-                            <MDBCardText>Upcoming Appointments</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="8">
-                            <MDBCardText className="text-muted">{props.user.weight}</MDBCardText>
-                        </MDBCol>
-                        </MDBRow>
-                        <hr />
-                        <MDBRow>
-                        <MDBCol sm="5">
-                            <MDBCardText>Total Appointments</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="8">
-                            <MDBCardText className="text-muted">{props.user.blood_type}</MDBCardText>
-                        </MDBCol>
-                        </MDBRow>
-                    </MDBCardBody>
+                        <MDBCardBody>
+                            <MDBRow>
+                            <MDBCol sm="8">
+                                <MDBCardText>Patients</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="2">
+                                <MDBCardText className="text-muted">{patientNo}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                            <hr />
+                            <MDBRow>
+                            <MDBCol sm="8">
+                                <MDBCardText>Upcoming Appointments</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="2">
+                                <MDBCardText className="text-muted">{numberOfEntries}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                            <hr />
+                            <MDBRow>
+                            <MDBCol sm="8">
+                                <MDBCardText>Total Appointments</MDBCardText>
+                            </MDBCol>
+                            <MDBCol sm="2">
+                                <MDBCardText className="text-muted">{numberOfApp}</MDBCardText>
+                            </MDBCol>
+                            </MDBRow>
+                        </MDBCardBody>
                     </MDBCard>
 
                 </MDBCol>
@@ -122,7 +162,7 @@ function Admin (props){
                         </MDBCol>
                         </MDBRow>
                         <hr />
-                        <MDBRow style={{ height: '400px', overflow: 'scroll' }}>
+                        <MDBRow style={{ height: '405px', overflow: 'scroll' }}>
                             {allPatients}
                         </MDBRow>
                         <hr />
