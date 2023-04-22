@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
 
-const Profile = (props) => {
+const Booking = (props) => {
 
   const [isEditing, setIsEditing]  = useState(false);
   const handleSignOut = () => {
@@ -224,4 +224,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile
+export default Booking
