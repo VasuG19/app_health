@@ -13,18 +13,18 @@ function Admin (props){
 
     const numberOfEntries = upcoming.data.length;
     const numberOfApp = appointments.data.length;
-
+    const userToken = localStorage.getItem('token');
+    const nav = useNavigate()
+    
     const handleSignOut = () => {
         props.handleAuthenticated(false)
         localStorage.removeItem('token')
     }
 
-    const userToken = localStorage.getItem('token');
-    const nav = useNavigate()
+    
 
     useEffect(() => {
-    const today = new Date().toISOString();
-
+        const today = new Date().toISOString();
         if (!props.user ||props.user.title!== 'Admin') {
             nav("/");
         } else {
@@ -146,10 +146,9 @@ function Admin (props){
                         </MDBCol>
                         </MDBRow>
                         <hr />
-                        <MDBRow style={{ height: '405px', overflow: 'scroll' }}>
+                        <MDBRow style={{ height: '360px', overflow: 'scroll' }}>
                             {allPatients}
                         </MDBRow>
-                        <hr />
                     </MDBCardBody>
                     </MDBCard>
                 </MDBCol>
