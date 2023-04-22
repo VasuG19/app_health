@@ -30,11 +30,10 @@ function Admin (props){
         } else {
             try {
             const getUserData = async () => {
-                const response = await axios.get('http://localhost:1337/api/users?populate=*', {
+                const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=Admin', {
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
                 setPatients(response.data);
-                console.log(response.data);
             }
 
             const getUserCount = async () => {
@@ -49,7 +48,6 @@ function Admin (props){
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
                 setUpcoming(response.data);
-                console.log(response.data);
             }
 
             const getAppointments = async () => {
@@ -72,7 +70,8 @@ function Admin (props){
 
 
     const allPatients = patients && patients.map(
-        (value) =>  <div key={value.id}>
+        (value) =>  
+        <div key={value.id}>
             <MDBCol sm={true}>
                 <MDBCard>
                     <MDBCardBody>
