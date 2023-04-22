@@ -8,37 +8,55 @@ const EditProfile = (props) => {
         last_name:props.last_name, prescriptions:props.prescriptions, allergies:props.allergies,
         height:props.height, weight:props.weight, phone:props.phone,birthday:props.birthday, 
         address:props.address, diet:props.diet, current_conditions:props.current_conditions, smoke:props.smoke,
-        pregnant:props.pregnant
+        pregnant:props.pregnant, password: '', passwordConfirmation: '', currentPassword: ''
   });
+
 
   const { 
     username, email, blood_type, first_name , last_name , prescriptions , allergies ,
-    height , weight , phone , birthday, address , diet , current_conditions, smoke, pregnant
+    height , weight , phone , birthday, address , diet , current_conditions, smoke, pregnant, 
+    password, passwordConfirmation, currentPassword
     } = updateData; 
 
   const handleChange = e => setUpdateData({ ...updateData, [e.target.name]: e.target.value });
 
+const code = localStorage.getItem('token');
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-        const config = {
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        };
-        const body = JSON.stringify({
-            username, email, blood_type, first_name, last_name, prescriptions, allergies, height , 
-            weight, phone, birthday, address, diet, current_conditions, smoke, pregnant 
-        });
-        const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
-        console.log(result.data)
-    } catch (error) {
-        console.error(error);
+
+    if (password !== passwordConfirmation) {
+        console.log('Passwords do not match');
+      } else {
+        try {
+            const config = {
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${code}`
+                }
+            };
+            const body = JSON.stringify({
+                username, email, blood_type, first_name, last_name, prescriptions, allergies, height , 
+                weight, phone, birthday, address, diet, current_conditions, smoke, pregnant 
+            });
+
+            const passwordReset = JSON.stringify({ password, passwordConfirmation, currentPassword })
+
+            const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
+            const reset = await axios.post(`http://localhost:1337/api/auth/change-password`, passwordReset, config);
+
+            console.log(result.data)
+            console.log(reset.data)
+
+        } catch (error) {
+            console.error(error);
+        }
     }
     props.onClose();
-    window.location.reload(false);
+    
   }
-
+//window.location.reload(false);
   return (
     <div>
       <h2>Edit Profile</h2>
@@ -144,6 +162,27 @@ const EditProfile = (props) => {
             <Col>
                 <Form.Group className="mb-3" controlId="formBasicBlood">
                 Smoke:<Form.Control type="text" name='smoke' value={smoke} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+        </Row>
+
+        <Row>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                Password:<Form.Control type="text" name='password' value={password} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicBlood">
+                Confirm Password:<Form.Control type="text" name='passwordConfirmation' value={passwordConfirmation} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+        </Row>
+
+        <Row>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                Current Password:<Form.Control type="text" name='currentPassword' value={currentPassword} onChange={handleChange}/>
                 </Form.Group>
             </Col>
         </Row>
