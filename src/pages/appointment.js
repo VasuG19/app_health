@@ -107,17 +107,18 @@ function Appointment(props) {
     <div>
       <div className='calender'>
         <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
-          initialView='timeGridWeek'
-          selectable={true}
-          selectMirror={true}
-          dayMaxEvents={true}
-          weekends={false}
-          events={events}
-          dateClick={handleDateSelect}
-          eventClick={handleEventClick}
-          themeSystem='bootstrap5'
-          headerToolbar={{
+          plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
+          initialView ='timeGridWeek'
+          selectable ={true}
+          selectMirror ={true}
+          dayMaxEvents ={true}
+          weekends ={false}
+          events ={events}
+          dateClick ={handleDateSelect}
+          eventClick ={handleEventClick}
+          themeSystem ='bootstrap5'
+          allDaySlot = {false}
+          headerToolbar = {{
             left: 'prev,next',
             center: 'title',
             right: 'timeGridWeek,timeGridDay'
