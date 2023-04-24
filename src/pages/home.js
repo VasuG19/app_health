@@ -76,7 +76,7 @@ function HomePage(props) {
               <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <Link to={`/booking`}>
+              <Link to={`/${value.id}`}>
                 <Button type="submit"> View Appointment </Button>
               </Link>
             </Card.Body>

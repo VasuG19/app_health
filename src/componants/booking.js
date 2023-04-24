@@ -3,12 +3,22 @@ import { useState } from 'react';
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
 import EditProfile from '../componants/edit';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Booking = (props) => {
 
   const [isEditing, setIsEditing]  = useState(false);
+  const [booking, setBooking] = useState ({});
+  const id = useParams().id; // Extracting the product ID from the URL params
   
+  useEffect(() => {
+  
+      fetch(`http://localhost:1337/api/appointments/${id}?populate=*`)
+        .then((response) => response.json())
+        .then((json) => setBooking(json.data))
+        .catch((err) => console.log(err.message));
+  
+  }, []);
 
   return (
     <div>
