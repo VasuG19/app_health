@@ -37,6 +37,8 @@ function HomePage(props) {
         .then((json) => setUpcoming(json.data))
         .catch((err) => console.log(err.message));
     }
+
+    console.log(upcoming)
   }, [props.user, props.user.id]);
 
   useEffect(() => {
@@ -72,10 +74,11 @@ function HomePage(props) {
         {chunk.map((value) => (
           <Card className="text-center" key={value.id}>
             <Card.Body className="appointmentCard">
+              <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <Link to={`/Appointment`}>
-                <Button type="submit"> View calendar </Button>
+              <Link to={`/booking`}>
+                <Button type="submit"> View Appointment </Button>
               </Link>
             </Card.Body>
           </Card>
@@ -90,10 +93,11 @@ function HomePage(props) {
         {chunk.map((value) => (
           <Card className="text-center" key={value.id}>
             <Card.Body className="appointmentCard">
+            <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <Link to={`/Appointment`}>
-                <Button type="submit"> View calendar </Button>
+              <Link to={`/booking`}>
+                <Button type="submit"> View Appointment </Button>
               </Link>
             </Card.Body>
           </Card>

@@ -5,25 +5,10 @@ import EditProfile from '../componants/edit';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
-
 const Booking = (props) => {
 
   const [isEditing, setIsEditing]  = useState(false);
-  const handleSignOut = () => {
-    props.handleAuthenticated(false)
-    localStorage.removeItem('token')
-  }
-
-  const nav = useNavigate();
-  useEffect(() => {
-  if (!props.user ||props.user.title!== 'Admin') {
-     nav("/profile");
-    } else {
-     nav("/admin");
-    }
-  },[nav, props.user]);
-
-  const bmi = (props.user.weight / props.user.height)^2
+  
 
   return (
     <div>
@@ -62,8 +47,7 @@ const Booking = (props) => {
                   alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
                 <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
                 <div className="d-flex justify-content-center mb-2">
-                <div className='profileButton'><Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button></div>
-                <div className='profileButton'><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
+                    <div className='profileButton'><Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button></div>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -121,15 +105,6 @@ const Booking = (props) => {
                   </MDBCol>
                   <MDBCol sm="8">
                     <MDBCardText className="text-muted">{props.user.smoke}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="4">
-                    <MDBCardText>BMI</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{bmi}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
