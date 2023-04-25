@@ -5,13 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: ''
+    email: '', username: '', first_name: '',
+    last_name:'', password: '', confirmPassword: ''
   });
 
-  const { username, email, password, confirmPassword } = formData; 
+  const { username, email, password, confirmPassword,first_name,last_name, } = formData; 
   const nav = useNavigate();
 
   const handleChange = e =>
@@ -23,27 +21,15 @@ const Register = () => {
       console.log('Passwords do not match');
     } else {
       try {
-
-        const config = {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        };
-
-        const body = JSON.stringify({
-          username,
-          email,
-          password,
-        });
-
-      console.log("body",body)
-
-      const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
-      console.log(result.data)
-      nav("/");
-
-    } catch (error) {
+        const config = {headers: {'Content-Type': 'application/json'}};
+        const body = JSON.stringify({username, email, password, first_name,last_name,});
+        console.log("body",body)
+        const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
+        console.log(result.data)
+        nav("/");
+      } catch (error) {
       console.error(error);
+      alert("there was an error registering your account, please try again")
     }
   }
 };
@@ -69,6 +55,24 @@ return (
                             name='username' 
                             type="text" 
                             value={username} 
+                            onChange={handleChange} />
+                      </Form.Group><br/>
+
+                      <Form.Group className="mb-3" controlId="formBasicUsername">
+                          <Form.Control 
+                            placeholder="First Name" 
+                            name='first_name' 
+                            type="text" 
+                            value={first_name} 
+                            onChange={handleChange} />
+                      </Form.Group><br/>
+
+                      <Form.Group className="mb-3" controlId="formBasicUsername">
+                          <Form.Control 
+                            placeholder="Last Name" 
+                            name='last_name' 
+                            type="text" 
+                            value={last_name} 
                             onChange={handleChange} />
                       </Form.Group><br/>
                           

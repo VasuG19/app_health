@@ -8,6 +8,7 @@ import { Button, Form } from 'react-bootstrap';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function Appointment(props) {
   const [events, setEvents] = useState([]);
@@ -15,6 +16,7 @@ function Appointment(props) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [formData, setFormData] = useState({title:'', start:'', patient:''});
   const [data, setData] = useState([]);
+  const [eventType, setEventType] = useState('');
 
   // retrieve appointments from API
   useEffect( () => {
@@ -36,7 +38,8 @@ function Appointment(props) {
       id: value.id,
       start: new Date(value.attributes.start),
       title: value.attributes.title,
-      patient: props.user.id
+      patient: props.user.id,
+      type: value.attributes.type
     }));    
     setEvents(appointment);
   }, [data, props.user.id]);
@@ -66,27 +69,34 @@ function Appointment(props) {
     setSelectedDate(arg.date);
     const title = prompt('Enter a title for the booking:');
     if (title) {
-      setEvents([
-      ...events,
-      {
-        title: title,
-        start: arg.date,
-        patient: props.user.id
-      },
+      setEvents([...events,
+        {
+          title: title,
+          start: arg.date,
+          patient: props.user.id,
+          type: eventType
+        },
       ]);
       setFormData({
-        data:{
-        title: title,
-        start: arg.date.toISOString(),
-        patient: props.user.id
-      }
+        data: {
+          title: title,
+          start: arg.date.toISOString(),
+          patient: props.user.id,
+        },
       });
-      
     }
   };
 
+  const handleEventTypeSelect = (event) => {
+    setEventType(event.target.innerText);
+  };
+
   const handleSubmit = async (e) => {
+    setFormData({data: {type: eventType,},});
     e.preventDefault();
+    if (eventType === "") {
+      alert("you must select and appointment type")
+    }else{
     setIsBooking(true);
     try {
       const config = {headers: {'Content-Type': 'application/json'}};
@@ -101,10 +111,11 @@ function Appointment(props) {
       setIsBooking(false);
       window.location.reload(false);
     }
+   }
   };
 
   return (
-    <div>
+    <div className='bookButton'>      
       <div className='calender'>
         <FullCalendar
           plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
@@ -132,18 +143,25 @@ function Appointment(props) {
           }}
           slotMinTime={'09:00'}
           slotMaxTime={'18:00'}
-
         />
-      </div>
-      {selectedDate && (
-        <div>
-          <Form onSubmit={handleSubmit} className='bookButton'>
+      </div> 
+        <Dropdown className='profileButton'>
+          <Dropdown.Toggle variant="primary" id="dropdown-button-dark">
+            Appointment type
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={handleEventTypeSelect}>clinic</Dropdown.Item>
+            <Dropdown.Item onClick={handleEventTypeSelect}>phone</Dropdown.Item>
+            <Dropdown.Item onClick={handleEventTypeSelect}>video</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        {selectedDate && (
+          <Form onSubmit={handleSubmit} className='profileButton'>
             <Button type='submit' disabled={isBooking}>
               {isBooking ? 'Booking...' : 'Book Appointment'}
             </Button>
           </Form>
-        </div>
-      )}
+        )}
     </div>
   );
 }

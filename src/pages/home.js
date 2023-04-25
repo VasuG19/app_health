@@ -3,7 +3,6 @@ import { Button, Card, Carousel, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-
 function HomePage(props) {
   const [previous, setPrevious] = useState([]);
   const [itemsperslide, setitemsperslide] = useState(3);
@@ -47,7 +46,6 @@ function HomePage(props) {
     setShowModal(true);
   };
   
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -125,8 +123,8 @@ function HomePage(props) {
       </div>
 
       <h4 className='homeheader'>Previous appointments</h4>
-      <div>
-        <Carousel className='appointments'
+      <div className='appointments'>
+        <Carousel 
           prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
           nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
           indicators={false}
@@ -144,7 +142,7 @@ function HomePage(props) {
           <p><strong>Patient:</strong> {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.username}</p>
           <p><strong>Title:</strong> {selectedAppointment && selectedAppointment.attributes.title}</p>
           <p><strong>Start:</strong> {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
-          <p><strong>Type:</strong> {selectedAppointment && selectedAppointment.attributes.location}</p>
+          <p><strong>Type:</strong> {selectedAppointment && selectedAppointment.attributes.type}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>

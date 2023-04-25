@@ -12,6 +12,7 @@ import axios from 'axios';
 import Footer from './componants/footer';
 import Admin from './pages/admin';
 import { useNavigate } from "react-router-dom";
+import NotFound from './componants/notFound';
 
 // Main App function - calls all componants and routes for the app 
 function App() {
@@ -62,12 +63,13 @@ const nav = useNavigate();
       { authenticated &&
         <div className='content'>     
           <Routes>
+            <Route path='*' element={<NotFound />}/>
             <Route path="/" element={<HomePage user={user} />} />
             <Route path="/appointment" element={<Appointment user={user}/>} />
             <Route path="/services" element={<ServicesPage/>} />
             <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+            <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
           </Routes>
         </div>
@@ -75,6 +77,7 @@ const nav = useNavigate();
       {!authenticated &&
         <div className='content'>     
         <Routes>
+          <Route path='*' element={<NotFound />}/>
           <Route path="/" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
