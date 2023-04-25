@@ -45,6 +45,26 @@ function HomePage(props) {
     setSelectedAppointment(appointment);
     setShowModal(true);
   };
+
+  const handleEventClick = async () => {
+    if (window.confirm(`Are you sure you want to delete the booking '${selectedAppointment.title}'?`)) {
+      try {
+        // Delete the appointment using the API
+        const response = await fetch(`http://localhost:1337/api/appointments/${selectedAppointment.id}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          alert('Booking deleted successfully!');
+        } else {
+          alert('There was an error deleting the booking.');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('There was an error deleting the booking.');
+      }
+      window.location.reload(false);
+    }
+  };
   
   useEffect(() => {
     const handleResize = () => {
@@ -110,9 +130,9 @@ function HomePage(props) {
   return (
     <div className="home">
 
-      <h4 className='homeheader'>Upcoming appointments</h4>
-      <div className='appointments'>
-        <Carousel
+      <div >
+        <h4 className='homeheader'>Upcoming appointments</h4>
+        <Carousel className='appointments'
           prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
           nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
           indicators={false}
@@ -122,9 +142,9 @@ function HomePage(props) {
         </Carousel>
       </div>
 
-      <h4 className='homeheader'>Previous appointments</h4>
-      <div className='appointments'>
-        <Carousel 
+      <div >
+        <h4 className='homeheader'>Previous appointments</h4>
+        <Carousel className='appointments'
           prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
           nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
           indicators={false}
@@ -140,12 +160,14 @@ function HomePage(props) {
         </Modal.Header>
         <Modal.Body>
           <p><strong>Patient:</strong> {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.username}</p>
+          <p><strong>Name:</strong> {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.first_name}-
+                                    {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.last_name}</p>
           <p><strong>Title:</strong> {selectedAppointment && selectedAppointment.attributes.title}</p>
           <p><strong>Start:</strong> {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
           <p><strong>Type:</strong> {selectedAppointment && selectedAppointment.attributes.type}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button variant="danger" onClick={handleEventClick}>Cancel Appointment</Button>
         </Modal.Footer>
       </Modal>
 
