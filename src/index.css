@@ -15,6 +15,7 @@ code {
 .content
 {
   margin: 70px;
+  min-height: 100vh;
 }
 
 .carousel-control-prev svg,

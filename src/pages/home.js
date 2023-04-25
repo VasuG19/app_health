@@ -39,7 +39,7 @@ function HomePage(props) {
         .catch((err) => console.log(err.message));
     }
   
-  }, [props.user, props.user.id]);
+  },[props.user, props.user.id]);
 
   const handleViewAppointment = (appointment) => {
     setSelectedAppointment(appointment);
@@ -148,7 +148,6 @@ function HomePage(props) {
           <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
         </Modal.Footer>
       </Modal>
-
 
     </div>
   );
