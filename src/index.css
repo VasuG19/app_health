@@ -44,6 +44,7 @@ code {
 
 .bookButton{
   text-align: center;
+  padding-top: 20px;
 }
 
 .profileButton{
@@ -91,7 +92,7 @@ code {
 .footer-container {
   width: 100%;
   padding: 1rem 0;
-  background-color: rgb(33, 37, 41);
+  background-color: rgb(33, 37, 41)
 }
 
 .footer {
@@ -173,4 +174,10 @@ code {
 footer {
   color: aliceblue;
 }
+
+/*
+.healthNav{
+  background-color: rgb(255,202,123);
+}
+*/
 

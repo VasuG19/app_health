@@ -115,8 +115,7 @@ function Appointment(props) {
   };
 
   return (
-    <div className='bookButton'>      
-      <div className='calender'>
+    <div className='calender'>
         <FullCalendar
           plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
           initialView ='timeGridWeek'
@@ -144,23 +143,24 @@ function Appointment(props) {
           slotMinTime={'09:00'}
           slotMaxTime={'18:00'}
         />
-      </div> 
-        <Dropdown className='profileButton'>
-          <Dropdown.Toggle variant="primary" id="dropdown-button-dark">
-            Appointment type
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={handleEventTypeSelect}>clinic</Dropdown.Item>
-            <Dropdown.Item onClick={handleEventTypeSelect}>phone</Dropdown.Item>
-            <Dropdown.Item onClick={handleEventTypeSelect}>video</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
         {selectedDate && (
-          <Form onSubmit={handleSubmit} className='profileButton'>
-            <Button type='submit' disabled={isBooking}>
-              {isBooking ? 'Booking...' : 'Book Appointment'}
-            </Button>
-          </Form>
+          <div>      
+            <Dropdown className='bookButton'>
+              <Dropdown.Toggle variant="primary" id="dropdown-button-dark">
+                Appointment type
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={handleEventTypeSelect}>clinic</Dropdown.Item>
+                <Dropdown.Item onClick={handleEventTypeSelect}>phone</Dropdown.Item>
+                <Dropdown.Item onClick={handleEventTypeSelect}>video</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Form onSubmit={handleSubmit} className='bookButton'>
+              <Button type='submit' disabled={isBooking}>
+                {isBooking ? 'Booking...' : 'Book Appointment'}
+              </Button>
+            </Form>
+          </div> 
         )}
     </div>
   );

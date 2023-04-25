@@ -61,7 +61,7 @@ const nav = useNavigate();
           <NavBar authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>
         </div>
       { authenticated &&
-        <div className='content'>     
+        <div className='content'>   
           <Routes>
             <Route path='*' element={<NotFound />}/>
             <Route path="/" element={<HomePage user={user} />} />
