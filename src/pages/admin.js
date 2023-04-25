@@ -21,8 +21,6 @@ function Admin (props){
         localStorage.removeItem('token')
     }
 
-    
-
     useEffect(() => {
         const today = new Date().toISOString();
         if (!props.user ||props.user.title!== 'Admin') {
@@ -69,8 +67,7 @@ function Admin (props){
     },[nav, props.user, userToken]);
 
 
-    const allPatients = patients && patients.map(
-        (value) =>  
+    const allPatients = patients && patients.map((value) =>  
         <div key={value.id}>
             <MDBCol sm={true}>
                 <MDBCard>

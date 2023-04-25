@@ -12,7 +12,6 @@ import axios from 'axios';
 import Footer from './componants/footer';
 import Admin from './pages/admin';
 import { useNavigate } from "react-router-dom";
-import Booking from './componants/booking';
 
 // Main App function - calls all componants and routes for the app 
 function App() {
@@ -70,7 +69,6 @@ const nav = useNavigate();
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
             <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
-            <Route path="/:id" element={<Booking authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
           </Routes>
         </div>
       } 
@@ -81,7 +79,6 @@ const nav = useNavigate();
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/appointment"element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/id" element={<Booking authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/services" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/profile" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
