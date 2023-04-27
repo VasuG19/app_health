@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import axios from 'axios';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -122,6 +122,7 @@ function Timetable(props) {
 
   return (
     <div className='calender'>
+      <Container>
         <FullCalendar
           plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
           initialView ='timeGridWeek'
@@ -164,6 +165,7 @@ function Timetable(props) {
             </Form>
           </div> 
         )}
+        </Container>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Button, Card, Carousel, Modal } from 'react-bootstrap';
+import { Button, Card, Carousel, Container, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -129,6 +129,7 @@ function Appointments(props) {
 
   return (
     <div className="home">
+      <Container>
 
       <div >
         <h4 className='homeheader'>Upcoming appointments</h4>
@@ -170,7 +171,7 @@ function Appointments(props) {
           <Button variant="danger" onClick={handleEventClick}>Cancel Appointment</Button>
         </Modal.Footer>
       </Modal>
-
+      </Container>
     </div>
   );
 }

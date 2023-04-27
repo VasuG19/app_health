@@ -63,23 +63,18 @@ const nav = useNavigate();
           <NavBar authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>
         </div>
       { authenticated &&
-        <div>
+        <div className='content'>
             <Routes>
               <Route path="/" element={<HomePage user={user} />} />
+              <Route path='*' element={<NotFound />}/>
+              <Route path="/appointments" element={<Appointments user={user}/>} />
+              <Route path="/calendar" element={<Timetable user={user}/>} />
+              <Route path="/services" element={<ServicesPage/>} />
+              <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+              <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
             </Routes>
-          <Container className='content'>   
-            <Routes>
-                <Route path="/"/>
-                <Route path='*' element={<NotFound />}/>
-                <Route path="/appointments" element={<Appointments user={user}/>} />
-                <Route path="/calendar" element={<Timetable user={user}/>} />
-                <Route path="/services" element={<ServicesPage/>} />
-                <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-                <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
-            </Routes>
-          </Container>
           </div>
       } 
       {!authenticated &&
