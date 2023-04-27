@@ -37,7 +37,6 @@ useEffect(() => {
           headers: { Authorization: `Bearer ${userToken}`,},
         });
         setUser(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -63,7 +62,7 @@ const nav = useNavigate();
           <NavBar authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>
         </div>
       { authenticated &&
-        <div className='content'>
+        <div>
             <Routes>
               <Route path="/" element={<HomePage user={user} />} />
               <Route path='*' element={<NotFound />}/>

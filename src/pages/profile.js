@@ -51,7 +51,7 @@ const Profile = (props) => {
         />
       }
       {!isEditing &&
-      <MDBContainer className="py-3">
+      <MDBContainer className="py-3 content">
         <MDBRow>
 
           <MDBCol lg="4">

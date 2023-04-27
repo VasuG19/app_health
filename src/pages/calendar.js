@@ -67,31 +67,38 @@ function Timetable(props) {
   };
 
   const handleDateSelect = (arg) => {
-    setSelectedDate(arg.date);
-    const title = prompt('Enter a title for the booking:');
-    if (title) {
-      const start = arg.date.toISOString();
-      const end = new Date(arg.date.getTime() + 30 * 60000).toISOString();
-      setEvents([
-        ...events,
-        {
-          title: title,
-          start: start,
-          end: end,
-          patient: props.user.id,
-          type: eventType,
-        },
-      ]);
-      setFormData({
-        data: {
-          title: title,
-          start: start,
-          end: end,
-          patient: props.user.id,
-        },
-      });
+    const today = new Date();
+    const selected = new Date(arg.date);
+    if (selected >= today) {
+      setSelectedDate(selected);
+      const title = prompt('Enter a title for the booking:');
+      if (title) {
+        const start = selected.toISOString();
+        const end = new Date(selected.getTime() + 30 * 60000).toISOString();
+        setEvents([
+          ...events,
+          {
+            title: title,
+            start: start,
+            end: end,
+            patient: props.user.id,
+            type: eventType,
+          },
+        ]);
+        setFormData({
+          data: {
+            title: title,
+            start: start,
+            end: end,
+            patient: props.user.id,
+          },
+        });
+      }
+    } else {
+      alert("you cannot book appointments for today or previous days")
     }
-  };
+  }
+
   
   const handleEventTypeSelect = (event) => {
     setEventType(event.target.innerText);
@@ -122,7 +129,7 @@ function Timetable(props) {
 
   return (
     <div className='calender'>
-      <Container>
+      <Container className='content'>
         <FullCalendar
           plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
           initialView ='timeGridWeek'

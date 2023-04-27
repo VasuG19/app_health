@@ -82,7 +82,7 @@ function Admin (props){
     return(
         <div>
         {props.Admin &&
-        <MDBContainer className="py-5">
+        <MDBContainer className="py-5 content">
             <h1><strong>Admin</strong></h1>
             <MDBRow>
 

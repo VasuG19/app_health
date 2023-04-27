@@ -14,7 +14,7 @@ code {
 
 .content
 {
-  margin-top: 60px;
+  margin-top: 75px;
   min-height: 100vh;
 }
 
@@ -183,4 +183,19 @@ footer {
 
 .features{
   margin-top: 100px;
+}
+
+.feature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1.5rem;
+}
+
+.quote{
+  margin-top: 100px;
+  background-color: #f0eded;
+  padding: 30px;
 }

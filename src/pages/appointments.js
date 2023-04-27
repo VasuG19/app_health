@@ -128,8 +128,7 @@ function Appointments(props) {
   ));
 
   return (
-    <div className="home">
-      <Container>
+      <Container className='content'>
 
       <div >
         <h4 className='homeheader'>Upcoming appointments</h4>
@@ -172,7 +171,6 @@ function Appointments(props) {
         </Modal.Footer>
       </Modal>
       </Container>
-    </div>
   );
 }
 
