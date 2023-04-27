@@ -14,7 +14,7 @@ function Appointment(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [formData, setFormData] = useState({title:'', start:'', patient:''});
+  const [formData, setFormData] = useState({title:'', start:'', patient:'', end:''});
   const [data, setData] = useState([]);
   const [eventType, setEventType] = useState('');
 
@@ -39,7 +39,8 @@ function Appointment(props) {
       start: new Date(value.attributes.start),
       title: value.attributes.title,
       patient: props.user.id,
-      type: value.attributes.type
+      type: value.attributes.type,
+      end: new Date(value.attributes.end),
     }));    
     setEvents(appointment);
   }, [data, props.user.id]);
@@ -69,24 +70,29 @@ function Appointment(props) {
     setSelectedDate(arg.date);
     const title = prompt('Enter a title for the booking:');
     if (title) {
-      setEvents([...events,
+      const start = arg.date.toISOString();
+      const end = new Date(arg.date.getTime() + 30 * 60000).toISOString();
+      setEvents([
+        ...events,
         {
           title: title,
-          start: arg.date,
+          start: start,
+          end: end,
           patient: props.user.id,
-          type: eventType
+          type: eventType,
         },
       ]);
       setFormData({
         data: {
           title: title,
-          start: arg.date.toISOString(),
+          start: start,
+          end: end,
           patient: props.user.id,
         },
       });
     }
   };
-
+  
   const handleEventTypeSelect = (event) => {
     setEventType(event.target.innerText);
   };
@@ -128,18 +134,14 @@ function Appointment(props) {
           eventClick ={handleEventClick}
           themeSystem ='bootstrap5'
           allDaySlot = {false}
+          nowIndicator = {true}
           headerToolbar = {{
             left: 'prev,next',
             center: 'title',
             right: 'timeGridWeek,timeGridDay'
           }}
-          aspectRatio={2}
-          businessHours={{
-            // days of week. an array of zero-based day of week integers (0=Sunday)
-            daysOfWeek: [ 1, 2, 3, 4, 5 ], // Monday - Friday
-            startTime: '09:00', // a start time (9am in this example)
-            endTime: '18:00', // an end time (6pm in this example)
-          }}
+          aspectRatio={2.7}
+          businessHours={{ daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
           slotMinTime={'09:00'}
           slotMaxTime={'18:00'}
         />

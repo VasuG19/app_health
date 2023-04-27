@@ -19,8 +19,7 @@ const Login = (props) => {
       console.log(response);
     } catch (error) {
       console.error(error);
-    } finally{
-      
+      alert("Incorrect username or password")
     }
   }
 
