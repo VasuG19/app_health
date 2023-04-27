@@ -1,9 +1,10 @@
 import './index.css';
 import NavBar from './componants/nav';
-import HomePage from './pages/home';
+import HomePage from './pages/home.js';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Appointment from './pages/appointment';
+import Appointments from './pages/appointments';
+import Timetable from './pages/calendar';
 import ServicesPage from './pages/services';
 import Profile from './pages/profile';
 import Register from './componants/register';
@@ -13,6 +14,7 @@ import Footer from './componants/footer';
 import Admin from './pages/admin';
 import { useNavigate } from "react-router-dom";
 import NotFound from './componants/notFound';
+import { Container } from 'react-bootstrap';
 
 // Main App function - calls all componants and routes for the app 
 function App() {
@@ -61,33 +63,39 @@ const nav = useNavigate();
           <NavBar authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>
         </div>
       { authenticated &&
-        <div className='content'>   
-          <Routes>
-            <Route path='*' element={<NotFound />}/>
-            <Route path="/" element={<HomePage user={user} />} />
-            <Route path="/appointment" element={<Appointment user={user}/>} />
-            <Route path="/services" element={<ServicesPage/>} />
-            <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-            <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
-          </Routes>
-        </div>
+        <div>
+            <Routes>
+              <Route path="/" element={<HomePage user={user} />} />
+            </Routes>
+          <Container className='content'>   
+            <Routes>
+                <Route path="/"/>
+                <Route path='*' element={<NotFound />}/>
+                <Route path="/appointments" element={<Appointments user={user}/>} />
+                <Route path="/calendar" element={<Timetable user={user}/>} />
+                <Route path="/services" element={<ServicesPage/>} />
+                <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+                <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
+            </Routes>
+          </Container>
+          </div>
       } 
       {!authenticated &&
-        <div className='content'>     
+        <Container className='content'>     
         <Routes>
           <Route path='*' element={<NotFound />}/>
           <Route path="/" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/appointment"element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/appointments"element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/services" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/profile" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/admin" element={<Login authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
         </Routes>
-      </div>
+      </Container>
       }
       <Footer/>
     </div>

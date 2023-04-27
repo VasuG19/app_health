@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-function Appointment(props) {
+function Timetable(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -140,7 +140,7 @@ function Appointment(props) {
             center: 'title',
             right: 'timeGridWeek,timeGridDay'
           }}
-          aspectRatio={2.7}
+          aspectRatio={2.6}
           businessHours={{ daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
           slotMinTime={'09:00'}
           slotMaxTime={'18:00'}
@@ -168,4 +168,4 @@ function Appointment(props) {
   );
 }
 
-export default Appointment;
+export default Timetable;

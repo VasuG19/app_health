@@ -14,7 +14,7 @@ function ServicesPage(){
 
     return(
         <div className='home'>
-         
+
         </div>
     )}
 
