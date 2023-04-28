@@ -3,10 +3,19 @@ import { useState } from 'react';
 import { Form, Button, Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
+/**
+ * login componant
+ * 
+ * called to allow the user to login to the webpage
+ * 
+ * @author Mehtab Gill
+ */
+
 const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // handle submitting the username and password to the database and verifying the credentials 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

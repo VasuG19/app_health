@@ -3,7 +3,17 @@ import { useState } from 'react';
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * register componant
+ * 
+ * componant called to register a user to the database
+ * 
+ * @author Mehtab Gill
+ */
+
 const Register = () => {
+
+  // declare the data
   const [formData, setFormData] = useState({
     email: '', username: '', first_name: '',
     last_name:'', password: '', confirmPassword: ''
@@ -12,12 +22,14 @@ const Register = () => {
   const { username, email, password, confirmPassword,first_name,last_name, } = formData; 
   const nav = useNavigate();
 
+  // target the correct input when typing in the form fields
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // handle submitting the form data to the database to register the user 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (password !== confirmPassword) { // validate that both password entries match
       console.log('Passwords do not match');
     } else {
       try {
@@ -26,7 +38,7 @@ const Register = () => {
         console.log("body",body)
         const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
         console.log(result.data)
-        nav("/");
+        nav("/login"); // redirect user to login page once registered
       } catch (error) {
       console.error(error);
       alert("there was an error registering your account, please try again")
@@ -34,6 +46,7 @@ const Register = () => {
   }
 };
 
+//display the register form
 return (
   <Row className="loginForm">
       <Col sm="12" md="5" >

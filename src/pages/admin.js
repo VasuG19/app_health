@@ -5,6 +5,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Popup from "../componants/popup";
 
+/**
+ * Admin Page 
+ * 
+ * Retrieves and displays relevant admin data for the admin
+ * 
+ * @author Mehtab Gill
+ */
+
 function Admin (props){
     // States used in the component
     const [patients, setPatients] = useState([]);

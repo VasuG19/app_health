@@ -10,7 +10,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+/**
+ * Calendar Page 
+ * 
+ * retreieves and displays all of specific appointments depending on whether the user is the admin
+ * displays a calendar to visualise and display the appointments for the user and the admin
+ * 
+ * @author Mehtab Gill
+ */
+
 function Timetable(props) {
+  // Define state variables
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -18,7 +28,7 @@ function Timetable(props) {
   const [data, setData] = useState([]);
   const [eventType, setEventType] = useState('');
 
-  // retrieve appointments from API
+  // Retrieve appointments from API based on user type
   useEffect( () => {
     if (!props.user ||props.user.title!== 'Admin') {
       fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
@@ -32,7 +42,8 @@ function Timetable(props) {
       .catch((err) => {console.log(err.message)});
      }
   }, [props.user]);
-  
+
+  // Map retrieved appointments data to FullCalendar compatible event objects
   useEffect(() => {
     const appointment = data.map((value) => ({
       id: value.id,
@@ -45,6 +56,7 @@ function Timetable(props) {
     setEvents(appointment);
   }, [data, props.user.id]);
 
+  // Delete appointment on event click
   const handleEventClick = async (arg) => {
     if (window.confirm(`Are you sure you want to delete the booking '${arg.event.title}'?`)) {
       try {
@@ -66,6 +78,7 @@ function Timetable(props) {
     }
   };
 
+  // Handle date selection on FullCalendar
   const handleDateSelect = (arg) => {
     const today = new Date();
     const selected = new Date(arg.date);
@@ -99,11 +112,13 @@ function Timetable(props) {
     }
   }
 
-  
+  // set the type of appointment that the user is booking
   const handleEventTypeSelect = (event) => {
     setEventType(event.target.innerText);
   };
 
+
+  // submit the appointment with relevant data to the database 
   const handleSubmit = async (e) => {
     setFormData({data: {type: eventType,},});
     e.preventDefault();
@@ -127,6 +142,7 @@ function Timetable(props) {
    }
   };
 
+  // display the calendar
   return (
     <div className='calender'>
       <Container className='content'>

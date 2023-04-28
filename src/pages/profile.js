@@ -5,15 +5,25 @@ import EditProfile from '../componants/edit';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Profile Page 
+ * 
+ * profile page displays all of the user info or redicects the admin to the admin page
+ * 
+ * @author Mehtab Gill
+ */
 
 const Profile = (props) => {
 
   const [isEditing, setIsEditing]  = useState(false);
+
+  // log out the current user
   const handleSignOut = () => {
     props.handleAuthenticated(false)
     localStorage.removeItem('token')
   }
 
+  // if the user is the admin, redirect to the admin page
   const nav = useNavigate();
   useEffect(() => {
   if (!props.user ||props.user.title!== 'Admin') {
@@ -23,8 +33,10 @@ const Profile = (props) => {
     }
   },[nav, props.user]);
 
+  // calculate the users BMI using the height and weight properties
   const bmi = (props.user.weight / props.user.height)^2
 
+ // return the profile page as well as calling the edit page when the edit button is selected 
   return (
     <div>
       {isEditing && 

@@ -2,15 +2,16 @@ import {React} from 'react';
 import { Container, Row } from 'react-bootstrap';
 
 /**
- * Home Page
+ * Services Page 
  * 
- * function to return home page data with relevant information and images
+ * function to return services data with relevant information
  * 
  * @author Mehtab Gill
  */
 
 function ServicesPage(props){
 
+    // return all of the services into a grid for the services page
     const service = props.services && props.services.map((value) => (
         <div  key={value.id} className="col-lg-4 mb-5">
             <div className="card h-100 shadow border-0">

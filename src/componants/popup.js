@@ -3,16 +3,27 @@ import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody} from 'mdb-r
 import { Button, Collapse } from 'react-bootstrap';
 import { useState } from 'react';
 
+/**
+ * popup componant
+ * 
+ * componant to be called and display a popup with relevant appointment data
+ * 
+ * @author Mehtab Gill
+ */
+
 function Popup(props) {
 
+  // open and visable states for the popup
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
 
+  // handle when the popup is open and visable
   const showDetails = () => {
     setVisible(!visible);
     setOpen(!open)
   }
 
+  // return the popup data
   return (
     <div>
         {props.user.username}

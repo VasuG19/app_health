@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 function HomePage(props){
 
+    // map the services retrieved from app.js and display them on the home page
     const service = props.services && props.services.map((value) => (
             <div  key={value.id} className="col-lg-4 mb-5">
                 <div className="card h-100 shadow border-0">
@@ -34,6 +35,7 @@ function HomePage(props){
         )
     )
 
+    // return the home page
     return(
         <div>
             <div className='p-5 text-center bg-image jumbotron'>

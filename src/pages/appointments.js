@@ -3,6 +3,15 @@ import { Button, Card, Carousel, Container, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * Appointment Page 
+ * 
+ * retreives all appointments relevant to the current user
+ * and displays them in an upcoming and previous carousel
+ * 
+ * @author Mehtab Gill
+ */
+
 // Component to show upcoming and previous appointments
 function Appointments(props) {
 

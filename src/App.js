@@ -14,6 +14,14 @@ import Footer from './componants/footer';
 import Admin from './pages/admin';
 import NotFound from './componants/notFound';
 
+/**
+ * App Page 
+ * 
+ * calls all routes and pages then exports them to index.js
+ * 
+ * @author Mehtab Gill
+ */
+
 // Main App function - calls all componants and routes for the app 
 function App() {
 

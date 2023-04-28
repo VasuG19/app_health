@@ -2,7 +2,18 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 
+/**
+ * edit componant
+ * 
+ * this componant is called within the profile page to allow the user to edit and add their personal health data
+ * also allows the user to change their password if they choose to
+ * 
+ * @author Mehtab Gill
+ */
+
 const EditProfile = (props) => {
+
+    // declare variables
   const [updateData, setUpdateData] = useState({
         username:props.username, email: props.email, blood_type: props.blood_type, first_name:props.first_name,
         last_name:props.last_name, prescriptions:props.prescriptions, allergies:props.allergies,
@@ -10,7 +21,6 @@ const EditProfile = (props) => {
         address:props.address, diet:props.diet, current_conditions:props.current_conditions, smoke:props.smoke,
         pregnant:props.pregnant, password: '', passwordConfirmation: '', currentPassword: ''
   });
-
 
   const { 
     username, email, blood_type, first_name , last_name , prescriptions , allergies ,
@@ -20,9 +30,9 @@ const EditProfile = (props) => {
 
   const handleChange = e => setUpdateData({ ...updateData, [e.target.name]: e.target.value });
 
-const code = localStorage.getItem('token');
+  const code = localStorage.getItem('token');
 
-
+   // handle submitting updated data
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,7 +64,7 @@ const code = localStorage.getItem('token');
         }
     }
     props.onClose();
-    
+    window.location.reload(false);
   }
 //window.location.reload(false);
   return (

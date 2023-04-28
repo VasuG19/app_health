@@ -2,6 +2,14 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+/**
+ * footer componant
+ * 
+ * footer componant returns the website footer whenever called
+ * 
+ * @author Mehtab Gill
+ */
+
 function Footer() {
     return (
       <footer>
