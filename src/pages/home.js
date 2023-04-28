@@ -1,6 +1,6 @@
 import {React} from 'react';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 /**
  * Home Page
@@ -12,20 +12,20 @@ import { useNavigate } from "react-router-dom";
 
 function HomePage(props){
 
-const nav = useNavigate();
-
     const service = props.services && props.services.map((value) => (
             <div  key={value.id} className="col-lg-4 mb-5">
                 <div className="card h-100 shadow border-0">
                     <div className="card-body p-4">
                         <div className="badge bg-primary bg-gradient rounded-pill mb-2">Health+</div>
-                        <a className="text-decoration-none link-dark stretched-link" href="#!"><h5 className="card-title mb-3">{value.attributes.title}</h5></a>
+                        <h4 className="card-title mb-3">{value.attributes.title}</h4>
                         <p className="card-text mb-0">{value.attributes.desc}</p>
                     </div>
                     <div className="card-footer p-4 pt-0 bg-transparent border-top-0">
                         <div className="d-flex align-items-end justify-content-between">
                             <div className="d-flex align-items-center">
-                            <Button onClick={() => {nav("/services");}}> View All </Button>
+                                <Link to="/services">
+                                    <Button> View All </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ const nav = useNavigate();
             </div>
 
             <section className='features'>
-            <div className="container px-5 my-5">
+                <div className="container px-5 my-5">
                     <div className="row gx-5">
                         <div className="col-lg-4 mb-5 mb-lg-0"><h2 className="fw-bolder mb-0">A better insight to your health.</h2></div>
                         <div className="col-lg-8">
@@ -54,22 +54,22 @@ const nav = useNavigate();
                                 <div className="col mb-5 h-100">
                                     <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-collection"></i></div>
                                     <h2 className="h5">Flexibility</h2>
-                                    <p className="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <p className="mb-0">Multiple appointment types available such as phone and video calls or a face to face appointment.</p>
                                 </div>
                                 <div className="col mb-5 h-100">
                                     <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-building"></i></div>
                                     <h2 className="h5">Convenience</h2>
-                                    <p className="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <p className="mb-0">Book consultations quickly and have a record of your current health data</p>
                                 </div>
                                 <div className="col mb-5 mb-md-0 h-100">
                                     <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-toggles2"></i></div>
                                     <h2 className="h5">Assessments</h2>
-                                    <p className="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <p className="mb-0">Book regular assessments of your current health .</p>
                                 </div>
                                 <div className="col h-100">
                                     <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-toggles2"></i></div>
                                     <h2 className="h5">Fast and Reliable</h2>
-                                    <p className="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <p className="mb-0">Appointments are quick and easy to book with displayed available times and quick confirmation.</p>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ const nav = useNavigate();
                     <aside className="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
                         <div className="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                             <div className="mb-4 mb-xl-0">
-                                <div className="fs-3 fw-bold text-white">New products, delivered to you.</div>
+                                <div className="fs-3 fw-bold text-white">Fast & Reliable.</div>
                                 <div className="text-white-50">Sign up for our newsletter for the latest updates.</div>
                             </div>
                             <div className="ms-xl-4">

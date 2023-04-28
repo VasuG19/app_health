@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 
 const EditProfile = (props) => {
   const [updateData, setUpdateData] = useState({
@@ -58,7 +58,7 @@ const code = localStorage.getItem('token');
   }
 //window.location.reload(false);
   return (
-    <div>
+    <Container className='content'>
       <h2>Edit Profile</h2>
       <Form onSubmit={handleSubmit}>
 
@@ -192,7 +192,7 @@ const code = localStorage.getItem('token');
             <div className='profileButton'><Button type="button"  onClick={props.onClose}>Cancel</Button></div>
         </div>
       </Form>
-    </div>
+    </Container>
   );
 }
 

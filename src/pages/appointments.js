@@ -159,12 +159,13 @@ function Appointments(props) {
           <Modal.Title>Appointment Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p><strong>Patient:</strong> {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.username}</p>
-          <p><strong>Name:</strong> {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.first_name}-
-                                    {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.last_name}</p>
-          <p><strong>Title:</strong> {selectedAppointment && selectedAppointment.attributes.title}</p>
-          <p><strong>Start:</strong> {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
-          <p><strong>Type:</strong> {selectedAppointment && selectedAppointment.attributes.type}</p>
+          <p><strong>Patient:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.username}</p>
+          <p><strong>Name:</strong>     {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.first_name}-
+                                        {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.last_name}</p>
+          <p><strong>Title:</strong>    {selectedAppointment && selectedAppointment.attributes.title}</p>
+          <p><strong>Start:</strong>    {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
+          <p><strong>End:</strong>      {selectedAppointment && new Date(selectedAppointment.attributes.end).toLocaleString()}</p>
+          <p><strong>Type:</strong>     {selectedAppointment && selectedAppointment.attributes.type}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleEventClick}>Cancel Appointment</Button>
