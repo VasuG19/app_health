@@ -105,7 +105,7 @@ const EditProfile = (props) => {
                 </Form.Group>
             </Col>
             <Col>
-                <Form.Group className="mb-3" controlId="formBasicBlood">
+                <Form.Group className="mb-3" placeholder='yyyy-mm-dd' controlId="formBasicBlood">
                 Birthday:<Form.Control type="text" name='birthday' value={birthday} onChange={handleChange}/>
                 </Form.Group>
             </Col>
