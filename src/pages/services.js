@@ -1,4 +1,5 @@
 import {React} from 'react';
+import { Container } from 'react-bootstrap';
 
 /**
  * Home Page
@@ -13,9 +14,9 @@ function ServicesPage(){
 
 
     return(
-        <div className='content'>
+        <Container className='content'>
 
-        </div>
+        </Container>
     )}
 
 export default ServicesPage
