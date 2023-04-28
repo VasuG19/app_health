@@ -11,12 +11,13 @@ function Footer() {
             <div className='footer-col'>
                 <Link to="/" className="logo">Health+</Link>
             </div>
+            <div className='footer-col'>
+                <p className="company-rights text-muted"> Queen Victoria Rd, Newcastle upon Tyne NE1 4LP </p>
+            </div>
             <div className='footer-col footer-links'>
                 <Link to="/services">Services</Link>
-                <Link to="/about">About</Link>
-                <Link to="/payment">Payment</Link>
                 <Link to="/contact-us">
-                <Button type="button" className='primary btn'> Contact Us</Button>
+                    <Button type="button" className='primary btn'> Contact Us</Button>
                 </Link>
             </div>
             </div>
@@ -35,6 +36,7 @@ function Footer() {
             <div className='footer-col'>
                 <p className="company-rights"> © 2023 Health+. All rights reserved </p>
             </div>
+            
             <div className='footer-col'>
                 <Link to="/terms-conditions" className="policy-links"> Terms & Conditions </Link>
                 <Link to="/policy" className="policy-links"> Privacy Policy </Link>
