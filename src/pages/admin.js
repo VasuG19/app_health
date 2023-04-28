@@ -6,28 +6,37 @@ import axios from "axios";
 import Popup from "../componants/popup";
 
 function Admin (props){
+    // States used in the component
     const [patients, setPatients] = useState([]);
     const [patientNo, setPatientsNo] = useState([]);
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
 
+    // Count of upcoming and all appointments
     const numberOfEntries = upcoming.data.length;
     const numberOfApp = appointments.data.length;
+
+    // Get token from local storage and initialize navigate hook
     const userToken = localStorage.getItem('token');
     const nav = useNavigate()
-    
+
+    // Function to handle user sign out
     const handleSignOut = () => {
         props.handleAuthenticated(false)
         localStorage.removeItem('token')
     }
 
+    // Use Effect to fetch data on mount and when dependencies change
     useEffect(() => {
         const today = new Date().toISOString();
+
+        // Redirect user to home page if not an admin
         if (!props.user ||props.user.title!== 'Admin') {
             nav("/");
         } else {
             try {
             const getUserData = async () => {
+                // Get patient data
                 const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=Admin', {
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
@@ -35,6 +44,7 @@ function Admin (props){
             }
 
             const getUserCount = async () => {
+                // Get patient count
                 const response = await axios.get('http://localhost:1337/api/users/count', {
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
@@ -42,6 +52,7 @@ function Admin (props){
             }
 
             const getUpcoming = async () => {
+                // Get upcoming appointments
                 const response = await axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`, {
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
@@ -49,6 +60,7 @@ function Admin (props){
             }
 
             const getAppointments = async () => {
+                // Get all appointments
                 const response = await axios.get(`http://localhost:1337/api/appointments`, {
                 headers: { Authorization: `Bearer ${userToken}`,},
                 });
@@ -66,7 +78,7 @@ function Admin (props){
         }
     },[nav, props.user, userToken]);
 
-
+    // Map through patients and create card for each
     const allPatients = patients && patients.map((value) =>  
         <div key={value.id}>
             <MDBCol sm={true}>
@@ -79,6 +91,7 @@ function Admin (props){
         </div>
     );
 
+    // Render admin dashboard
     return(
         <div>
         {props.Admin &&
