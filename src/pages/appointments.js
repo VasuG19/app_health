@@ -114,7 +114,7 @@ function Appointments(props) {
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
-          <Card className="text-center" key={value.id}>
+          <Card key={value.id}>
             <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
               <Card.Title>{value.attributes.title}</Card.Title>

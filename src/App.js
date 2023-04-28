@@ -64,7 +64,6 @@ useEffect(() => {
           const limitedServices = json.data.slice(0, 3);
           setServicesHome(limitedServices);
           setServices(json.data)
-          console.log(json.data)
         })
         .catch((err) => console.log(err.message));        
     }
