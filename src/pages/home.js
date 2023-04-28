@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 function HomePage(props){
 
 const nav = useNavigate();
- 
 
     const service = props.services && props.services.map((value) => (
             <div  key={value.id} className="col-lg-4 mb-5">
