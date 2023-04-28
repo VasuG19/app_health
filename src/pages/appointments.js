@@ -3,16 +3,20 @@ import { Button, Card, Carousel, Container, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+// Component to show upcoming and previous appointments
 function Appointments(props) {
-  const [previous, setPrevious] = useState([]);
-  const [itemsperslide, setitemsperslide] = useState(3);
-  const [upcoming, setUpcoming] = useState([]);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const today = new Date().toISOString();
-    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in format yyyy-mm-dd
+// States to hold the data for previous and upcoming appointments, selected appointment and whether to show modal or not.
+const [previous, setPrevious] = useState([]);
+const [itemsperslide, setitemsperslide] = useState(3);
+const [upcoming, setUpcoming] = useState([]);
+const [selectedAppointment, setSelectedAppointment] = useState(null);
+const [showModal, setShowModal] = useState(false);
+
+// Function to get previous and upcoming appointments from the API and set the state for previous and upcoming appointments accordingly
+useEffect(() => {
+const today = new Date().toISOString();
+const currentDate = new Date().toISOString().split('T')[0]; // Get current date in format yyyy-mm-dd
   
     if (!props.user ||props.user.title!== 'Admin') {
 
@@ -41,11 +45,13 @@ function Appointments(props) {
   
   },[props.user, props.user.id]);
 
+  // handle for when the view appointment button is clicked and displays popup with relevant 
   const handleViewAppointment = (appointment) => {
     setSelectedAppointment(appointment);
     setShowModal(true);
   };
 
+  // handle for when an event is clicked, the user has the option to delete the booking
   const handleEventClick = async () => {
     if (window.confirm(`Are you sure you want to delete the booking '${selectedAppointment.title}'?`)) {
       try {
@@ -66,6 +72,7 @@ function Appointments(props) {
     }
   };
   
+  // resize the carousel depending on the amount of size of the window and the amount of appointments
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -93,6 +100,7 @@ function Appointments(props) {
     return acc;
   }, []);
 
+  // map upcoming bookings to the upcoming carousel
   const upcomingBooking = chunks.map((chunk, i) => (
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
@@ -110,6 +118,7 @@ function Appointments(props) {
     </Carousel.Item>
   ));
   
+  // map previous bookings to the previous carousel
   const previousBooking = pchunks.map((chunk, i) => (
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
