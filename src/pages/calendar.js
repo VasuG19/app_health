@@ -119,7 +119,7 @@ function Timetable(props) {
         alert('Your booking has been confirmed!');
     } catch (error) {
       console.error(error);
-      alert('There was an error making your booking.');
+      alert('There was an error reserving your appointment, this time slot may already be taken, please try again or select another time');
     } finally {
       setIsBooking(false);
       window.location.reload(false);
