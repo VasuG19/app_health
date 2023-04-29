@@ -117,7 +117,7 @@ const currentDate = new Date().toISOString().split('T')[0]; // Get current date 
           <Card className="text-center" key={value.id}>
             <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
-              <Card.Title>{value.attributes.title}</Card.Title>
+              <Card.Text>{value.attributes.title}</Card.Text>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
               <Button type="button" onClick={() => handleViewAppointment(value)}>View Appointment</Button>
             </Card.Body>
@@ -132,14 +132,14 @@ const currentDate = new Date().toISOString().split('T')[0]; // Get current date 
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
-          <Card key={value.id}>
-            <Card.Body className="appointmentCard">
-              <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
-              <Card.Title>{value.attributes.title}</Card.Title>
-              <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <Button type="button" onClick={() => handleViewAppointment(value)}>View Appointment</Button>
-            </Card.Body>
-          </Card>
+          <Card className="text-center" key={value.id}>
+          <Card.Body className="appointmentCard">
+            <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
+            <Card.Text>{value.attributes.title}</Card.Text>
+            <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
+            <Button type="button" onClick={() => handleViewAppointment(value)}>View Appointment</Button>
+          </Card.Body>
+        </Card>
         ))}
       </div>
     </Carousel.Item>

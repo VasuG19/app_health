@@ -16,8 +16,7 @@ function ServicesPage(props){
         <div  key={value.id} className="col-lg-4 mb-5">
             <div className="card h-100 shadow border-0">
                 <div className="card-body p-4">
-                    <div className="badge bg-primary bg-gradient rounded-pill mb-2">Health+</div>
-                    <a className="text-decoration-none link-dark stretched-link" href="#!"><h5 className="card-title mb-3">{value.attributes.title}</h5></a>
+                    <div className="badge bg-primary bg-gradient rounded-pill mb-2">{value.attributes.title}</div>
                     <p className="card-text mb-0">{value.attributes.desc}</p>
                 </div>
             </div>

@@ -84,7 +84,7 @@ const Profile = (props) => {
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="4">
-                    <MDBCardText>Height</MDBCardText>
+                    <MDBCardText>Height(ft)</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
                     <MDBCardText className="text-muted">{props.user.height}</MDBCardText>
@@ -93,7 +93,7 @@ const Profile = (props) => {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="4">
-                    <MDBCardText>Weight</MDBCardText>
+                    <MDBCardText>Weight(KG)</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
                     <MDBCardText className="text-muted">{props.user.weight}</MDBCardText>
