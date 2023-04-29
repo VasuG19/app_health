@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
 import EditProfile from '../componants/edit';
-import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -74,8 +73,8 @@ const Profile = (props) => {
                   alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
                 <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
                 <div className="d-flex justify-content-center mb-2">
-                <div className='profileButton'><Button className="logout" onClick={() => setIsEditing(true)}>Edit</Button></div>
-                <div className='profileButton'><Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button></div>
+                <div className='profileButton'><button className=" themeButton logout" onClick={() => setIsEditing(true)}>Edit</button></div>
+                <div className='profileButton'><button className=" themeButton logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</button></div>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -202,7 +201,7 @@ const Profile = (props) => {
               <MDBCol md="4">
                 <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Prescriptions</span></MDBCardText>
+                    <MDBCardText className="mb-4"><span className="textTheme me-1">Prescriptions</span></MDBCardText>
                     <MDBCardText className="text-muted">{props.user.prescriptions}</MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
@@ -211,7 +210,7 @@ const Profile = (props) => {
               <MDBCol md="4">
                 <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Conditions</span></MDBCardText>
+                    <MDBCardText className="mb-4"><span className="textTheme me-1">Conditions</span></MDBCardText>
                     <MDBCardText className="text-muted">{props.user.current_conditions}</MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
@@ -220,7 +219,7 @@ const Profile = (props) => {
               <MDBCol md="4">
                 <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Allergies</span></MDBCardText>
+                    <MDBCardText className="mb-4"><span className="textTheme me-1">Allergies</span></MDBCardText>
                     <MDBCardText className="text-muted">{props.user.allergies}</MDBCardText>
                   </MDBCardBody>
                 </MDBCard>

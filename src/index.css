@@ -41,6 +41,10 @@ html {
   background-color:#b38add;
 }
 
+.textTheme{
+  color:#9f6ad3;
+}
+
 .backTheme{
   background-color: #e2e1dc;
 }
@@ -54,6 +58,7 @@ html {
   background-color:#b38add;
   border: none;
   border-radius: 5px;
+  padding: 10px;
   color: white;
 }
 
@@ -74,7 +79,7 @@ html {
 
 .carousel-control-prev svg:hover,
 .carousel-control-next svg:hover {
-  color: rgb(0, 149, 255);
+  color: #b38add;
 }
 
 .calender{
@@ -212,6 +217,7 @@ html {
 .jumbotron{
   height: 400px;
   width: 100%;
+  background-color: #f0eded;
 }
 /*background-color: rgb(33, 37, 41)*/
 

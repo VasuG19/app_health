@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 /**
@@ -24,9 +23,6 @@ function Footer() {
             </div>
             <div className='footer-col footer-links'>
                 <Link to="/services">Services</Link>
-                <Link to="/contact-us">
-                    <Button type="button" className='primary btn'> Contact Us</Button>
-                </Link>
             </div>
             </div>
             <div className='footer-row'>

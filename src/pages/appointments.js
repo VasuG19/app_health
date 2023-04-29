@@ -119,7 +119,7 @@ const currentDate = new Date().toISOString().split('T')[0]; // Get current date 
               <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
               <Card.Text>{value.attributes.title}</Card.Text>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <Button type="button" onClick={() => handleViewAppointment(value)}>View Appointment</Button>
+              <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
             </Card.Body>
           </Card>
         ))}
@@ -137,7 +137,7 @@ const currentDate = new Date().toISOString().split('T')[0]; // Get current date 
             <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
             <Card.Text>{value.attributes.title}</Card.Text>
             <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-            <Button type="button" onClick={() => handleViewAppointment(value)}>View Appointment</Button>
+            <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
           </Card.Body>
         </Card>
         ))}

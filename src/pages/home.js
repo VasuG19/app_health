@@ -1,5 +1,4 @@
 import {React} from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 /**
@@ -17,7 +16,7 @@ function HomePage(props){
             <div  key={value.id} className="col-lg-4 mb-5">
                 <div className="card h-100 shadow border-0">
                     <div className="card-body p-4">
-                        <div className="badge webTheme bg-gradient rounded-pill mb-2">Health+</div>
+                        <div className="badge webTheme rounded-pill mb-2">Health+</div>
                         <h4 className="card-title mb-3">{value.attributes.title}</h4>
                         <p className="card-text mb-0">{value.attributes.desc}</p>
                     </div>
@@ -54,17 +53,17 @@ function HomePage(props){
                         <div className="col-lg-8">
                             <div className="row gx-5 row-cols-1 row-cols-md-2">
                                 <div className="col mb-5 h-100">
-                                    <div className="feature  bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-comments"></i></div>
+                                    <div className="feature  bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-comments fa-bounce"></i></div>
                                     <h2 className="h5">Flexibility</h2>
                                     <p className="mb-0">Multiple appointment types available such as phone and video calls or a face to face appointment.</p>
                                 </div>
                                 <div className="col mb-5 h-100">
-                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-calendar-days"></i></div>
+                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-calendar-days fa-flip"></i></div>
                                     <h2 className="h5">Convenience</h2>
                                     <p className="mb-0">Book consultations quickly and have a record of your current health data</p>
                                 </div>
                                 <div className="col mb-5 mb-md-0 h-100">
-                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-solid fa-person"></i></div>
+                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-solid fa-person fa-flip"></i></div>
                                     <h2 className="h5">Assessments</h2>
                                     <p className="mb-0">Book regular assessments of your current health .</p>
                                 </div>
