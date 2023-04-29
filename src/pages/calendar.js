@@ -77,6 +77,7 @@ function Timetable(props) {
       window.location.reload(false);
     }
   };
+  
 
   // Handle date selection on FullCalendar
   const handleDateSelect = (arg) => {
@@ -165,11 +166,11 @@ function Timetable(props) {
               right: 'timeGridWeek,timeGridDay'
             }}
             businessHours={{ 
-              startTime: '09:00', // a start time (10am in this example)
+              startTime: '08:00', // a start time (10am in this example)
               endTime: '18:00', // an end time (6pm in this example)
               daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
-            //slotMinTime={'09:00'}
-            //slotMaxTime={'18:00'}
+            slotMinTime={'06:00'}
+            slotMaxTime={'19:00'}
           />
         </div>
         {selectedDate && (
