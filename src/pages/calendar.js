@@ -169,8 +169,8 @@ function Timetable(props) {
               startTime: '08:00', // a start time (10am in this example)
               endTime: '18:00', // an end time (6pm in this example)
               daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
-            slotMinTime={'06:00'}
-            slotMaxTime={'19:00'}
+            slotMinTime={'05:00'}
+            slotMaxTime={'21:00'}
           />
         </div>
         {selectedDate && (
