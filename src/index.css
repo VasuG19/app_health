@@ -1,21 +1,60 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+:root{
+  --primary-clr: #b38add
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*{
+font-family: 'Poppins', sans-serif;
+}
+
+body,
+html {
+  margin: 0;
+  background-color: #e2e1dc;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(./fonts/Poppins/Poppins-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 900;
+  src: local('Poppins'), url(./fonts/Poppins/Poppins-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 900;
+  src: local('Poppins'), url(./fonts/Poppins/Poppins-Black.ttf) format('truetype');
 }
 
 .content
 {
   margin-top: 80px;
   min-height: 100vh;
+}
+
+.webTheme
+{
+  background-color:#b38add;
+}
+
+.backTheme{
+  background-color: #e2e1dc;
+}
+
+.navTheme{
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.themeButton{
+  background-color:#b38add;
+  border: none;
+  border-radius: 5px;
+  color: white;
 }
 
 .carousel-control-prev svg,
@@ -92,7 +131,6 @@ code {
 .footer-container {
   width: 100%;
   padding: 1rem 0;
-  background-color: rgb(33, 37, 41)
 }
 
 .footer {
@@ -171,15 +209,11 @@ code {
   float: right;
 }
 
-footer {
-  color: aliceblue;
-}
-
 .jumbotron{
   height: 400px;
   width: 100%;
-  background-color: rgb(33, 37, 41)
 }
+/*background-color: rgb(33, 37, 41)*/
 
 .features{
   margin-top: 100px;
@@ -192,6 +226,7 @@ footer {
   height: 3rem;
   width: 3rem;
   font-size: 1.5rem;
+  background-color:#b38add;
 }
 
 .quote{

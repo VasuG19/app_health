@@ -14,7 +14,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 function NavBar(props){
 
   return(
-    <Navbar style={{padding:'10px'}} className='healthNav' bg='dark' variant='dark' expand="lg" fixed="top">
+    <Navbar style={{padding:'10px'}} className='navTheme' expand="lg" fixed="top">
       <Container>
         <Navbar.Brand>Health+</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

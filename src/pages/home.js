@@ -17,7 +17,7 @@ function HomePage(props){
             <div  key={value.id} className="col-lg-4 mb-5">
                 <div className="card h-100 shadow border-0">
                     <div className="card-body p-4">
-                        <div className="badge bg-primary bg-gradient rounded-pill mb-2">Health+</div>
+                        <div className="badge webTheme bg-gradient rounded-pill mb-2">Health+</div>
                         <h4 className="card-title mb-3">{value.attributes.title}</h4>
                         <p className="card-text mb-0">{value.attributes.desc}</p>
                     </div>
@@ -25,7 +25,7 @@ function HomePage(props){
                         <div className="d-flex align-items-end justify-content-between">
                             <div className="d-flex align-items-center">
                                 <Link to="/services">
-                                    <Button> View All </Button>
+                                    <button className='themeButton'> View All </button>
                                 </Link>
                             </div>
                         </div>
@@ -40,8 +40,8 @@ function HomePage(props){
         <div>
             <div className='p-5 text-center bg-image jumbotron'>
                 <div className='d-flex justify-content-center align-items-center h-100'>
-                    <div className='text-white'>
-                    <h1 className='mb-3'>Welcome to Health+</h1>
+                    <div className='jumboText'>
+                    <h1 className='mb-3 fw-bold'>Welcome to Health+</h1>
                     <h4 className='mb-3'>our solution to to all of your health requirements</h4>
                     </div>
                 </div>
@@ -54,22 +54,22 @@ function HomePage(props){
                         <div className="col-lg-8">
                             <div className="row gx-5 row-cols-1 row-cols-md-2">
                                 <div className="col mb-5 h-100">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-collection"></i></div>
+                                    <div className="feature  bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-comments"></i></div>
                                     <h2 className="h5">Flexibility</h2>
                                     <p className="mb-0">Multiple appointment types available such as phone and video calls or a face to face appointment.</p>
                                 </div>
                                 <div className="col mb-5 h-100">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-building"></i></div>
+                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-calendar-days"></i></div>
                                     <h2 className="h5">Convenience</h2>
                                     <p className="mb-0">Book consultations quickly and have a record of your current health data</p>
                                 </div>
                                 <div className="col mb-5 mb-md-0 h-100">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-toggles2"></i></div>
+                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-solid fa-person"></i></div>
                                     <h2 className="h5">Assessments</h2>
                                     <p className="mb-0">Book regular assessments of your current health .</p>
                                 </div>
                                 <div className="col h-100">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i className="bi bi-toggles2"></i></div>
+                                    <div className="feature bg-gradient text-white rounded-3 mb-3"><i className="fa-regular fa-circle-check fa-bounce"></i></div>
                                     <h2 className="h5">Fast and Reliable</h2>
                                     <p className="mb-0">Appointments are quick and easy to book with displayed available times and quick confirmation.</p>
                                 </div>
@@ -114,7 +114,7 @@ function HomePage(props){
                     <div className="row gx-5">
                         {service}
                     </div>
-                    <aside className="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+                    <aside className="webTheme rounded-3 p-4 p-sm-5 mt-5">
                         <div className="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                             <div className="mb-4 mb-xl-0">
                                 <div className="fs-3 fw-bold text-white">Fast & Reliable.</div>
