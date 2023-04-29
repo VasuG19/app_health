@@ -144,6 +144,7 @@ function Timetable(props) {
 
   // display the calendar
   return (
+    <div className='calender'>
       <Container className='content'>
         <FullCalendar
           plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
@@ -163,6 +164,7 @@ function Timetable(props) {
             center: 'title',
             right: 'timeGridWeek,timeGridDay'
           }}
+          aspectRatio={2.6}
           businessHours={{ daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
           slotMinTime={'09:00'}
           slotMaxTime={'18:00'}
@@ -187,6 +189,7 @@ function Timetable(props) {
           </div> 
         )}
         </Container>
+    </div>
   );
 }
 
