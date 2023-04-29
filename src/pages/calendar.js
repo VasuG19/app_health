@@ -145,29 +145,33 @@ function Timetable(props) {
   // display the calendar
   return (
       <Container className='content'>
-        <FullCalendar
-          plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
-          initialView ='timeGridWeek'
-          selectable ={true}
-          selectMirror ={true}
-          dayMaxEvents ={true}
-          weekends ={false}
-          events ={events}
-          dateClick ={handleDateSelect}
-          eventClick ={handleEventClick}
-          themeSystem ='bootstrap5'
-          allDaySlot = {false}
-          nowIndicator = {true}
-          headerToolbar = {{
-            left: 'prev,next',
-            center: 'title',
-            right: 'timeGridWeek,timeGridDay'
-          }}
-          aspectRatio={2.6}
-          businessHours={{ daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
-          slotMinTime={'09:00'}
-          slotMaxTime={'18:00'}
-        />
+        <div>
+          <FullCalendar
+            plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
+            initialView ='timeGridWeek'
+            selectable ={true}
+            selectMirror ={true}
+            dayMaxEvents ={true}
+            weekends ={false}
+            events ={events}
+            dateClick ={handleDateSelect}
+            eventClick ={handleEventClick}
+            themeSystem ='bootstrap5'
+            allDaySlot = {false}
+            nowIndicator = {true}
+            headerToolbar = {{
+              left: 'prev,next',
+              center: 'title',
+              right: 'timeGridWeek,timeGridDay'
+            }}
+            businessHours={{ 
+              startTime: '09:00', // a start time (10am in this example)
+              endTime: '18:00', // an end time (6pm in this example)
+              daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
+            //slotMinTime={'09:00'}
+            //slotMaxTime={'18:00'}
+          />
+        </div>
         {selectedDate && (
           <div>      
             <Dropdown className='bookButton'>
