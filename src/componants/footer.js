@@ -14,6 +14,7 @@ function Footer() {
       <footer>
         <div className='footer-container'>
         <div className='footer'>
+        <hr />
             <div className='footer-row'>
             <div className='footer-col'>
                 <Link to="/" className="logo">Health+</Link>
