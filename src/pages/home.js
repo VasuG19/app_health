@@ -1,4 +1,5 @@
 import {React} from 'react';
+import { Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 /**
@@ -14,22 +15,22 @@ function HomePage(props){
     // map the services retrieved from app.js and display them on the home page
     const service = props.services && props.services.map((value) => (
             <div  key={value.id} className="col-lg-4 mb-5">
-                <div className="card h-100 shadow border-0">
+                <Card className="card h-100  shadow border-0">
                     <div className="card-body p-4">
-                        <div className="badge webTheme rounded-pill mb-2">Health+</div>
+                        <div className="badge serviceCard rounded-pill mb-2">Health+</div>
                         <h4 className="card-title mb-3">{value.attributes.title}</h4>
                         <p className="card-text mb-0">{value.attributes.desc}</p>
                     </div>
-                    <div className="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div className="card-footer  p-4 pt-0 bg-transparent border-top-0">
                         <div className="d-flex align-items-end justify-content-between">
-                            <div className="d-flex align-items-center">
+                            <div className="d-flex align-items-center ">
                                 <Link to="/services">
                                     <button className='themeButton'> View All </button>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Card>
             </div>
         )
     )
@@ -113,7 +114,7 @@ function HomePage(props){
                     <div className="row gx-5">
                         {service}
                     </div>
-                    <aside className="webTheme rounded-3 p-4 p-sm-5 mt-5">
+                    <aside className="serviceCard rounded-3 p-4 p-sm-5 mt-5">
                         <div className="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                             <div className="mb-4 mb-xl-0">
                                 <div className="fs-3 fw-bold text-white">Fast & Reliable.</div>
