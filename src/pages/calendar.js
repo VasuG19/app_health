@@ -144,7 +144,6 @@ function Timetable(props) {
 
   // display the calendar
   return (
-    <div className='calender'>
       <Container className='content'>
         <FullCalendar
           plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
@@ -189,7 +188,6 @@ function Timetable(props) {
           </div> 
         )}
         </Container>
-    </div>
   );
 }
 
