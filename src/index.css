@@ -143,7 +143,6 @@ html {
 }
 
 .footer {
-  max-width: 1560px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
