@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Form, Button, Row, Col, Card } from "react-bootstrap";
+import { Form, Row, Col, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -48,73 +48,75 @@ const Register = () => {
 
 //display the register form
 return (
-  <Row className="loginForm">
-      <Col sm="12" md="5" >
-          <Card className="text-center">
-              <div className='formcard'>
-              <h1><strong>Register</strong></h1>
-                  <Form className="loginForm" onSubmit={handleSubmit}>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                          <Form.Control 
-                            placeholder="Email" 
-                            name="email" type="text" 
-                            value={email} 
-                            onChange={handleChange} />
-                      </Form.Group><br/>
-
-                      <Form.Group className="mb-3" controlId="formBasicUsername">
-                          <Form.Control 
-                            placeholder="username" 
-                            name='username' 
-                            type="text" 
-                            value={username} 
-                            onChange={handleChange} />
-                      </Form.Group><br/>
-
-                      <Form.Group className="mb-3" controlId="formBasicUsername">
-                          <Form.Control 
-                            placeholder="First Name" 
-                            name='first_name' 
-                            type="text" 
-                            value={first_name} 
-                            onChange={handleChange} />
-                      </Form.Group><br/>
-
-                      <Form.Group className="mb-3" controlId="formBasicUsername">
-                          <Form.Control 
-                            placeholder="Last Name" 
-                            name='last_name' 
-                            type="text" 
-                            value={last_name} 
-                            onChange={handleChange} />
-                      </Form.Group><br/>
-                          
-                      <Form.Group className="mb-3" controlId="formBasicPassword">
-                          <Form.Control 
-                              placeholder="Password" 
-                              name='password' 
-                              minLength={6} 
-                              required type="password" 
-                              value={password} 
+  <Container className='content'>
+    <Row className="loginForm">
+        <Col sm="12" md="5" >
+            <Card className="text-center">
+                <div className='formcard'>
+                <h1><strong>Register</strong></h1>
+                    <Form className="loginForm" onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Control 
+                              placeholder="Email" 
+                              name="email" type="text" 
+                              value={email} 
                               onChange={handleChange} />
-                          </Form.Group><br/>
+                        </Form.Group><br/>
 
-                      <Form.Group className="mb-3" controlId="formBasicPassword">
-                          <Form.Control 
-                              placeholder="Confirm Password" 
-                              type='password'
-                              name='confirmPassword'
-                              value={confirmPassword}
-                              onChange={handleChange}
-                              minLength='6'
-                              required />
-                      </Form.Group><br/>
-                      <Button type="submit">Register</Button>
-                  </Form>
-              </div>
-          </Card>
-      </Col>
-  </Row>
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Control 
+                              placeholder="username" 
+                              name='username' 
+                              type="text" 
+                              value={username} 
+                              onChange={handleChange} />
+                        </Form.Group><br/>
+
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Control 
+                              placeholder="First Name" 
+                              name='first_name' 
+                              type="text" 
+                              value={first_name} 
+                              onChange={handleChange} />
+                        </Form.Group><br/>
+
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Control 
+                              placeholder="Last Name" 
+                              name='last_name' 
+                              type="text" 
+                              value={last_name} 
+                              onChange={handleChange} />
+                        </Form.Group><br/>
+                            
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control 
+                                placeholder="Password" 
+                                name='password' 
+                                minLength={6} 
+                                required type="password" 
+                                value={password} 
+                                onChange={handleChange} />
+                            </Form.Group><br/>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control 
+                                placeholder="Confirm Password" 
+                                type='password'
+                                name='confirmPassword'
+                                value={confirmPassword}
+                                onChange={handleChange}
+                                minLength='6'
+                                required />
+                        </Form.Group><br/>
+                        <button className='themeButton' type="submit">Register</button>
+                    </Form>
+                </div>
+            </Card>
+        </Col>
+    </Row>
+  </Container>
   );
 };
 

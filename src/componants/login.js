@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Card, Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 /**
@@ -33,25 +33,27 @@ const Login = (props) => {
   }
 
   return (
-      <div className='login'>
-        <div className="text-center">
-          <Card className='formcard'>
-          <h1><strong>Login</strong></h1>
-            <Form className="loginForm" onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicUsername">
-                  <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-              </Form.Group><br/>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-              </Form.Group><br/>
-              <Button type="submit">Login</Button>
-            </Form>
-            <h6>
-              Click <Link to="/register">Here</Link> to register
-            </h6>
-          </Card>
+      <Container className='content'>
+        <div className='login'>
+          <div className="text-center">
+            <Card className='formcard'>
+            <h1><strong>Login</strong></h1>
+              <Form className="loginForm" onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicUsername">
+                    <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                </Form.Group><br/>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </Form.Group><br/>
+                <button className='themeButton' type="submit">Login</button>
+              </Form>
+              <h6>
+                Click <Link to="/register">Here</Link> to register
+              </h6>
+            </Card>
+          </div>
         </div>
-      </div>
+      </Container>
     );
   };
 
