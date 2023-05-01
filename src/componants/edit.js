@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Form, Button, Col, Row, Container } from 'react-bootstrap';
+import { Form, Col, Row, Container } from 'react-bootstrap';
 
 /**
  * edit componant
@@ -195,8 +195,8 @@ const EditProfile = (props) => {
         </Row>
 
         <div className="d-flex justify-content-center mb-2">
-            <div className='profileButton'><Button type="submit" >Save</Button></div>
-            <div className='profileButton'><Button type="button"  onClick={props.onClose}>Cancel</Button></div>
+            <div className='profileButton'><button className='themeButton' type="submit" >Save</button></div>
+            <div className='profileButton'><button className='themeButton' type="button"  onClick={props.onClose}>Cancel</button></div>
         </div>
       </Form>
     </Container>
