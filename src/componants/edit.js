@@ -179,7 +179,7 @@ const EditProfile = (props) => {
         <Row>
             <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                Password:<Form.Control type="text" name='password' value={password} onChange={handleChange}/>
+                New Password:<Form.Control type="text" name='password' value={password} onChange={handleChange}/>
                 </Form.Group>
             </Col>
             <Col>
@@ -187,9 +187,6 @@ const EditProfile = (props) => {
                 Confirm Password:<Form.Control type="text" name='passwordConfirmation' value={passwordConfirmation} onChange={handleChange}/>
                 </Form.Group>
             </Col>
-        </Row>
-
-        <Row>
             <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 Current Password:<Form.Control type="text" name='currentPassword' value={currentPassword} onChange={handleChange}/>
