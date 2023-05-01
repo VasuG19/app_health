@@ -36,6 +36,13 @@ html {
   min-height: 100vh;
 }
 
+.navTheme a.nav-link {
+  color: #373c4f;
+}
+.navTheme a.active.nav-link {
+  color:#9f6ad3;
+}
+
 .webTheme
 {
   background-color:#b38add;
