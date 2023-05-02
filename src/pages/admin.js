@@ -45,33 +45,25 @@ function Admin (props){
             try {
             const getUserData = async () => {
                 // Get patient data
-                const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=Admin', {
-                headers: { Authorization: `Bearer ${userToken}`,},
-                });
+                const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=client');
                 setPatients(response.data);
             }
 
             const getUserCount = async () => {
                 // Get patient count
-                const response = await axios.get('http://localhost:1337/api/users/count', {
-                headers: { Authorization: `Bearer ${userToken}`,},
-                });
+                const response = await axios.get('http://localhost:1337/api/users/count');
                 setPatientsNo(response.data);
             }
 
             const getUpcoming = async () => {
                 // Get upcoming appointments
-                const response = await axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`, {
-                headers: { Authorization: `Bearer ${userToken}`,},
-                });
+                const response = await axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`);
                 setUpcoming(response.data);
             }
 
             const getAppointments = async () => {
                 // Get all appointments
-                const response = await axios.get(`http://localhost:1337/api/appointments`, {
-                headers: { Authorization: `Bearer ${userToken}`,},
-                });
+                const response = await axios.get(`http://localhost:1337/api/appointments`);
                 setAppointments(response.data);
             }
 
