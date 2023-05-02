@@ -30,7 +30,7 @@ function Timetable(props) {
 
   // Retrieve appointments from API based on user type
   useEffect( () => {
-    if (!props.user ||props.user.title!== 'Admin') {
+    if (!props.user ||props.user.title!== 'client') {
       fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
       .then((response) => response.json())
       .then((json) => {setData(json.data)})
@@ -86,6 +86,7 @@ function Timetable(props) {
     if (selected >= today) {
       setSelectedDate(selected);
       const title = prompt('Enter a title for the booking:');
+      console.log(title);
       if (title) {
         const start = selected.toISOString();
         const end = new Date(selected.getTime() + 30 * 60000).toISOString();

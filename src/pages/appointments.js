@@ -2,6 +2,8 @@ import { React, useState, useEffect } from 'react';
 import { Button, Card, Carousel, Container, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+
 
 /**
  * Appointment Page 
@@ -21,6 +23,8 @@ const [itemsperslide, setitemsperslide] = useState(3);
 const [upcoming, setUpcoming] = useState([]);
 const [selectedAppointment, setSelectedAppointment] = useState(null);
 const [showModal, setShowModal] = useState(false);
+const code = localStorage.getItem('token');
+const [notes, setNotes] = useState({notes:''});
 
 // Function to get previous and upcoming appointments from the API and set the state for previous and upcoming appointments accordingly
 useEffect(() => {
@@ -62,7 +66,7 @@ if (!props.user || props.user.title !== 'Admin') {
 
   // handle for when an event is clicked, the user has the option to delete the booking
   const handleEventClick = async () => {
-    if (window.confirm(`Are you sure you want to delete the booking '${selectedAppointment.title}'?`)) {
+    if (window.confirm(`Are you sure you want to delete the booking '${selectedAppointment.attributes.title}'?`)) {
       try {
         // Delete the appointment using the API
         const response = await fetch(`http://localhost:1337/api/appointments/${selectedAppointment.id}`, {
@@ -76,6 +80,40 @@ if (!props.user || props.user.title !== 'Admin') {
       } catch (error) {
         console.error(error);
         alert('There was an error deleting the booking.');
+      }
+      window.location.reload(false);
+    }
+  };
+
+   // handle for when an event is clicked, the user has the option to delete the booking
+  const editNotes = async () => {
+    const note = prompt('Add notes');
+    console.log(note);
+    if (note) {
+      setNotes({
+        data: {
+          notes: note
+        },
+      });
+    }
+  }
+
+  // save the edited notes and send them to the API
+   const save = async () => {
+    if (window.confirm(`Are you sure you want to add these notes '${selectedAppointment.attributes.title}'?`)) {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${code}`
+          }
+        };
+        const body = JSON.stringify(notes); // update the body with the correct payload format
+        const response = await axios.put(`http://localhost:1337/api/appointments/${selectedAppointment.id}`, body, config);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+        alert('There was an error adding notes.');
       }
       window.location.reload(false);
     }
@@ -97,12 +135,12 @@ if (!props.user || props.user.title !== 'Admin') {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // functions to make the carousel responsive by adding and taking away the number of entries
   const chunks = upcoming.reduce((acc, curr, i) => {
     if (i % itemsperslide === 0) acc.push([]);
     acc[acc.length - 1].push(curr);
     return acc;
   }, []);
-
   const pchunks = previous.reduce((acc, curr, i) => {
     if (i % itemsperslide === 0) acc.push([]);
     acc[acc.length - 1].push(curr);
@@ -184,8 +222,11 @@ if (!props.user || props.user.title !== 'Admin') {
           <p><strong>Start:</strong>    {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
           <p><strong>End:</strong>      {selectedAppointment && new Date(selectedAppointment.attributes.end).toLocaleString()}</p>
           <p><strong>Type:</strong>     {selectedAppointment && selectedAppointment.attributes.type}</p>
+          <p><strong>Notes:</strong>     {selectedAppointment && selectedAppointment.attributes.notes}</p>
         </Modal.Body>
         <Modal.Footer>
+          <Button variant="success" onClick={save}>Save</Button>
+          <Button variant="primary" onClick={editNotes}>Edit Notes</Button>
           <Button variant="danger" onClick={handleEventClick}>Cancel Appointment</Button>
         </Modal.Footer>
       </Modal>

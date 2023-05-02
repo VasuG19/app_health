@@ -37,7 +37,7 @@ const [services, setServices] = useState([]);
 const userToken = localStorage.getItem('token');
 
 useEffect(() => {
-  if (!user ||user.title!== 'Admin') {
+  if (!user ||user.title!== 'client') {
      setIsAdmin(false)
     } else {
       setIsAdmin(true)

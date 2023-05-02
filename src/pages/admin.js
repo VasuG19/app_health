@@ -39,7 +39,7 @@ function Admin (props){
         const today = new Date().toISOString();
 
         // Redirect user to home page if not an admin
-        if (!props.user ||props.user.title!== 'Admin') {
+        if (!props.user ||props.user.title!== 'client') {
             nav("/");
         } else {
             try {

@@ -25,7 +25,7 @@ const Profile = (props) => {
   // if the user is the admin, redirect to the admin page
   const nav = useNavigate();
   useEffect(() => {
-  if (!props.user ||props.user.title!== 'Admin') {
+  if (!props.user ||props.user.title!== 'client') {
      nav("/profile");
     } else {
      nav("/admin");
