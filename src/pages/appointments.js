@@ -27,31 +27,31 @@ useEffect(() => {
 const today = new Date().toISOString();
 const currentDate = new Date().toISOString().split('T')[0]; // Get current date in format yyyy-mm-dd
   
-    if (!props.user ||props.user.title!== 'Admin') {
+if (!props.user || props.user.title !== 'Admin') {
 
       fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$lt]=${currentDate}`)
         .then((response) => response.json())
-        .then((json) => setPrevious(json.data.sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
-        .catch((err) => console.log(err.message));
-  
-      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
-        .then((response) => response.json())
-        .then((json) => setUpcoming(json.data.sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
+        .then((json) => setPrevious(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
         .catch((err) => console.log(err.message));
 
-    } else if (props.user ||props.user.title!== 'Admin'){
-  
+      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
+        .then((response) => response.json())
+        .then((json) => setUpcoming(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
+        .catch((err) => console.log(err.message));
+
+    } else if (props.user || props.user.title !== 'Admin') {
+
       fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$lt]=${currentDate}`)
         .then((response) => response.json())
-        .then((json) => setPrevious(json.data.sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
+        .then((json) => setPrevious(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
         .catch((err) => console.log(err.message));
 
       fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`)
         .then((response) => response.json())
-        .then((json) => setUpcoming(json.data.sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
+        .then((json) => setUpcoming(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
         .catch((err) => console.log(err.message));
     }
-  
+
   },[props.user, props.user.id]);
 
   // handle for when the view appointment button is clicked and displays popup with relevant 
