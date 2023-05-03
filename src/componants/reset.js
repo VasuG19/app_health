@@ -35,8 +35,7 @@ const Reset = (props) => {
                 'Authorization': `Bearer ${code}`
                 }
             };
-            const body = JSON.stringify({username, email});
-            const passwordReset = JSON.stringify({ password, passwordConfirmation })
+            const passwordReset = JSON.stringify({ password, passwordConfirmation, username, email  })
             const response = await axios.post('http://localhost:1337/auth/reset-password', passwordReset, config);
             console.log(response.data)
         } catch (error) {
