@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Form, Card, Container } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 /**
  * login componant
@@ -11,9 +12,10 @@ import { Link } from 'react-router-dom';
  * @author Mehtab Gill
  */
 
-const Login = (props) => {
+const ClientLogin = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const nav = useNavigate();
 
   // handle submitting the username and password to the database and verifying the credentials 
   const handleSubmit = async (e) => {
@@ -30,6 +32,7 @@ const Login = (props) => {
       console.error(error);
       alert("Incorrect username or password")
     }
+    nav("/client-details"); // redirect user to login page once registered
   }
 
   return (
@@ -37,7 +40,7 @@ const Login = (props) => {
         <div className='login'>
           <div className="text-center">
             <Card className='formcard'>
-            <h1><strong>Login</strong></h1>
+            <h1><strong>Client Login</strong></h1>
               <Form className="loginForm" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -47,13 +50,6 @@ const Login = (props) => {
                 </Form.Group><br/>
                 <button className='themeButton' type="submit">Login</button>
               </Form>
-              <h6>
-                Click <Link to="/register">Here</Link> to register
-              </h6>
-                or
-              <p>
-                 <Link to="/client-register">Here</Link> to register as a client
-              </p>
             </Card>
           </div>
         </div>
@@ -61,4 +57,4 @@ const Login = (props) => {
     );
   };
 
-export default Login;
+export default ClientLogin;

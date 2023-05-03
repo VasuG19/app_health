@@ -13,7 +13,9 @@ import axios from 'axios';
 import Footer from './componants/footer';
 import Admin from './pages/admin';
 import NotFound from './componants/notFound';
-import Reset from './componants/reset';
+import ClientRegister from './componants/clientRegister';
+import ClientLogin from './componants/clientLogin';
+import ClientDetails from './componants/clientDetails';
 
 /**
  * App Page 
@@ -96,6 +98,7 @@ useEffect(() => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/admin" element={<Admin authenticated={authenticated} user={user} service={services} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
+          <Route path="/client-details" element={<ClientDetails user={user} />}/>
         </Routes>
       } 
       {!authenticated &&
@@ -106,7 +109,8 @@ useEffect(() => {
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/services" element={<ServicesPage services={services}  user={user} />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/reset" element={<Reset/>} />
+          <Route path="/client-register" element={<ClientRegister/>} />
+          <Route path="/client-login" element={<ClientLogin authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
         </Routes>
       }
       <Footer/>

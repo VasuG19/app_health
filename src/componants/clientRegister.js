@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Form, Row, Col, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Dropdown from 'react-bootstrap/Dropdown';
 
 /**
  * register componant
@@ -12,25 +11,19 @@ import Dropdown from 'react-bootstrap/Dropdown';
  * @author Mehtab Gill
  */
 
-const Register = () => {
+const ClientRegister = () => {
 
   // declare the data
   const [formData, setFormData] = useState({
     email: '', username: '', first_name: '',
-    last_name:'', password: '', confirmPassword: '', 
+    last_name:'', password: '', confirmPassword: '',
   });
-  const [userType, setUserType] = useState('');
   const { username, email, password, confirmPassword,first_name,last_name,} = formData; 
   const nav = useNavigate();
 
   // target the correct input when typing in the form fields
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  // set the type of appointment that the user is booking
-  const handleEventTypeSelect = (event) => {
-    setUserType(event.target.innerText);
-  };
 
   // handle submitting the form data to the database to register the user 
   const handleSubmit = async (e) => {
@@ -40,11 +33,11 @@ const Register = () => {
     } else {
       try {
         const config = {headers: {'Content-Type': 'application/json'}};
-        const body = JSON.stringify({username, email, password, first_name,last_name, title: userType});
+        const body = JSON.stringify({username, email, password, first_name,last_name, title: "client"});
         console.log("body",body)
         const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
         console.log(result.data)
-        nav("/login"); // redirect user to login page once registered
+        nav("/client-login"); // redirect user to login page once registered
       } catch (error) {
       console.error(error);
       alert("there was an error registering your account, please try again")
@@ -59,7 +52,7 @@ return (
         <Col sm="12" md="5" >
             <Card className="text-center">
                 <div className='formcard'>
-                <h1><strong>Register</strong></h1>
+                <h1><strong>Client Register</strong></h1>
                     <Form className="loginForm" onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Control 
@@ -117,15 +110,6 @@ return (
                                 required />
                         </Form.Group><br/>
 
-                        <Dropdown className='bookButton'>
-                          <Dropdown.Toggle variant="primary" id="dropdown-button-dark">
-                            Role
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item onClick={handleEventTypeSelect}>client</Dropdown.Item>
-                            <Dropdown.Item onClick={handleEventTypeSelect}>patient</Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
                         <button className='themeButton' type="submit">Register</button>
                     </Form>
                 </div>
@@ -136,4 +120,4 @@ return (
   );
 };
 
-export default Register;
+export default ClientRegister;
