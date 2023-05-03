@@ -90,7 +90,7 @@ useEffect(() => {
           <Route path='*' element={<NotFound />}/>
           <Route path="/appointments" element={<Appointments user={user}/>} />
           <Route path="/calendar" element={<Timetable user={user}/>} />
-          <Route path="/services" element={<ServicesPage services={services} />} />
+          <Route path="/services" element={<ServicesPage services={services} user={user} />} />
           <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
@@ -104,7 +104,7 @@ useEffect(() => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/appointments"element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/services" element={<ServicesPage services={services} />} />
+          <Route path="/services" element={<ServicesPage services={services}  user={user} />} />
           <Route path="/profile" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/admin" element={<Login authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
