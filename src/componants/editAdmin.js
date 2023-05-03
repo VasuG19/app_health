@@ -32,23 +32,20 @@ const EditAdmin = (props) => {
             const config = {
                 headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${code}`
                 }
             };
             const body = JSON.stringify({username, email,  });
-            const CL = JSON.stringify({institute, address,  });
-
+            const CL = JSON.stringify({data:{institute, address,  }});
             const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
-            const resultCL = await axios.put(`http://localhost:1337/api/client/${props.user.client.id}`, CL, config);
-            
+            const resultCL = await axios.put(`http://localhost:1337/api/clients/${props.user.client.id}`, CL, config);
             console.log(result)
             console.log(resultCL)
-
-            
         } catch (error) {
             console.error(error);
         }
     props.onClose();
-//    window.location.reload(false);
+    window.location.reload(false);
   }
 
   const changePass = async (e) => {

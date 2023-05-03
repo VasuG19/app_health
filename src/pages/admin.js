@@ -16,11 +16,11 @@ import EditAdmin from "../componants/editAdmin";
 function Admin (props){
     // States used in the component
     const [patients, setPatients] = useState([]);
-    const [patientNo, setPatientsNo] = useState([]);
+//    const [patientNo, setPatientsNo] = useState([]);
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
     const [isEditing, setIsEditing]  = useState(false);
-
+    const [clientData, setClientData] = useState({}) 
 
     // Count of upcoming and all appointments
     const numberOfEntries = upcoming.data.length;
@@ -50,12 +50,12 @@ function Admin (props){
                 const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=client');
                 setPatients(response.data);
             }
-
+/*
             const getUserCount = async () => {
                 // Get patient count
                 const response = await axios.get('http://localhost:1337/api/users/count');
                 setPatientsNo(response.data);
-            }
+            }*/
 
             const getUpcoming = async () => {
                 // Get upcoming appointments
@@ -69,11 +69,15 @@ function Admin (props){
                 setAppointments(response.data);
             }
 
-            getUserCount()
+ //           getUserCount()
             getUserData()
             getUpcoming()
             getAppointments()
 
+            setClientData({
+                institute : props.user.client.institute,
+                address : props.user.client.address
+            })
         } catch (error) {
             console.error(error);
           }
@@ -126,30 +130,39 @@ function Admin (props){
                     <MDBCard className="mb-4 mb-lg-0 profile">
                         <MDBCardBody>
                             <MDBRow>
-                            <MDBCol sm="8">
-                                <MDBCardText>Patients</MDBCardText>
-                            </MDBCol>
-                            <MDBCol sm="2">
-                                <MDBCardText className="text-muted">{patientNo}</MDBCardText>
-                            </MDBCol>
+                                <MDBCol sm="5">
+                                    <MDBCardText>Institute</MDBCardText>
+                                </MDBCol>
+                                <MDBCol sm="5">
+                                    <MDBCardText className="text-muted">{clientData.institute}</MDBCardText>
+                                </MDBCol>
                             </MDBRow>
                             <hr />
                             <MDBRow>
-                            <MDBCol sm="8">
-                                <MDBCardText>Upcoming Appointments</MDBCardText>
-                            </MDBCol>
-                            <MDBCol sm="2">
-                                <MDBCardText className="text-muted">{numberOfEntries}</MDBCardText>
-                            </MDBCol>
+                                <MDBCol sm="5">
+                                    <MDBCardText>Address</MDBCardText>
+                                </MDBCol>
+                                <MDBCol sm="5">
+                                    <MDBCardText className="text-muted">{clientData.address}</MDBCardText>
+                                </MDBCol>
                             </MDBRow>
                             <hr />
                             <MDBRow>
-                            <MDBCol sm="8">
-                                <MDBCardText>Total Appointments</MDBCardText>
-                            </MDBCol>
-                            <MDBCol sm="2">
-                                <MDBCardText className="text-muted">{numberOfApp}</MDBCardText>
-                            </MDBCol>
+                                <MDBCol sm="8">
+                                    <MDBCardText>Upcoming Appointments</MDBCardText>
+                                </MDBCol>
+                                <MDBCol sm="2">
+                                    <MDBCardText className="text-muted">{numberOfEntries}</MDBCardText>
+                                </MDBCol>
+                            </MDBRow>
+                            <hr />
+                            <MDBRow>
+                                <MDBCol sm="8">
+                                    <MDBCardText>Total Appointments</MDBCardText>
+                                </MDBCol>
+                                <MDBCol sm="2">
+                                    <MDBCardText className="text-muted">{numberOfApp}</MDBCardText>
+                                </MDBCol>
                             </MDBRow>
                         </MDBCardBody>
                     </MDBCard>

@@ -37,7 +37,8 @@ function ServicesPage(props){
             setServices({
             data: {
                 title: title,
-                desc: description
+                desc: description,
+                client: props.user.client.id
             },
           });
         }
