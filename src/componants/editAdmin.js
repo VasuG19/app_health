@@ -15,14 +15,12 @@ const EditAdmin = (props) => {
 
     // declare variables
   const [updateData, setUpdateData] = useState({
-        username:props.username, email: props.email, password: '', passwordConfirmation: '', currentPassword: ''
+        username:props.username, email: props.email, password: '', passwordConfirmation: '', 
+        currentPassword: '', institute:props.institute, address:props.address
   });
-  const { username, email,password, passwordConfirmation, currentPassword} = updateData; 
-
-
+  const { username, email,password, passwordConfirmation, currentPassword, institute, address} = updateData; 
 
   const handleChange = e => setUpdateData({ ...updateData, [e.target.name]: e.target.value });
-
 
   const code = localStorage.getItem('token');
 
@@ -30,19 +28,20 @@ const EditAdmin = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
         try {
             const config = {
                 headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${code}`
                 }
             };
             const body = JSON.stringify({username, email,  });
+            const CL = JSON.stringify({institute, address,  });
 
             const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
+            const resultCL = await axios.put(`http://localhost:1337/api/client/${props.user.client.id}`, CL, config);
             
             console.log(result)
+            console.log(resultCL)
 
             
         } catch (error) {
@@ -90,6 +89,18 @@ const EditAdmin = (props) => {
             <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 Email:<Form.Control type="email" name='email' value={email} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+        </Row>
+        <Row>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicUsername">
+                Institute:<Form.Control type="text" name='institute' value={institute} onChange={handleChange}/>
+                </Form.Group>
+            </Col>
+            <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                Address:<Form.Control type="text" name='address' value={address} onChange={handleChange}/>
                 </Form.Group>
             </Col>
         </Row>

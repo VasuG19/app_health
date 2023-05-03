@@ -3,7 +3,7 @@ import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Popup from "../componants/popup";
-import EditAdmin from "../componants/editService";
+import EditAdmin from "../componants/editAdmin";
 
 /**
  * Admin Page 
@@ -101,6 +101,8 @@ function Admin (props){
           user={props.user}
           username={props.user.username}
           email={props.user.email}
+          institute={props.user.client.institute}
+          address={props.user.client.address}
           onProfileUpdate={""}
           onClose={() => setIsEditing(false)}
         />
