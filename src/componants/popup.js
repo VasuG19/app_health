@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody} from 'mdb-react-ui-kit';
-import { Button, Collapse } from 'react-bootstrap';
+import { Collapse } from 'react-bootstrap';
 import { useState } from 'react';
 
 /**
@@ -27,10 +27,10 @@ function Popup(props) {
   return (
     <div>
         {props.user.username}
-        <Button 
-            className='patientButton' variant="primary" aria-controls="example-collapse-text"
+        <button 
+            className='patientButton themeButton' aria-controls="example-collapse-text"
             aria-expanded={open} onClick={showDetails}>Show Details
-        </Button>
+        </button>
       <Collapse in={open}>
       <MDBContainer className="py-5">
         <MDBRow>

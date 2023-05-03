@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Popup from "../componants/popup";
+import EditAdmin from "../componants/editService";
 
 /**
  * Admin Page 
@@ -19,6 +19,8 @@ function Admin (props){
     const [patientNo, setPatientsNo] = useState([]);
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
+    const [isEditing, setIsEditing]  = useState(false);
+
 
     // Count of upcoming and all appointments
     const numberOfEntries = upcoming.data.length;
@@ -93,12 +95,18 @@ function Admin (props){
 
     // Render admin dashboard
     return(
-        <div>
-        {props.Admin &&
         <MDBContainer className="py-5 content">
-            <h1><strong>Admin</strong></h1>
+            {isEditing && 
+        <EditAdmin
+          user={props.user}
+          username={props.user.username}
+          email={props.user.email}
+          onProfileUpdate={""}
+          onClose={() => setIsEditing(false)}
+        />
+      }
+      {!isEditing &&
             <MDBRow>
-
                 <MDBCol lg="4">
                     <MDBCard className="mb-4 profile">
                         <MDBCardBody className="text-center">
@@ -107,9 +115,8 @@ function Admin (props){
                             alt="avatar" className="rounded-circle" style={{ width: '150px' }} fluid />
                             <div className='profileButton'><p className="text-muted mb-1">{props.user.username}</p></div>
                             <div className="d-flex justify-content-center mb-2">
-                                <div className='profileButton'>
-                                    <Button className="logout" type="button" value="Sign out" onClick={handleSignOut}>Sign out</Button>
-                                </div>
+                                <div className='profileButton'><button className=" themeButton logout" onClick={() => setIsEditing(true)}>Edit</button></div>  
+                                <div className='profileButton'><button className="logout themeButton" type="button" value="Sign out" onClick={handleSignOut}>Sign out</button></div>
                             </div>
                         </MDBCardBody>
                     </MDBCard>
@@ -164,9 +171,8 @@ function Admin (props){
                 </MDBCol>
 
             </MDBRow>
+            }
         </MDBContainer>
-        }
-      </div>
     )
 }
 

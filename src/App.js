@@ -94,7 +94,7 @@ useEffect(() => {
           <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/admin" element={<Admin authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
+          <Route path="/admin" element={<Admin authenticated={authenticated} user={user} service={services} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
         </Routes>
       } 
       {!authenticated &&
