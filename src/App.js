@@ -13,6 +13,7 @@ import axios from 'axios';
 import Footer from './componants/footer';
 import Admin from './pages/admin';
 import NotFound from './componants/notFound';
+import Reset from './componants/reset';
 
 /**
  * App Page 
@@ -103,11 +104,9 @@ useEffect(() => {
           <Route path="/" element={<HomePage user={user} services={servicesHome} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/appointments"element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/services" element={<ServicesPage services={services}  user={user} />} />
-          <Route path="/profile" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/admin" element={<Login authenticated={authenticated} user={user} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
+          <Route path="/reset" element={<Reset/>} />
         </Routes>
       }
       <Footer/>

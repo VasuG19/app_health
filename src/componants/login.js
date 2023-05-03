@@ -50,6 +50,10 @@ const Login = (props) => {
               <h6>
                 Click <Link to="/register">Here</Link> to register
               </h6>
+                or
+              <p>
+                 <Link to="/reset">Here</Link> to reset password
+              </p>
             </Card>
           </div>
         </div>
