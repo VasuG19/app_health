@@ -16,10 +16,9 @@ const Register = () => {
   // declare the data
   const [formData, setFormData] = useState({
     email: '', username: '', first_name: '',
-    last_name:'', password: '', confirmPassword: ''
+    last_name:'', password: '', confirmPassword: '',
   });
-
-  const { username, email, password, confirmPassword,first_name,last_name, } = formData; 
+  const { username, email, password, confirmPassword,first_name,last_name,} = formData; 
   const nav = useNavigate();
 
   // target the correct input when typing in the form fields
@@ -34,11 +33,11 @@ const Register = () => {
     } else {
       try {
         const config = {headers: {'Content-Type': 'application/json'}};
-        const body = JSON.stringify({username, email, password, first_name,last_name,});
+        const body = JSON.stringify({username, email, password, first_name,last_name, title: "patient"});
         console.log("body",body)
         const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
         console.log(result.data)
-        nav("/login"); // redirect user to login page once registered
+        nav("/client-login"); // redirect user to login page once registered
       } catch (error) {
       console.error(error);
       alert("there was an error registering your account, please try again")
@@ -110,6 +109,7 @@ return (
                                 minLength='6'
                                 required />
                         </Form.Group><br/>
+
                         <button className='themeButton' type="submit">Register</button>
                     </Form>
                 </div>
@@ -119,5 +119,4 @@ return (
   </Container>
   );
 };
-
 export default Register;
