@@ -24,6 +24,7 @@ function Timetable(props) {
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedEventType, setSelectedEventType] = useState(null);
   const [formData, setFormData] = useState({title:'', start:'', patient:'', end:''});
   const [data, setData] = useState([]);
   const [eventType, setEventType] = useState('');
@@ -121,6 +122,7 @@ function Timetable(props) {
   // set the type of appointment that the user is booking
   const handleEventTypeSelect = (event) => {
     setEventType(event.target.innerText);
+    setSelectedEventType(true);
   };
 
 
@@ -190,11 +192,13 @@ function Timetable(props) {
                 <Dropdown.Item onClick={handleEventTypeSelect}>video</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Form onSubmit={handleSubmit} className='bookButton'>
-              <Button type='submit' disabled={isBooking}>
-                {isBooking ? 'Booking...' : 'Book Appointment'}
-              </Button>
-            </Form>
+            {selectedEventType &&(
+              <Form onSubmit={handleSubmit} className='bookButton'>
+                <Button type='submit' disabled={isBooking}>
+                  {isBooking ? 'Booking...' : 'Book Appointment'}
+                </Button>
+              </Form>
+            )}
           </div> 
         )}
         </Container>
