@@ -1,137 +1,107 @@
-import {React} from 'react';
-import { Container, Row, Button } from 'react-bootstrap';
-import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
+import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Popup from "../componants/popup";
+import { Container, Row, Card, Col } from "react-bootstrap";
 
 /**
- * Services Page 
+ * Admin Page 
  * 
- * function to return services data with relevant information
+ * Retrieves and displays relevant admin data for the admin
  * 
  * @author Mehtab Gill
  */
 
-function ClientsPage(props){
-    
-    const [services, setServices] = useState({title:'', desc:''})
-    const [isAdmin, setIsAdmin]  = useState(false);
+function Clients (props){
+    // States used in the component
+    const [clients, setClients] = useState([]);
 
+    // Get token from local storage and initialize navigate hook
+    const userToken = localStorage.getItem('token');
+    const nav = useNavigate()
 
+    // Use Effect to fetch data on mount and when dependencies change
     useEffect(() => {
+        // Redirect user to home page if not an admin
         if (!props.user ||props.user.title!== 'client') {
-           setIsAdmin(false)
-          } else {
-            setIsAdmin(true)
-          }
-    },[props.user]);
-
-    // handle submitting updated data
-      const addService = async () => {
-        const title = prompt('Add title');
-        console.log(title);
-        const description = prompt('Add description');
-        console.log(description);
-        if (title) {
-            setServices({
-            data: {
-                title: title,
-                desc: description
-            },
-          });
-        }
-      }
-
-    const save = async () => {
-        if (window.confirm(`Are you sure you want to add these services?`)) {
+            nav("/");
+        } else {
             try {
-                const config = {
-                    headers: {
-                      'Content-Type': 'application/json',
-                    }
-                  };
-                console.log(services)
-                const service = JSON.stringify(services)
-                const serv = await axios.post(`http://localhost:1337/api/services`, service, config);
-                console.log(serv)
-            } catch (error) {
-            console.error(error);
-            alert('There was an error adding notes.');
+            const getUserData = async () => {
+                // Get patient data
+                const response = await axios.get('http://localhost:1337/api/clients?populate=*');
+                setClients(response.data.data);
+                console.log(response.data.data);
             }
-            window.location.reload(false);
-        }
-    };
-
-    // handle for when an event is clicked, the user has the option to delete the booking
-    const del = async (id) => {
-        if (window.confirm(`Are you sure you want to delete this service?`)) {
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                };
-                await axios.delete(`http://localhost:1337/api/services/${id}`, config);
-                alert('Service deleted successfully!');
-                window.location.reload(false);
+            getUserData()
             } catch (error) {
-                console.error(error);
-                alert('There was an error deleting the service.');
-            }
+                console.error(error.message);
+            }        
         }
-    };
-    
+    },[nav, props.user, userToken]);
 
-    // return all of the services into a grid for the services page
-    const service = props.services && props.services.map((value) => (
-        <div  key={value.id} className="col-lg-4 mb-5">
-            <div className="card h-100 shadow border-0">
-                <div className="card-body p-4">
-                <h4 className="card-title mb-3">{value.attributes.title}</h4>
-                    <p className="card-text mb-0">{value.attributes.desc}</p>
-                </div>
-            </div>
-        </div>
-        )
+    // Map through patients and create card for each
+    const allPatients = clients && clients.map((value) =>  
+            <Col style={{  overflow: 'scroll' }} sm={true} key={value.id}>
+                <Card>
+                    <Card.Body>
+                    <Row>
+                    <Col className='clientName' sm="true">
+                        <Card.Text>{value.attributes.username}</Card.Text>
+                    </Col>
+                  </Row>
+                  <hr />
+                  <Row>
+                    <Col sm="3">
+                      <Card.Text>Institute</ Card.Text>
+                    </Col>
+                    <Col sm="9">
+                      <Card.Text className="text-muted">{value.attributes.institute}</ Card.Text>
+                    </Col>
+                  </Row>
+                  <hr/>
+                  <Row>
+                    <Col sm="3">
+                      <Card.Text>Address</ Card.Text>
+                    </Col>
+                    <Col sm="9">
+                      <Card.Text className="text-muted">{value.attributes.address}</ Card.Text>
+                    </Col>
+                  </Row>
+                  <hr/>
+                  <Row>
+                    <Col sm="3">
+                      <Card.Text>Role</ Card.Text>
+                    </Col>
+                    <Col sm="9">
+                      <Card.Text className="text-muted">{value.attributes.role}</ Card.Text>
+                    </Col>
+                  </Row>
+                  <hr/>
+                        <Popup clients={value} />
+                    </Card.Body>
+                </Card>
+            </Col>
     );
 
-    const serviceAdmin = props.services && props.services.map((value) => (
-        <div  key={value.id} className="col-lg-4 mb-5">
-            <div className="card h-100 shadow border-0">
-                <div className="card-body p-4">
-                <h4 className="card-title mb-3">{value.attributes.title}</h4>
-                    <p className="card-text mb-0">{value.attributes.desc}</p>
-                </div>
-                <div className="card-footer p-4">
-                    <div className='profileButton'>
-                        <Button className='themeButton' variant='danger' onClick={() => del(value.id)}>delete</Button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    ));
-    
-
+    // Render admin dashboard
     return(
-        <Container className='content'>
-            { isAdmin &&
-                <div>
-                    <Row sm={true}>
-                        {serviceAdmin}
+        <Container className="content">
+            <Row>
+                <Col lg="true">
+                    <Row>
+                        <Col>
+                            <Card.Text> Clients </Card.Text>
+                        </Col>
                     </Row>
-                    <div className="d-flex justify-content-center mb-2">
-                        <div className='profileButton'><Button className='themeButton' variant='primary' onClick={addService} >add service</Button></div>
-                        <div className='profileButton'><Button className='themeButton' variant='success' onClick={save} >Save</Button></div>
-                    </div>
-                </div>
-            }
-            {!isAdmin &&
-                 <Row sm={true}>
-                 {service}
-             </Row>
-            }
+                    <hr />
+                    <Row>
+                        {allPatients}
+                    </Row>
+                </Col>
+            </Row>
         </Container>
-    )}
+    )
+}
 
-export default ClientsPage
+export default Clients;

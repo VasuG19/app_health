@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage} from 'mdb-react-ui-kit';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Popup from "../componants/popup";
 import EditAdmin from "../componants/editAdmin";
 
 /**
@@ -79,7 +78,7 @@ function Admin (props){
             <MDBCol sm={true}>
                 <MDBCard>
                     <MDBCardBody>
-                        <Popup user={value} />
+                        
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>

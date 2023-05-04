@@ -24,6 +24,7 @@ function NavBar(props){
            <LinkContainer to="/services"><Nav.Link>Services</Nav.Link></LinkContainer>
             {props.authenticated &&<LinkContainer to="/appointments"><Nav.Link>Appointments</Nav.Link></LinkContainer>}
             {props.authenticated && <LinkContainer to="/calendar"><Nav.Link>Calendar</Nav.Link></LinkContainer>}
+            {props.authenticated && <LinkContainer to="/clients"><Nav.Link>Clients</Nav.Link></LinkContainer>}
           </Nav>
           <Nav className="ml-auto">
             {props.authenticated && <LinkContainer to="/profile"><Nav.Link>{props.user.username}</Nav.Link></LinkContainer> }

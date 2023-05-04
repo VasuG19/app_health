@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-
 /**
  * Services Page 
  * 
@@ -16,20 +15,22 @@ import { useEffect } from 'react';
 function ServicesPage(props){
     
     const [services, setServices] = useState({title:'', desc:''})
+    const [data, setData] = useState([])
+
 
     useEffect(() => {
         // retrieve the user data from the api
         const getServices = async () => {
-          const response = await axios.get(`http://localhost:1337/api/services?populate=*&filter[client][$eq]=${props.clientData.id}`);
-          setServices(response.data.data);
+          const response = await axios.get(`http://localhost:1337/api/services/?populate=*`);
+          setData(response.data.data);
+          console.log(response.data.data)
         };
-      
-        getServices();
 
+        getServices();
     }, [props.user, props.clientData.id]);
 
     // handle submitting updated data
-      const addService = async () => {
+    const addService = async () => {
         const title = prompt('Add title');
         console.log(title);
         const description = prompt('Add description');
@@ -41,10 +42,9 @@ function ServicesPage(props){
                 desc: description,
                 client: props.clientData.id
             },
-          });
+            });
         }
-      }
-
+    }
 
     const save = async () => {
         if (window.confirm(`Are you sure you want to add these services?`)) {
@@ -87,7 +87,7 @@ function ServicesPage(props){
     
 
     // return all of the services into a grid for the services page
-    const service = props.services && props.services.map((value) => (
+    const service = data.map((value) => (
         <div  key={value.id} className="col-lg-4 mb-5">
             <div className="card h-100 shadow border-0">
                 <div className="card-body p-4">
@@ -99,7 +99,7 @@ function ServicesPage(props){
         )
     );
 
-    const serviceAdmin = props.services && props.services.map((value) => (
+    const serviceAdmin = data && data.map((value) => (
         <div  key={value.id} className="col-lg-4 mb-5">
             <div className="card h-100 shadow border-0">
                 <div className="card-body p-4">
