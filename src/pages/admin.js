@@ -19,7 +19,6 @@ function Admin (props){
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
     const [isEditing, setIsEditing]  = useState(false);
-    const [clientData, setClientData]  = useState(false);
 
     // Count of upcoming and all appointments
     const numberOfEntries = upcoming.data.length;
@@ -45,12 +44,7 @@ function Admin (props){
             nav("/");
         } else {
             try {
-            setClientData({
-                id: props.user.client.id,
-                institute: props.user.client.institute,
-                address: props.user.client.address
-            })
-            
+
             const getUserData = async () => {
                 // Get patient data
                 const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=client');
@@ -100,8 +94,8 @@ function Admin (props){
           user={props.user}
           username={props.user.username}
           email={props.user.email}
-          institute={clientData.institute}
-          address={clientData.address}
+          institute={props.clientData.institute}
+          address={props.clientData.address}
           onProfileUpdate={""}
           onClose={() => setIsEditing(false)}
         />
@@ -129,7 +123,7 @@ function Admin (props){
                                     <MDBCardText>Institute</MDBCardText>
                                 </MDBCol>
                                 <MDBCol sm="5">
-                                    <MDBCardText className="text-muted">{clientData.institute}</MDBCardText>
+                                    <MDBCardText className="text-muted">{props.clientData.institute}</MDBCardText>
                                 </MDBCol>
                             </MDBRow>
                             <hr />
@@ -138,7 +132,7 @@ function Admin (props){
                                     <MDBCardText>Address</MDBCardText>
                                 </MDBCol>
                                 <MDBCol sm="5">
-                                    <MDBCardText className="text-muted">{clientData.address}</MDBCardText>
+                                    <MDBCardText className="text-muted">{props.clientData.address}</MDBCardText>
                                 </MDBCol>
                             </MDBRow>
                             <hr />

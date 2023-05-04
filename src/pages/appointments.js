@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-
 /**
  * Appointment Page 
  * 
@@ -28,35 +27,32 @@ const [notes, setNotes] = useState({notes:''});
 
 // Function to get previous and upcoming appointments from the API and set the state for previous and upcoming appointments accordingly
 useEffect(() => {
-const today = new Date().toISOString();
-const currentDate = new Date().toISOString().split('T')[0]; // Get current date in format yyyy-mm-dd
-  
-if (!props.user || props.user.title !== 'client') {
+  const today = new Date().toISOString();
+  const currentDate = new Date().toISOString().split('T')[0]; // Get current date in format yyyy-mm-dd
 
-      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$lt]=${currentDate}`)
-        .then((response) => response.json())
-        .then((json) => setPrevious(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
-        .catch((err) => console.log(err.message));
+  if (!props.user || props.user.title !== 'client') {
+    Promise.all([
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$lt]=${currentDate}`),
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
+    ])
+      .then(([previousResponse, upcomingResponse]) => {
+        setPrevious(previousResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
+        setUpcoming(upcomingResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
+      })
+      .catch(error => console.log(error.message));
+  } else if (props.user || props.user.title !== 'Admin') {
+    Promise.all([
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$lt]=${currentDate}`),
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`)
+    ])
+      .then(([previousResponse, upcomingResponse]) => {
+        setPrevious(previousResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
+        setUpcoming(upcomingResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
+      })
+      .catch(error => console.log(error.message));
+  }
+}, [props.user, props.user.id]);
 
-      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
-        .then((response) => response.json())
-        .then((json) => setUpcoming(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
-        .catch((err) => console.log(err.message));
-
-    } else if (props.user || props.user.title !== 'Admin') {
-
-      fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$lt]=${currentDate}`)
-        .then((response) => response.json())
-        .then((json) => setPrevious(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
-        .catch((err) => console.log(err.message));
-
-      fetch(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`)
-        .then((response) => response.json())
-        .then((json) => setUpcoming(json.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start))))
-        .catch((err) => console.log(err.message));
-    }
-
-  },[props.user, props.user.id]);
 
   // handle for when the view appointment button is clicked and displays popup with relevant 
   const handleViewAppointment = (appointment) => {

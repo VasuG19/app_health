@@ -29,18 +29,22 @@ function Timetable(props) {
   const [eventType, setEventType] = useState('');
 
   // Retrieve appointments from API based on user type
-  useEffect( () => {
-    if (!props.user ||props.user.title!== 'client') {
-      fetch(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq]=${props.user.id}`)
-      .then((response) => response.json())
-      .then((json) => {setData(json.data)})
-      .catch((err) => {console.log(err.message)});
-     } else {
-      fetch(`http://localhost:1337/api/appointments?populate=*`)
-      .then((response) => response.json())
-      .then((json) => {setData(json.data)})
-      .catch((err) => {console.log(err.message)});
-     }
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        let url = '';
+        if (!props.user || props.user.title !== 'client') {
+          url = `http://localhost:1337/api/appointments?populate=*&filters[patient][$eq]=${props.user.id}`;
+        } else {
+          url = `http://localhost:1337/api/appointments?populate=*`;
+        }
+        const response = await axios.get(url);
+        setData(response.data.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchAppointments();
   }, [props.user]);
 
   // Map retrieved appointments data to FullCalendar compatible event objects

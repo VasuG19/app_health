@@ -99,11 +99,11 @@ function App() {
           <Route path='*' element={<NotFound />}/>
           <Route path="/appointments" element={<Appointments user={user}/>} />
           <Route path="/calendar" element={<Timetable user={user}/>} />
-          <Route path="/services" element={<ServicesPage user={user} />} />
+          <Route path="/services" element={<ServicesPage user={user} isAdmin={isAdmin} clientData={clientData} />} />
           <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/admin" element={<Admin authenticated={authenticated} user={user} service={services} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
+          <Route path="/admin" element={<Admin authenticated={authenticated} user={user} clientData={clientData} service={services} Admin={isAdmin} handleAuthenticated={setAuthenticated} />} />
           <Route path="/client-details" element={<ClientDetails user={user} />}/>
         </Routes>
       } 

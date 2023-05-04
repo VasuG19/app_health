@@ -16,33 +16,17 @@ import { useEffect } from 'react';
 function ServicesPage(props){
     
     const [services, setServices] = useState({title:'', desc:''})
-    const [isAdmin, setIsAdmin]  = useState(false);
-    const [clientData, setClientData]  = useState(false);
 
     useEffect(() => {
-        if (!props.user || props.user.title !== 'client') {
-          setIsAdmin(false);
-        } else {
-          setIsAdmin(true);
-          setClientData({
-            id: props.user.client.id,
-            institute: props.user.client.institute,
-            address: props.user.client.address
-          });
-        }
-      
         // retrieve the user data from the api
         const getServices = async () => {
-          const response = await axios.get(`http://localhost:1337/api/services?populate=*&filter[client][$eq]=${clientData.id}`);
+          const response = await axios.get(`http://localhost:1337/api/services?populate=*&filter[client][$eq]=${props.clientData.id}`);
           setServices(response.data.data);
         };
       
-        if (clientData.id) {
-          getServices();
-        }
-      }, [props.user, clientData.id]);
-      
+        getServices();
 
+    }, [props.user, props.clientData.id]);
 
     // handle submitting updated data
       const addService = async () => {
@@ -134,7 +118,7 @@ function ServicesPage(props){
 
     return(
         <Container className='content'>
-            { isAdmin &&
+            { props.isAdmin &&
                 <div>
                     <Row sm={true}>
                         {serviceAdmin}
@@ -145,7 +129,7 @@ function ServicesPage(props){
                     </div>
                 </div>
             }
-            {!isAdmin &&
+            {!props.isAdmin &&
                  <Row sm={true}>
                  {service}
              </Row>
