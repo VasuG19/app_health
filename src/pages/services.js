@@ -17,15 +17,32 @@ function ServicesPage(props){
     
     const [services, setServices] = useState({title:'', desc:''})
     const [isAdmin, setIsAdmin]  = useState(false);
-
+    const [clientData, setClientData]  = useState(false);
 
     useEffect(() => {
-        if (!props.user ||props.user.title!== 'client') {
-           setIsAdmin(false)
-          } else {
-            setIsAdmin(true)
-          }
-    },[props.user]);
+        if (!props.user || props.user.title !== 'client') {
+          setIsAdmin(false);
+        } else {
+          setIsAdmin(true);
+          setClientData({
+            id: props.user.client.id,
+            institute: props.user.client.institute,
+            address: props.user.client.address
+          });
+        }
+      
+        // retrieve the user data from the api
+        const getServices = async () => {
+          const response = await axios.get(`http://localhost:1337/api/services?populate=*&filter[client][$eq]=${clientData.id}`);
+          setServices(response.data.data);
+        };
+      
+        if (clientData.id) {
+          getServices();
+        }
+      }, [props.user, clientData.id]);
+      
+
 
     // handle submitting updated data
       const addService = async () => {
@@ -38,11 +55,12 @@ function ServicesPage(props){
             data: {
                 title: title,
                 desc: description,
-                client: props.user.client.id
+                client: props.clientData.id
             },
           });
         }
       }
+
 
     const save = async () => {
         if (window.confirm(`Are you sure you want to add these services?`)) {

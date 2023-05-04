@@ -16,11 +16,10 @@ import EditAdmin from "../componants/editAdmin";
 function Admin (props){
     // States used in the component
     const [patients, setPatients] = useState([]);
-//    const [patientNo, setPatientsNo] = useState([]);
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
     const [isEditing, setIsEditing]  = useState(false);
-    const [clientData, setClientData] = useState({}) 
+    const [clientData, setClientData]  = useState(false);
 
     // Count of upcoming and all appointments
     const numberOfEntries = upcoming.data.length;
@@ -34,6 +33,7 @@ function Admin (props){
     const handleSignOut = () => {
         props.handleAuthenticated(false)
         localStorage.removeItem('token')
+        nav("/login");
     }
 
     // Use Effect to fetch data on mount and when dependencies change
@@ -45,17 +45,17 @@ function Admin (props){
             nav("/");
         } else {
             try {
+            setClientData({
+                id: props.user.client.id,
+                institute: props.user.client.institute,
+                address: props.user.client.address
+            })
+            
             const getUserData = async () => {
                 // Get patient data
                 const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=client');
                 setPatients(response.data);
             }
-/*
-            const getUserCount = async () => {
-                // Get patient count
-                const response = await axios.get('http://localhost:1337/api/users/count');
-                setPatientsNo(response.data);
-            }*/
 
             const getUpcoming = async () => {
                 // Get upcoming appointments
@@ -69,15 +69,10 @@ function Admin (props){
                 setAppointments(response.data);
             }
 
- //           getUserCount()
             getUserData()
             getUpcoming()
             getAppointments()
 
-            setClientData({
-                institute : props.user.client.institute,
-                address : props.user.client.address
-            })
         } catch (error) {
             console.error(error);
           }
@@ -105,8 +100,8 @@ function Admin (props){
           user={props.user}
           username={props.user.username}
           email={props.user.email}
-          institute={props.user.client.institute}
-          address={props.user.client.address}
+          institute={clientData.institute}
+          address={clientData.address}
           onProfileUpdate={""}
           onClose={() => setIsEditing(false)}
         />

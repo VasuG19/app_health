@@ -20,6 +20,7 @@ const Profile = (props) => {
   const handleSignOut = () => {
     props.handleAuthenticated(false)
     localStorage.removeItem('token')
+    nav("/login");
   }
 
   // if the user is the admin, redirect to the admin page

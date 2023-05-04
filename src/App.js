@@ -28,47 +28,53 @@ import ClientDetails from './componants/clientDetails';
 // Main App function - calls all componants and routes for the app 
 function App() {
 
-// declare variables
-const [authenticated, setAuthenticated] = useState(false);
-const [user, setUser] = useState({});
-const [isAdmin, setIsAdmin]  = useState(false);
-const [servicesHome, setServicesHome] = useState([]);
-const [services, setServices] = useState([]);
+  // declare variables
+  const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState({});
+  const [isAdmin, setIsAdmin]  = useState(false);
+  const [servicesHome, setServicesHome] = useState([]);
+  const [services, setServices] = useState([]);
+  const [clientData, setClientData]  = useState(false);
 
+  // validate whether the user is authenticated
+  const userToken = localStorage.getItem('token');
 
-// validate whether the user is authenticated
-const userToken = localStorage.getItem('token');
-
-useEffect(() => {
-  if (!user ||user.title!== 'client') {
-     setIsAdmin(false)
-    } else {
-      setIsAdmin(true)
-    }
+  useEffect(() => {
+    if (!user ||user.title!== 'client') {
+      setIsAdmin(false)
+      } else {
+        setIsAdmin(true)
+        setClientData({
+          id: user.client.id,
+          institute: user.client.institute,
+          address: user.client.address
+      })
+      }
   },[user]);
 
-// retrieve the user data from the api
-useEffect(() => {
-  if (localStorage.getItem('token')) {
-    setAuthenticated(true)
-    const getUserData = async () => {
-      try {
-        const response = await axios.get('http://localhost:1337/api/users/me?populate=*', {
-          headers: { Authorization: `Bearer ${userToken}`,},
-        });
-        setUser(response.data);
-      } catch (error) {
-        console.error(error);
+  // retrieve the user data from the api
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setAuthenticated(true)
+      const getUserData = async () => {
+        try {
+          const response = await axios.get('http://localhost:1337/api/users/me?populate=*', {
+            headers: { Authorization: `Bearer ${userToken}`,},
+          });
+          setUser(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error(error);
+        }
       }
+      getUserData();
     }
-    getUserData();
-  }
-}, [userToken]);
+  }, [userToken]);
 
-// retrieve the user data from the api
+ // retrieve the user data from the api
   useEffect(() => {
     const getServices = async () => {
-      fetch(`http://localhost:1337/api/services`)
+      fetch(`http://localhost:1337/api/services?populate=*`)
         .then((response) => response.json())
         .then((json) => {
           // limit the number of services received to 3
@@ -76,12 +82,12 @@ useEffect(() => {
           setServicesHome(limitedServices);
           setServices(json.data)
         })
-        .catch((err) => console.log(err.message));        
+        .catch((err) => console.log(err.message));   
     }
     getServices();
   }, []);
 
-// return routes to index.js for the different pages of the web-app while calling relevant functions 
+  // return routes to index.js for the different pages of the web-app while calling relevant functions 
   return (
     <div className="App">
        <div className='nav'>
@@ -93,7 +99,7 @@ useEffect(() => {
           <Route path='*' element={<NotFound />}/>
           <Route path="/appointments" element={<Appointments user={user}/>} />
           <Route path="/calendar" element={<Timetable user={user}/>} />
-          <Route path="/services" element={<ServicesPage services={services} user={user} />} />
+          <Route path="/services" element={<ServicesPage user={user} />} />
           <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
@@ -107,7 +113,6 @@ useEffect(() => {
           <Route path="/" element={<HomePage user={user} services={servicesHome} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/services" element={<ServicesPage services={services}  user={user} />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/client-register" element={<ClientRegister/>} />
           <Route path="/client-login" element={<ClientLogin authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
