@@ -44,7 +44,7 @@ function Popup(props) {
     <div>
         <button 
             className='patientButton themeButton' aria-controls="example-collapse-text"
-            aria-expanded={open} onClick={showDetails}>Show Details
+            aria-expanded={open} onClick={showDetails}>Show Services
         </button>
       <Collapse in={open}>
         <MDBContainer className="py-5">

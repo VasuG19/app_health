@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Popup from "../componants/popup";
 import { Container, Row, Card, Col } from "react-bootstrap";
@@ -16,16 +15,8 @@ function Clients (props){
     // States used in the component
     const [clients, setClients] = useState([]);
 
-    // Get token from local storage and initialize navigate hook
-    const userToken = localStorage.getItem('token');
-    const nav = useNavigate()
-
     // Use Effect to fetch data on mount and when dependencies change
     useEffect(() => {
-        // Redirect user to home page if not an admin
-        if (!props.user ||props.user.title!== 'client') {
-            nav("/");
-        } else {
             try {
             const getUserData = async () => {
                 // Get patient data
@@ -37,12 +28,11 @@ function Clients (props){
             } catch (error) {
                 console.error(error.message);
             }        
-        }
-    },[nav, props.user, userToken]);
+    },[props.user]);
 
     // Map through patients and create card for each
     const allPatients = clients && clients.map((value) =>  
-            <Col style={{  overflow: 'scroll' }} sm={true} key={value.id}>
+            <Col  sm={true} key={value.id}>
                 <Card>
                     <Card.Body>
                     <Row>
@@ -78,7 +68,8 @@ function Clients (props){
                     </Col>
                   </Row>
                   <hr/>
-                        <Popup clients={value} />
+                  <div style={{ height: '250px', overflow: 'scroll' }} >
+                        <Popup clients={value} /></div>
                     </Card.Body>
                 </Card>
             </Col>

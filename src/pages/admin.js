@@ -3,6 +3,7 @@ import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditAdmin from "../componants/editAdmin";
+import ServicesPage from "./services";
 
 /**
  * Admin Page 
@@ -78,7 +79,7 @@ function Admin (props){
             <MDBCol sm={true}>
                 <MDBCard>
                     <MDBCardBody>
-                        
+                        <ServicesPage clientData={props.clientData}/>
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>
@@ -162,7 +163,7 @@ function Admin (props){
                     <MDBCardBody>
                         <MDBRow>
                         <MDBCol>
-                            <MDBCardText> List of patients </MDBCardText>
+                            <MDBCardText> List of Services </MDBCardText>
                         </MDBCol>
                         </MDBRow>
                         <hr />

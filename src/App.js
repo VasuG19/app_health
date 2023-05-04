@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Appointments from './pages/appointments';
 import Timetable from './pages/calendar';
-import ServicesPage from './pages/services';
 import Profile from './pages/profile';
 import Register from './componants/register';
 import Login from './componants/login';
@@ -100,7 +99,6 @@ function App() {
           <Route path='*' element={<NotFound />}/>
           <Route path="/appointments" element={<Appointments user={user}/>} />
           <Route path="/calendar" element={<Timetable user={user}/>} />
-          <Route path="/services" element={<ServicesPage user={user} isAdmin={isAdmin} clientData={clientData} />} />
           <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />

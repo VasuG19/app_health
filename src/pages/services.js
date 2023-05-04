@@ -84,20 +84,6 @@ function ServicesPage(props){
             }
         }
     };
-    
-
-    // return all of the services into a grid for the services page
-    const service = data.map((value) => (
-        <div  key={value.id} className="col-lg-4 mb-5">
-            <div className="card h-100 shadow border-0">
-                <div className="card-body p-4">
-                <h4 className="card-title mb-3">{value.attributes.title}</h4>
-                    <p className="card-text mb-0">{value.attributes.desc}</p>
-                </div>
-            </div>
-        </div>
-        )
-    );
 
     const serviceAdmin = data && data.map((value) => (
         <div  key={value.id} className="col-lg-4 mb-5">
@@ -118,7 +104,6 @@ function ServicesPage(props){
 
     return(
         <Container className='content'>
-            { props.isAdmin &&
                 <div>
                     <Row sm={true}>
                         {serviceAdmin}
@@ -128,12 +113,6 @@ function ServicesPage(props){
                         <div className='profileButton'><Button className='themeButton' variant='success' onClick={save} >Save</Button></div>
                     </div>
                 </div>
-            }
-            {!props.isAdmin &&
-                 <Row sm={true}>
-                 {service}
-             </Row>
-            }
         </Container>
     )}
 
