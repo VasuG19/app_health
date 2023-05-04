@@ -167,7 +167,7 @@ function Admin (props){
                         </MDBCol>
                         </MDBRow>
                         <hr />
-                        <MDBRow style={{ height: '50vh', overflow: 'scroll' }}>
+                        <MDBRow style={{ height: '70vh', overflow: 'scroll' }}>
                             {allPatients}
                         </MDBRow>
                     </MDBCardBody>
