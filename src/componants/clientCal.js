@@ -19,22 +19,24 @@ import Dropdown from 'react-bootstrap/Dropdown';
  * @author Mehtab Gill
  */
 
-function clientCal(props) {
+function ClientCal(props) {
   // Define state variables
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEventType, setSelectedEventType] = useState(null);
-  const [formData, setFormData] = useState({title:'', start:'', patient:'', end:''});
+  const [formData, setFormData] = useState({title:'', start:'', patient:'', end:'', client:''});
   const [data, setData] = useState([]);
   const [eventType, setEventType] = useState('');
+  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   // Retrieve appointments from API based on user type
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         let url = '';
-        url = `http://localhost:1337/api/appointments?populate=*&filters[patient][$eq]=${props.user.id}`;
+        url = `http://localhost:1337/api/appointments?populate=*&filters[patient][$eq]=${props.client.id}`;
         const response = await axios.get(url);
         setData(response.data.data);
       } catch (error) {
@@ -50,12 +52,19 @@ function clientCal(props) {
       id: value.id,
       start: new Date(value.attributes.start),
       title: value.attributes.title,
-      patient: props.user.id,
+      patient: props.user.patient.id,
+      client: props.client.id,
       type: value.attributes.type,
       end: new Date(value.attributes.end),
     }));    
     setEvents(appointment);
   }, [data, props.user.id]);
+
+  // handle when the popup is open and visable
+  const showDetails = () => {
+    setVisible(!visible);
+    setOpen(!open);
+  }
 
   // Delete appointment on event click
   const handleEventClick = async (arg) => {
@@ -97,7 +106,8 @@ function clientCal(props) {
             title: title,
             start: start,
             end: end,
-            patient: props.user.id,
+            patient: props.user.patient.id,
+            client: props.client.id,
             type: eventType,
           },
         ]);
@@ -106,7 +116,8 @@ function clientCal(props) {
             title: title,
             start: start,
             end: end,
-            patient: props.user.id,
+            patient: props.user.patient.id,
+            client: props.client.id,
           },
         });
       }
@@ -148,7 +159,6 @@ function clientCal(props) {
 
   // display the calendar
   return (
-      <Container className='content'>
         <div>
           <FullCalendar
             plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
@@ -175,7 +185,6 @@ function clientCal(props) {
             slotMinTime={'09:00'}
             slotMaxTime={'18:00'}
           />
-        </div>
         {selectedDate && (
           <div>      
             <Dropdown className='bookButton'>
@@ -197,8 +206,8 @@ function clientCal(props) {
             )}
           </div> 
         )}
-        </Container>
+        </div>
   );
 }
 
-export default clientCal;
+export default ClientCal;

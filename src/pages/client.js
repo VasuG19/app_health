@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Popup from "../componants/popup";
 import { Container, Row, Card, Col } from "react-bootstrap";
+import clientCal from "../componants/clientCal";
+import ClientCal from "../componants/clientCal";
 
 /**
  * Admin Page 
@@ -30,7 +32,7 @@ function Clients (props){
     },[props.user]);
 
     // Map through patients and create card for each
-    const allPatients = clients && clients.map((value) =>  
+    const allCients = clients && clients.map((value) =>  
             <Col  sm={true} key={value.id}>
                 <Card>
                     <Card.Body>
@@ -68,7 +70,9 @@ function Clients (props){
                   </Row>
                   <hr/>
                   <div style={{ height: '250px', overflow: 'scroll' }} >
-                        <Popup clients={value} /></div>
+                        <Popup clients={value} />
+                  </div>
+                        <ClientCal user={props.user} client={value}/>
                     </Card.Body>
                 </Card>
             </Col>
@@ -86,7 +90,7 @@ function Clients (props){
                     </Row>
                     <hr />
                     <Row>
-                        {allPatients}
+                        {allCients}
                     </Row>
                 </Col>
             </Row>
