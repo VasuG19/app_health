@@ -21,13 +21,11 @@ function ServicesPage(props){
     useEffect(() => {
         // retrieve the user data from the api
         const getServices = async () => {
-          const response = await axios.get(`http://localhost:1337/api/services/?populate=*`);
+          const response = await axios.get(`http://localhost:1337/api/services?populate=*&filters[client][id][$eq]=${props.clientData.id}`);
           setData(response.data.data);
-          console.log(response.data.data)
         };
-
         getServices();
-    }, []);
+    }, [props.clientData.id]);
 
     // handle submitting updated data
     const addService = async () => {

@@ -22,7 +22,6 @@ function Clients (props){
                 // Get patient data
                 const response = await axios.get('http://localhost:1337/api/clients?populate=*');
                 setClients(response.data.data);
-                console.log(response.data.data);
             }
             getUserData()
             } catch (error) {

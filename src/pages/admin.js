@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditAdmin from "../componants/editAdmin";
 import ServicesPage from "./services";
-
 /**
  * Admin Page 
  * 

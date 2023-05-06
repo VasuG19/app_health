@@ -34,7 +34,7 @@ function App() {
   const [isAdmin, setIsAdmin]  = useState(false);
   const [servicesHome, setServicesHome] = useState([]);
   const [services, setServices] = useState([]);
-  const [clientData, setClientData]  = useState(false);
+  const [clientData, setClientData]  = useState([]);
 
   // validate whether the user is authenticated
   const userToken = localStorage.getItem('token');
@@ -48,7 +48,8 @@ function App() {
           id: user.client.id,
           institute: user.client.institute,
           address: user.client.address
-      })
+        })
+        setServices(user.client)
       }
   },[user]);
 
@@ -80,7 +81,6 @@ function App() {
           // limit the number of services received to 3
           const limitedServices = json.data.slice(0, 3);
           setServicesHome(limitedServices);
-          setServices(json.data)
         })
         .catch((err) => console.log(err.message));   
     }
