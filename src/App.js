@@ -35,6 +35,7 @@ function App() {
   const [servicesHome, setServicesHome] = useState([]);
   const [services, setServices] = useState([]);
   const [clientData, setClientData]  = useState([]);
+  const [patientData, setPatientData]  = useState([]);
 
   // validate whether the user is authenticated
   const userToken = localStorage.getItem('token');
@@ -42,6 +43,9 @@ function App() {
   useEffect(() => {
     if (!user ||user.title!== 'client') {
       setIsAdmin(false)
+      setPatientData({
+          id: user.id,
+        })
       } else {
         setIsAdmin(true)
         setClientData({
@@ -49,6 +53,7 @@ function App() {
           institute: user.client.institute,
           address: user.client.address
         })
+        
         setServices(user.client)
       }
   },[user]);
@@ -97,9 +102,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage user={user} services={servicesHome} />} />
           <Route path='*' element={<NotFound />}/>
-          <Route path="/appointments" element={<Appointments user={user}/>} />
-          <Route path="/calendar" element={<Timetable user={user} client={clientData}/>} />
-          <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/appointments" element={<Appointments user={user} patient={patientData} client={clientData}/>} />
+          <Route path="/calendar" element={<Timetable user={user} patient={patientData} client={clientData}/>} />
+          <Route path="/profile" element={<Profile authenticated={authenticated} patient={patientData} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/client-details" element={<ClientDetails user={user} />}/>

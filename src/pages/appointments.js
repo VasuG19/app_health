@@ -32,18 +32,18 @@ useEffect(() => {
 
   if (!props.user || props.user.title !== 'client') {
     Promise.all([
-      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$lt]=${currentDate}`),
-      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient]$eq=${props.user.id}&filters[start][$gte]=${today}`)
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient][id]$eq=${props.user.patient.id}&filters[start][$lt]=${currentDate}`),
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient][id]$eq=${props.user.patient.id}&filters[start][$gte]=${today}`)
     ])
       .then(([previousResponse, upcomingResponse]) => {
         setPrevious(previousResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
         setUpcoming(upcomingResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
       })
       .catch(error => console.log(error.message));
-  } else if (props.user || props.user.title !== 'Admin') {
+  } else {
     Promise.all([
-      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$lt]=${currentDate}`),
-      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`)
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[client][id]$eq=${props.client.id}&filters[start][$lt]=${currentDate}`),
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[client][id]$eq=${props.client.id}&filters[start][$gte]=${today}`)
     ])
       .then(([previousResponse, upcomingResponse]) => {
         setPrevious(previousResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));
@@ -51,7 +51,7 @@ useEffect(() => {
       })
       .catch(error => console.log(error.message));
   }
-}, [props.user, props.user.id]);
+}, [props.user, props.user.id, props.client]);
 
 
   // handle for when the view appointment button is clicked and displays popup with relevant 
