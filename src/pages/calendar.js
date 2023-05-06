@@ -35,9 +35,9 @@ function Timetable(props) {
       try {
         let url = '';
         if (!props.user || props.user.title !== 'client') {
-          url = `http://localhost:1337/api/appointments?populate=*&filters[patient][$eq]=${props.user.id}`;
+          url = `http://localhost:1337/api/appointments?populate=*&filters[patient][id][$eq]=${props.user.patient.id}`;
         } else {
-          url = `http://localhost:1337/api/appointments?populate=*`;
+          url = `http://localhost:1337/api/appointments?populate=*&filters[client][id][$eq]=${props.client.id}`;
         }
         const response = await axios.get(url);
         setData(response.data.data);
@@ -46,7 +46,7 @@ function Timetable(props) {
       }
     };
     fetchAppointments();
-  }, [props.user]);
+  }, [props.user, props.client.id]);
 
   // Map retrieved appointments data to FullCalendar compatible event objects
   useEffect(() => {

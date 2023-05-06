@@ -98,7 +98,7 @@ function App() {
           <Route path="/" element={<HomePage user={user} services={servicesHome} />} />
           <Route path='*' element={<NotFound />}/>
           <Route path="/appointments" element={<Appointments user={user}/>} />
-          <Route path="/calendar" element={<Timetable user={user}/>} />
+          <Route path="/calendar" element={<Timetable user={user} client={clientData}/>} />
           <Route path="/profile" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />

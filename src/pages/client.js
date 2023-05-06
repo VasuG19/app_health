@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Popup from "../componants/popup";
 import { Container, Row, Card, Col } from "react-bootstrap";
-import clientCal from "../componants/clientCal";
 import ClientCal from "../componants/clientCal";
 
 /**

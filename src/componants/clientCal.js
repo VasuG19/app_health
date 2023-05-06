@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import axios from 'axios';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -28,15 +28,13 @@ function ClientCal(props) {
   const [formData, setFormData] = useState({title:'', start:'', patient:'', end:'', client:''});
   const [data, setData] = useState([]);
   const [eventType, setEventType] = useState('');
-  const [open, setOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   // Retrieve appointments from API based on user type
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         let url = '';
-        url = `http://localhost:1337/api/appointments?populate=*&filters[patient][$eq]=${props.client.id}`;
+        url = `http://localhost:1337/api/appointments?populate=*&filters[client][id][$eq]=${props.client.id}`;
         const response = await axios.get(url);
         setData(response.data.data);
       } catch (error) {
@@ -44,7 +42,7 @@ function ClientCal(props) {
       }
     };
     fetchAppointments();
-  }, [props.user]);
+  }, [props.client.id]);
 
   // Map retrieved appointments data to FullCalendar compatible event objects
   useEffect(() => {
@@ -58,13 +56,7 @@ function ClientCal(props) {
       end: new Date(value.attributes.end),
     }));    
     setEvents(appointment);
-  }, [data, props.user.id]);
-
-  // handle when the popup is open and visable
-  const showDetails = () => {
-    setVisible(!visible);
-    setOpen(!open);
-  }
+  }, [data, props.user.id, props.client.id, props.user.patient.id]);
 
   // Delete appointment on event click
   const handleEventClick = async (arg) => {
