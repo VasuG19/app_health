@@ -144,7 +144,7 @@ useEffect(() => {
   }, []);
 
   // map upcoming bookings to the upcoming carousel
-  const upcomingBooking = chunks.map((chunk, i) => (
+  const upcomingBooking = chunks.length > 0 ? chunks.map((chunk, i) => (
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
@@ -159,10 +159,14 @@ useEffect(() => {
         ))}
       </div>
     </Carousel.Item>
-  ));
-  
+  )) : (
+    <div className="text-center">
+      <p>No upcoming appointments.</p>
+    </div>
+  );
+
   // map previous bookings to the previous carousel
-  const previousBooking = pchunks.map((chunk, i) => (
+  const previousBooking = pchunks.length > 0 ? pchunks.map((chunk, i) => (
     <Carousel.Item key={i}>
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
@@ -177,7 +181,11 @@ useEffect(() => {
         ))}
       </div>
     </Carousel.Item>
-  ));
+  )) : (
+    <div className="text-center">
+      <p>No previous appointments.</p>
+    </div>
+  );
 
   return (
       <Container className='content'>
