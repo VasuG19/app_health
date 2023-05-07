@@ -51,7 +51,7 @@ useEffect(() => {
       })
       .catch(error => console.log(error.message));
   }
-}, [props.user, props.user.id, props.client]);
+}, [props.user, props.user.id, props.client, props.patient.id]);
 
 
   // handle for when the view appointment button is clicked and displays popup with relevant 

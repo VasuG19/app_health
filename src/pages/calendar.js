@@ -29,7 +29,7 @@ function Timetable(props) {
       try {
         let url = '';
         if (!props.user || props.user.title !== 'client') {
-          url = `http://localhost:1337/api/appointments?populate=*&filters[patient][id][$eq]=${props.user.patient.id}`;
+          url = `http://localhost:1337/api/appointments?populate=*&filters[patient][id][$eq]=${props.patient.id}`;
         } else {
           url = `http://localhost:1337/api/appointments?populate=*&filters[client][id][$eq]=${props.client.id}`;
         }
@@ -40,7 +40,7 @@ function Timetable(props) {
       }
     };
     fetchAppointments();
-  }, [props.user, props.client.id]);
+  }, [props.patient.id, props.user, props.client.id]);
 
   // Map retrieved appointments data to FullCalendar compatible event objects
   useEffect(() => {
@@ -52,7 +52,7 @@ function Timetable(props) {
       end: new Date(value.attributes.end),
     }));    
     setEvents(appointment);
-  }, [data]);
+  }, [data,]);
 
   // Delete appointment on event click
   const handleEventClick = async (arg) => {
@@ -79,7 +79,7 @@ function Timetable(props) {
   // display the calendar
   return (
       <Container className='content'>
-        <div>
+        <div className='calendar'>
           <FullCalendar
             plugins ={[dayGridPlugin, interactionPlugin, bootstrap5Plugin, timeGridPlugin]}
             initialView ='timeGridWeek'

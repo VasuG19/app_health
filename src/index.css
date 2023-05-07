@@ -56,6 +56,9 @@ html {
   background-color: #e2e1dc;
 }
 
+.app{
+ min-height: 100vh;
+}
 .navTheme{
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -69,9 +72,48 @@ html {
   color: white;
 }
 
+/* Sytem themes */
+
+/* Home  */
+
+.homeheader{
+  padding: 20px;
+}
+                                                              
 .serviceCard{
   background-color: #373c4f;
 }
+
+.jumbotron{
+  height: 400px;
+  width: 100%;
+  background-color: #f0eded;
+}
+
+.features{
+  margin-top: 100px;
+}
+
+.feature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1.5rem;
+  background-color:#b38add;
+}
+
+.quote{
+  margin-top: 100px;
+  background-color: #f0eded;
+  padding: 30px;
+}
+
+
+/* Home  */
+
+/* Appointment page  */
 
 .carousel-control-prev svg,
 .carousel-control-next svg {
@@ -93,9 +135,16 @@ html {
   color: #b38add;
 }
 
-.calender{
-  padding: 20px;
+.appointments{
+  padding: 30px 0px 30px 0px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
+
+
+/* Appointment page  */
+
+/* Client Page  */
 
 .bookButton{
   text-align: center;
@@ -106,9 +155,9 @@ html {
   text-align: center;
 }
 
-.profileButton{
-  padding: 5px;
-}
+/* Client Page  */
+
+/* Login Form  */
 
 .login{
   display: flex;
@@ -136,17 +185,14 @@ html {
   padding-bottom: 20px;
 }
 
-.homeheader{
-  padding: 20px;
+.patientButton{
+  float: right;
 }
 
-.appointments{
-  padding: 30px 0px 30px 0px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-}
+/* Login Form  */
 
-/* Footer style start */
+
+/* Footer  */
 
 .footer-container {
   width: 100%;
@@ -218,43 +264,19 @@ html {
     flex-direction: column;
   }
 }
+/* Footer  */
+
+/* Profile  */
+
+.profileButton{
+  padding: 5px;
+}
 
 .profile{
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
-.app{
- min-height: 100vh;
-}
+/* Profile  */
 
-.patientButton{
-  float: right;
-}
 
-.jumbotron{
-  height: 400px;
-  width: 100%;
-  background-color: #f0eded;
-}
-/*background-color: rgb(33, 37, 41)*/
-
-.features{
-  margin-top: 100px;
-}
-
-.feature {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 3rem;
-  width: 3rem;
-  font-size: 1.5rem;
-  background-color:#b38add;
-}
-
-.quote{
-  margin-top: 100px;
-  background-color: #f0eded;
-  padding: 30px;
-}
