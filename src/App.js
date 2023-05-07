@@ -16,6 +16,7 @@ import ClientRegister from './componants/clientRegister';
 import ClientLogin from './componants/clientLogin';
 import ClientDetails from './componants/clientDetails';
 import Clients from './pages/client';
+import ClientError from './componants/clientError';
 
 /**
  * App Page 
@@ -109,6 +110,7 @@ function App() {
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/client-details" element={<ClientDetails user={user} />}/>
           <Route path="/clients" element={<Clients user={user} />}/>
+          <Route path='clientError' element={<ClientError/>}/>
           <Route path="/admin" element={<Admin authenticated={authenticated} 
                                                user={user} 
                                                clientData={clientData} 

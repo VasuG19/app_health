@@ -58,29 +58,6 @@ function ClientCal(props) {
     setEvents(appointment);
   }, [data, props.user.id, props.client.id, props.user.patient.id]);
 
-  // Delete appointment on event click
-  const handleEventClick = async (arg) => {
-    if (window.confirm(`Are you sure you want to delete the booking '${arg.event.title}'?`)) {
-      try {
-        // Delete the appointment using the API
-        const response = await fetch(`http://localhost:1337/api/appointments/${arg.event.id}`, {
-          method: 'DELETE',
-        });
-        if (response.ok) {
-          setEvents(events.filter((event) => event.id !== arg.event.id));
-          alert('Booking deleted successfully!');
-        } else {
-          alert('There was an error deleting the booking.');
-        }
-      } catch (error) {
-        console.error(error);
-        alert('There was an error deleting the booking.');
-      }
-      window.location.reload(false);
-    }
-  };
-  
-
   // Handle date selection on FullCalendar
   const handleDateSelect = (arg) => {
     const today = new Date();
@@ -161,7 +138,6 @@ function ClientCal(props) {
             weekends ={false}
             events ={events}
             dateClick ={handleDateSelect}
-            eventClick ={handleEventClick}
             themeSystem ='bootstrap5'
             allDaySlot = {false}
             nowIndicator = {true}

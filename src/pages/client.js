@@ -3,6 +3,7 @@ import axios from "axios";
 import Popup from "../componants/popup";
 import { Container, Row, Card, Col } from "react-bootstrap";
 import ClientCal from "../componants/clientCal";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Admin Page 
@@ -13,21 +14,31 @@ import ClientCal from "../componants/clientCal";
  */
 
 function Clients (props){
-    // States used in the component
-    const [clients, setClients] = useState([]);
+  // States used in the component
+  const [clients, setClients] = useState([]);
+
+  // if the user is the admin, redirect to the admin page
+  const nav = useNavigate();
+  useEffect(() => {
+    if (!props.user ||props.user.title!== 'client') {
+        nav("/profile");
+      } else {
+        nav("/clientError");
+      }
+  },[nav, props.user]);
 
     // Use Effect to fetch data on mount and when dependencies change
-    useEffect(() => {
-            try {
-            const getUserData = async () => {
-                // Get patient data
-                const response = await axios.get('http://localhost:1337/api/clients?populate=*');
-                setClients(response.data.data);
-            }
-            getUserData()
-            } catch (error) {
-                console.error(error.message);
-            }        
+  useEffect(() => {
+          try {
+          const getUserData = async () => {
+              // Get patient data
+              const response = await axios.get('http://localhost:1337/api/clients?populate=*');
+              setClients(response.data.data);
+          }
+          getUserData()
+          } catch (error) {
+              console.error(error.message);
+          }        
     },[props.user]);
 
     // Map through patients and create card for each
@@ -84,7 +95,7 @@ function Clients (props){
                 <Col lg="true">
                     <Row>
                         <Col>
-                            <Card.Text> Clients </Card.Text>
+                          <Card.Text> Clients </Card.Text>
                         </Col>
                     </Row>
                     <hr />
