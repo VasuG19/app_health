@@ -191,7 +191,9 @@ useEffect(() => {
   return (
       <Container className='content'>
 
+      <div>
         <Timetable user={props.user} patient={props.patient} client={props.client}/>
+      </div>
 
       <div >
         <h4 className='homeheader'>Upcoming appointments</h4>

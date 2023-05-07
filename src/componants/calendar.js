@@ -86,7 +86,6 @@ function Timetable(props) {
             weekends ={false}
             events ={events}
             eventClick ={handleEventClick}
-            themeSystem ='bootstrap5'
             allDaySlot = {false}
             nowIndicator = {true}
             headerToolbar = {{
@@ -94,12 +93,17 @@ function Timetable(props) {
               center: 'title',
               right: 'timeGridWeek,timeGridDay'
             }}
+            eventDisplay ={'auto'}
+            eventColor= {'#b38add'}
+            eventBorderColor ={'black'}
+            eventTextColor ={'black'}
             businessHours={{ 
               startTime: '08:00', // a start time (10am in this example)
               endTime: '18:00', // an end time (6pm in this example)
               daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
             slotMinTime={'09:00'}
             slotMaxTime={'18:00'}
+            height={'550px'}
           />
   );
 }
