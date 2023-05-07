@@ -155,6 +155,8 @@ function ClientCal(props) {
             eventColor= {'#2c3e50'}
             eventBorderColor ={'black'}
             eventTextColor ={'white'}
+            themeSystem='bootstrap5'
+
           />
         {selectedDate && (
           <div>      

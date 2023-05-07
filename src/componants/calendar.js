@@ -91,7 +91,7 @@ function Timetable(props) {
             headerToolbar = {{
               left: 'prev,next',
               center: 'title',
-              right: 'timeGridWeek,timeGridDay'
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
             businessHours={{ 
               startTime: '08:00', // a start time (10am in this example)
@@ -104,6 +104,8 @@ function Timetable(props) {
             eventColor= {'#2c3e50'}
             eventBorderColor ={'black'}
             eventTextColor ={'white'}
+            navLinks={true}
+            themeSystem='bootstrap5'
           />
   );
 }
