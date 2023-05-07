@@ -3,6 +3,7 @@ import { Button, Card, Carousel, Container, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Timetable from './calendar';
 
 /**
  * Appointment Page 
@@ -189,6 +190,8 @@ useEffect(() => {
 
   return (
       <Container className='content'>
+
+        <Timetable user={props.user} patient={props.patient} client={props.client}/>
 
       <div >
         <h4 className='homeheader'>Upcoming appointments</h4>
