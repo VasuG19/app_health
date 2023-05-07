@@ -4,11 +4,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import axios from 'axios';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Dropdown from 'react-bootstrap/Dropdown';
 
 /**
  * Calendar Page 
@@ -22,12 +21,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 function Timetable(props) {
   // Define state variables
   const [events, setEvents] = useState([]);
-  const [isBooking, setIsBooking] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedEventType, setSelectedEventType] = useState(null);
-  const [formData, setFormData] = useState({title:'', start:'', patient:'', end:''});
   const [data, setData] = useState([]);
-  const [eventType, setEventType] = useState('');
 
   // Retrieve appointments from API based on user type
   useEffect(() => {
@@ -54,12 +48,11 @@ function Timetable(props) {
       id: value.id,
       start: new Date(value.attributes.start),
       title: value.attributes.title,
-      patient: props.user.id,
       type: value.attributes.type,
       end: new Date(value.attributes.end),
     }));    
     setEvents(appointment);
-  }, [data, props.user.id]);
+  }, [data]);
 
   // Delete appointment on event click
   const handleEventClick = async (arg) => {
@@ -82,73 +75,6 @@ function Timetable(props) {
       window.location.reload(false);
     }
   };
-  
-
-  // Handle date selection on FullCalendar
-  const handleDateSelect = (arg) => {
-    const today = new Date();
-    const selected = new Date(arg.date);
-    if (selected >= today) {
-      setSelectedDate(selected);
-      const title = prompt('Enter a title for the booking:');
-      console.log(title);
-      if (title) {
-        const start = selected.toISOString();
-        const end = new Date(selected.getTime() + 30 * 60000).toISOString();
-        setEvents([
-          ...events,
-          {
-            title: title,
-            start: start,
-            end: end,
-            patient: props.user.id,
-            type: eventType,
-          },
-        ]);
-        setFormData({
-          data: {
-            title: title,
-            start: start,
-            end: end,
-            patient: props.user.id,
-          },
-        });
-      }
-    } else {
-      alert("you cannot book appointments for today or previous days")
-    }
-  }
-
-  // set the type of appointment that the user is booking
-  const handleEventTypeSelect = (event) => {
-    setEventType(event.target.innerText);
-    setSelectedEventType(true);
-  };
-
-
-  // submit the appointment with relevant data to the database 
-  const handleSubmit = async (e) => {
-    setFormData({data: {type: eventType,},});
-    e.preventDefault();
-    if (eventType === "") {
-      alert("you must select and appointment type")
-    }else{
-    setIsBooking(true);
-    try {
-      const config = {headers: {'Content-Type': 'application/json'}};
-      const body = JSON.stringify(formData)
-      const response = await axios.post('http://localhost:1337/api/appointments', body, config);
-      console.log(response)
-        alert('Your booking has been confirmed!');
-    } catch (error) {
-      console.error(error);
-      alert('There was an error reserving your appointment, this time slot may already be taken, please try again or select another time');
-    } finally {
-      setIsBooking(false);
-      window.location.reload(false);
-    }
-   }
-  };
 
   // display the calendar
   return (
@@ -162,7 +88,6 @@ function Timetable(props) {
             dayMaxEvents ={true}
             weekends ={false}
             events ={events}
-            dateClick ={handleDateSelect}
             eventClick ={handleEventClick}
             themeSystem ='bootstrap5'
             allDaySlot = {false}
@@ -180,27 +105,6 @@ function Timetable(props) {
             slotMaxTime={'18:00'}
           />
         </div>
-        {selectedDate && (
-          <div>      
-            <Dropdown className='bookButton'>
-              <Dropdown.Toggle variant="primary" id="dropdown-button-dark">
-                Appointment type
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={handleEventTypeSelect}>clinic</Dropdown.Item>
-                <Dropdown.Item onClick={handleEventTypeSelect}>phone</Dropdown.Item>
-                <Dropdown.Item onClick={handleEventTypeSelect}>video</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            {selectedEventType &&(
-              <Form onSubmit={handleSubmit} className='bookButton'>
-                <Button type='submit' disabled={isBooking}>
-                  {isBooking ? 'Booking...' : 'Book Appointment'}
-                </Button>
-              </Form>
-            )}
-          </div> 
-        )}
         </Container>
   );
 }

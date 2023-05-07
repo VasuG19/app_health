@@ -32,8 +32,8 @@ useEffect(() => {
 
   if (!props.user || props.user.title !== 'client') {
     Promise.all([
-      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient][id]$eq=${props.user.patient.id}&filters[start][$lt]=${currentDate}`),
-      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient][id]$eq=${props.user.patient.id}&filters[start][$gte]=${today}`)
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient][id]$eq=${props.patient.id}&filters[start][$lt]=${currentDate}`),
+      axios.get(`http://localhost:1337/api/appointments?populate=*&filters[patient][id]$eq=${props.patient.id}&filters[start][$gte]=${today}`)
     ])
       .then(([previousResponse, upcomingResponse]) => {
         setPrevious(previousResponse.data.data.slice(0, 9).sort((a, b) => new Date(a.attributes.start) - new Date(b.attributes.start)));

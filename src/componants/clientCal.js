@@ -20,6 +20,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
  */
 
 function ClientCal(props) {
+
   // Define state variables
   const [events, setEvents] = useState([]);
   const [isBooking, setIsBooking] = useState(false);
