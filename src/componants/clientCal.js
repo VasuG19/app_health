@@ -49,7 +49,6 @@ function ClientCal(props) {
     const appointment = data.map((value) => ({
       id: value.id,
       start: new Date(value.attributes.start),
-      title: value.attributes.title,
       patient: props.user.patient.id,
       client: props.client.id,
       type: value.attributes.type,

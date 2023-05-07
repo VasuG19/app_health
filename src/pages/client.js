@@ -21,7 +21,7 @@ function Clients (props){
   const nav = useNavigate();
   useEffect(() => {
     if (!props.user ||props.user.title!== 'client') {
-        nav("/profile");
+        nav("/clients");
       } else {
         nav("/clientError");
       }
