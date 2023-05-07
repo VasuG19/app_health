@@ -93,10 +93,6 @@ function Timetable(props) {
               center: 'title',
               right: 'timeGridWeek,timeGridDay'
             }}
-            eventDisplay ={'auto'}
-            eventColor= {'#b38add'}
-            eventBorderColor ={'black'}
-            eventTextColor ={'black'}
             businessHours={{ 
               startTime: '08:00', // a start time (10am in this example)
               endTime: '18:00', // an end time (6pm in this example)
@@ -104,6 +100,10 @@ function Timetable(props) {
             slotMinTime={'09:00'}
             slotMaxTime={'18:00'}
             height={'550px'}
+            eventDisplay ={'auto'}
+            eventColor= {'#2c3e50'}
+            eventBorderColor ={'black'}
+            eventTextColor ={'white'}
           />
   );
 }

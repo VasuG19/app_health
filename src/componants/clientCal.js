@@ -138,7 +138,6 @@ function ClientCal(props) {
             weekends ={false}
             events ={events}
             dateClick ={handleDateSelect}
-            themeSystem ='bootstrap5'
             allDaySlot = {false}
             nowIndicator = {true}
             headerToolbar = {{
@@ -152,6 +151,10 @@ function ClientCal(props) {
               daysOfWeek: [ 1, 2, 3, 4, 5 ] }} // Monday - Friday
             slotMinTime={'09:00'}
             slotMaxTime={'18:00'}
+            eventDisplay ={'auto'}
+            eventColor= {'#2c3e50'}
+            eventBorderColor ={'black'}
+            eventTextColor ={'white'}
           />
         {selectedDate && (
           <div>      
