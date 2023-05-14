@@ -189,7 +189,7 @@ useEffect(() => {
   );
 
   return (
-      <Container className='content'>
+    <Container className='content'>
 
       <div>
         <Timetable user={props.user} patient={props.patient} client={props.client}/>
@@ -207,14 +207,14 @@ useEffect(() => {
         </Carousel>
       </div>
 
-      <div >
+      <div>
         <h4 className='homeheader'>Previous appointments</h4>
-        <Carousel className='appointments'
-          prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
-          nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
-          indicators={false}
-          itemsperslide={itemsperslide}
-        >
+          <Carousel className='appointments'
+            prevIcon={<FontAwesomeIcon icon={faChevronLeft} />}
+            nextIcon={<FontAwesomeIcon icon={faChevronRight} />}
+            indicators={false}
+            itemsperslide={itemsperslide}
+          >
           {previousBooking}
         </Carousel>
       </div>
@@ -231,7 +231,7 @@ useEffect(() => {
           <p><strong>Start:</strong>    {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
           <p><strong>End:</strong>      {selectedAppointment && new Date(selectedAppointment.attributes.end).toLocaleString()}</p>
           <p><strong>Type:</strong>     {selectedAppointment && selectedAppointment.attributes.type}</p>
-          <p><strong>Notes:</strong>     {selectedAppointment && selectedAppointment.attributes.notes}</p>
+          <p><strong>Notes:</strong>    {selectedAppointment && selectedAppointment.attributes.notes}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="success" onClick={save}>Save</Button>
@@ -239,7 +239,7 @@ useEffect(() => {
           <Button variant="danger" onClick={handleEventClick}>Cancel Appointment</Button>
         </Modal.Footer>
       </Modal>
-      </Container>
+    </Container>
   );
 }
 

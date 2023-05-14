@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Row, Card, Col, Button, Modal } from "react-bootstrap";
+import { Container, Row, Card, Col, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ClientCal from "../componants/clientCal";
 
@@ -90,9 +90,10 @@ function Clients(props) {
                 </Card.Text>
               </Col>
             </Row>
-            <hr />
-            <Button onClick={() => handleClientClick(value)}>Open Calendar</Button>
           </Card.Body>
+            <Card.Footer className="clientName">
+              <button className="themeButton" onClick={() => handleClientClick(value)}>View Appointments</button>
+            </Card.Footer>
         </Card>
       </Col>
     ));
@@ -116,14 +117,11 @@ function Clients(props) {
 
             <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
-              <Modal.Title>Appointment Details</Modal.Title>
+              <Modal.Title>Client Calendar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <ClientCal user={props.user} client={selectedClient} />
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="success">Save</Button>
-            </Modal.Footer>
           </Modal>
 
         </Container>
