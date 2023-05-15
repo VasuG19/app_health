@@ -14,7 +14,6 @@ import ServicesPage from "../componants/services";
 
 function Admin (props){
     // States used in the component
-    const [patients, setPatients] = useState([]);
     const [upcoming, setUpcoming] = useState({ data: [] });
     const [appointments, setAppointments] = useState({ data: [] });
     const [isEditing, setIsEditing]  = useState(false);
@@ -44,12 +43,6 @@ function Admin (props){
         } else {
             try {
 
-            const getUserData = async () => {
-                // Get patient data
-                const response = await axios.get('http://localhost:1337/api/users?filters[title][$ne]=client');
-                setPatients(response.data);
-            }
-
             const getUpcoming = async () => {
                 // Get upcoming appointments
                 const response = await axios.get(`http://localhost:1337/api/appointments?populate=*&filters[start][$gte]=${today}`);
@@ -62,7 +55,6 @@ function Admin (props){
                 setAppointments(response.data);
             }
 
-            getUserData()
             getUpcoming()
             getAppointments()
 
@@ -71,19 +63,6 @@ function Admin (props){
           }
         }
     },[nav, props.user, userToken]);
-
-    // Map through patients and create card for each
-    const allPatients = patients && patients.map((value) =>  
-        <div key={value.id}>
-            <MDBCol sm={true}>
-                <MDBCard>
-                    <MDBCardBody>
-                        <ServicesPage clientData={props.clientData}/>
-                    </MDBCardBody>
-                </MDBCard>
-            </MDBCol>
-        </div>
-    );
 
     // Render admin dashboard
     return(
@@ -167,7 +146,13 @@ function Admin (props){
                         </MDBRow>
                         <hr />
                         <MDBRow style={{ height: '70vh', overflow: 'scroll' }}>
-                            {allPatients}
+                            <MDBCol sm={true}>
+                                <MDBCard>
+                                    <MDBCardBody>
+                                        <ServicesPage clientData={props.clientData}/>
+                                    </MDBCardBody>
+                                </MDBCard>
+                            </MDBCol>
                         </MDBRow>
                     </MDBCardBody>
                     </MDBCard>

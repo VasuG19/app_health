@@ -25,7 +25,7 @@ function ServicesPage(props){
           setData(response.data.data);
         };
         getServices();
-    }, [props.clientData.id]);
+    }, [props.clientData.id, data]);
 
     // handle submitting updated data
     const addService = async () => {
