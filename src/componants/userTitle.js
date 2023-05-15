@@ -19,7 +19,7 @@ function UserTitle(props){
     const nav = useNavigate();
 
     // handle submitting updated data
-      const userData = async () => {
+    const userData = async () => {
         setUser({
             data: {
                 username: props.user.username, 
@@ -30,12 +30,10 @@ function UserTitle(props){
     }
 
     const handleSubmit = async () => {
-    const code = localStorage.getItem('token');
         try {
             const config = {
                 headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${code}`
                 }
             };
             const userData = JSON.stringify(user)
