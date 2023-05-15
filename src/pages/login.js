@@ -54,6 +54,10 @@ const Login = (props) => {
               <p>
                  <Link to="/client-register">Here</Link> to register as a client
               </p>
+              or
+              <p>
+                 <Link to="/forgot">Here</Link> to register reset your password
+              </p>
             </Card>
           </div>
         </div>

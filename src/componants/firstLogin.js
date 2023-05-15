@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
  * @author Mehtab Gill
  */
 
-const ClientLogin = (props) => {
+const FirstLogin = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const nav = useNavigate();
@@ -40,7 +40,7 @@ const ClientLogin = (props) => {
         <div className='login'>
           <div className="text-center">
             <Card className='formcard'>
-            <h1><strong>Client Login</strong></h1>
+            <h1><strong>Login</strong></h1>
               <Form className="loginForm" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Control placeholder="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -57,4 +57,4 @@ const ClientLogin = (props) => {
     );
   };
 
-export default ClientLogin;
+export default FirstLogin;

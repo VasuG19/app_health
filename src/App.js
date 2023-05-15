@@ -5,17 +5,19 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Appointments from './pages/appointments';
 import Profile from './pages/profile';
-import Register from './pages/register';
+import Register from './componants/register';
 import Login from './pages/login';
 import axios from 'axios';
 import Footer from './componants/footer';
 import Admin from './pages/admin';
 import NotFound from './componants/notFound';
 import ClientRegister from './componants/clientRegister';
-import ClientLogin from './componants/clientLogin';
+import FirstLogin from './componants/firstLogin';
 import ClientDetails from './componants/clientDetails';
 import Clients from './pages/client';
 import ClientError from './componants/clientError';
+import ForgotPass from './componants/forgotPass';
+import Reset from './componants/reset';
 
 /**
  * App Page 
@@ -128,9 +130,10 @@ function App() {
           <Route path="/" element={<HomePage user={user} services={servicesHome} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/login" element={<Login authenticated={authenticated} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/reset" element={<Reset/>} />
+          <Route path="/forgot" element={<ForgotPass/>} />
           <Route path="/client-register" element={<ClientRegister/>} />
-          <Route path="/client-login" element={<ClientLogin authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
+          <Route path="/first-login" element={<FirstLogin authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
         </Routes>
       }
       <Footer/>

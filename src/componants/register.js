@@ -37,7 +37,7 @@ const Register = () => {
         console.log("body",body)
         const result = await axios.post('http://localhost:1337/api/auth/local/register', body, config);
         console.log(result.data)
-        nav("/client-login"); // redirect user to login page once registered
+        nav("/first-login"); // redirect user to login page once registered
       } catch (error) {
       console.error(error);
       alert("there was an error registering your account, please try again")
