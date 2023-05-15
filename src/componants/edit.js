@@ -35,10 +35,6 @@ const EditProfile = (props) => {
    // handle submitting updated data
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (password !== passwordConfirmation) {
-        console.log('Passwords do not match');
-      } else {
         try {
             const config = {
                 headers: {
@@ -46,27 +42,48 @@ const EditProfile = (props) => {
                 'Authorization': `Bearer ${code}`
                 }
             };
-            const body = JSON.stringify({
-                username, email, blood_type, first_name, last_name, prescriptions, allergies, height , 
-                weight, phone, birthday, address, diet, current_conditions, smoke, pregnant 
+            const user = JSON.stringify({
+                username, email, first_name, last_name, phone, birthday, address,
             });
-
-            const passwordReset = JSON.stringify({ password, passwordConfirmation, currentPassword })
-
-            const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
-            const reset = await axios.post(`http://localhost:1337/api/auth/change-password`, passwordReset, config);
-
+            const patient = JSON.stringify({
+               data:{ blood_type, prescriptions, allergies, height, 
+                weight, diet, current_conditions, smoke, pregnant }
+            });
+            const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, user, config);
+            const rest = await axios.put(`http://localhost:1337/api/patients/${props.id}`, patient, config);
             console.log(result.data)
-            console.log(reset.data)
-
+            console.log(rest.data)
         } catch (error) {
             console.error(error);
+        }
+    props.onClose();
+    window.location.reload(false);
+  }
+
+  const changePass = async (e) => {
+    e.preventDefault();
+    if (password !== passwordConfirmation) {
+                console.log('Passwords do not match');
+            } else {
+        try {
+            const config = {
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${code}`
+                }
+            };
+            const passwordReset = JSON.stringify({ password, passwordConfirmation, currentPassword })
+            const reset = await axios.post(`http://localhost:1337/api/auth/change-password`, passwordReset, config);
+            console.log(reset)
+        } catch (error) {
+            console.error(error);
+            alert("there was an error changing your password")
         }
     }
     props.onClose();
     window.location.reload(false);
   }
-//window.location.reload(false);
+
   return (
     <Container className='content'>
       <h2>Edit Profile</h2>
@@ -196,6 +213,7 @@ const EditProfile = (props) => {
 
         <div className="d-flex justify-content-center mb-2">
             <div className='profileButton'><button className='themeButton' type="submit" >Save</button></div>
+            <div className='profileButton'><button className='themeButton' type="button" onClick={changePass} >change password</button></div>
             <div className='profileButton'><button className='themeButton' type="button"  onClick={props.onClose}>Cancel</button></div>
         </div>
       </Form>

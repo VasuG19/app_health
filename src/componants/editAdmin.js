@@ -72,7 +72,6 @@ const EditAdmin = (props) => {
     window.location.reload(false);
   }
 
-//window.location.reload(false);
   return (
     <Container className='content'>
       <h2>Edit Profile</h2>

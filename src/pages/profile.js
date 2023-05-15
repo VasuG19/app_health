@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = (props) => {
 
+  const [patient, setPatientData]  = useState([]);
   const [isEditing, setIsEditing]  = useState(false);
 
   // log out the current user
@@ -27,11 +28,26 @@ const Profile = (props) => {
   const nav = useNavigate();
   useEffect(() => {
   if (!props.user ||props.user.title!== 'client') {
-     nav("/profile");
-    } else {
-     nav("/admin");
-    }
-  },[nav, props.user]);
+    nav("/profile");
+    setPatientData({
+      id: props.patient.id,
+      prescriptions: props.patient.prescriptions,
+      allergies: props.patient.allergies,
+      blood_type: props.patient.blood_type,
+      height: props.patient.height,
+      weight: props.patient.weight,
+      phone: props.patient.phone,
+      birthday: props.patient.birthday,
+      address: props.patient.address,
+      diet: props.patient.diet,
+      smoke: props.patient.smoke,
+      pregnant: props.patient.pregnant,
+      current_conditions: props.patient.current_conditions,
+    });
+  } else {
+    nav("/admin");
+  }
+  },[nav, props.user, props.patient]);
 
   // calculate the users BMI using the height and weight properties
   const bmi = (props.user.weight / props.user.height)^2
@@ -45,19 +61,20 @@ const Profile = (props) => {
           email={props.user.email}
           first_name={props.user.first_name}
           last_name={props.user.last_name}
-          prescriptions={props.user.prescriptions}
-          allergies={props.user.allergies}
-          blood_type={props.user.blood_type}
-          height={props.user.height}
-          weight={props.user.weight}
+          prescriptions={patient.prescriptions}
+          allergies={patient.allergies}
+          blood_type={patient.blood_type}
+          height={patient.height}
+          weight={patient.weight}
           phone={props.user.phone}
           birthday={props.user.birthday}
           address={props.user.address}
-          diet={props.user.diet}
-          smoke={props.user.smoke}
-          pregnant={props.user.pregnant}
+          diet={patient.diet}
+          smoke={patient.smoke}
+          pregnant={patient.pregnant}
           user={props.user}
-          current_conditions={props.user.current_conditions}
+          id={patient.id}
+          current_conditions={patient.current_conditions}
           onProfileUpdate={""}
           onClose={() => setIsEditing(false)}
         />
@@ -87,7 +104,7 @@ const Profile = (props) => {
                     <MDBCardText>Height(ft)</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.height}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.height}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -96,7 +113,7 @@ const Profile = (props) => {
                     <MDBCardText>Weight(KG)</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.weight}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.weight}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -105,7 +122,7 @@ const Profile = (props) => {
                     <MDBCardText>Blood Type</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.blood_type}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.blood_type}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -114,7 +131,7 @@ const Profile = (props) => {
                     <MDBCardText>Diet</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.diet}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.diet}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -123,7 +140,7 @@ const Profile = (props) => {
                     <MDBCardText>Pregnant</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.pregnant}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.pregnant}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -132,7 +149,7 @@ const Profile = (props) => {
                     <MDBCardText>Smoke</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="8">
-                    <MDBCardText className="text-muted">{props.user.smoke}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.smoke}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />

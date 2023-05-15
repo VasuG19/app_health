@@ -67,6 +67,15 @@ function App() {
       if (user && user.patient) {
         setPatientData({
           id: user.patient.id,
+          prescriptions: user.patient.prescriptions,
+          allergies: user.patient.allergies,
+          blood_type: user.patient.blood_type,
+          height: user.patient.height,
+          weight: user.patient.weight,
+          diet: user.patient.diet,
+          smoke: user.patient.smoke,
+          pregnant: user.patient.pregnant,
+          current_conditions: user.patient.current_conditions,
         });
       }
     } else {
