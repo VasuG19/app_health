@@ -15,7 +15,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
  * displays a calendar to visualise and display the appointments for the user and the admin
  * 
  * @author Mehtab Gill
- */
+*/
 
 function Timetable(props) {
   // Define state variables

@@ -27,7 +27,7 @@ import ClientError from './componants/clientError';
 
 // Main App function - calls all componants and routes for the app 
 function App() {
-
+  
   // declare variables
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState({});
@@ -36,28 +36,10 @@ function App() {
   const [services, setServices] = useState([]);
   const [clientData, setClientData]  = useState([]);
   const [patientData, setPatientData]  = useState([]);
-
+  
   // validate whether the user is authenticated
   const userToken = localStorage.getItem('token');
-
-  useEffect(() => {
-    if (!user ||user.title!== 'client') {
-      setIsAdmin(false)
-      setPatientData({
-          id: user.id,
-        })
-      } else {
-        setIsAdmin(true)
-        setClientData({
-          id: user.client.id,
-          institute: user.client.institute,
-          address: user.client.address
-        })
-        
-        setServices(user.client)
-      }
-  },[user]);
-
+  
   // retrieve the user data from the api
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -76,6 +58,24 @@ function App() {
       getUserData();
     }
   }, [userToken]);
+
+  useEffect(() => {
+    if (!user ||user.title!== 'client') {
+      setIsAdmin(false)
+      setPatientData({
+     //     id: user.patient.id,
+        })
+      } else {
+        setIsAdmin(true)
+        setClientData({
+          id: user.client.id,
+          institute: user.client.institute,
+          address: user.client.address
+        })
+        setServices(user.client)
+      }
+  },[user]);
+
 
  // retrieve the user data from the api
   useEffect(() => {

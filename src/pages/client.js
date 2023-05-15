@@ -3,6 +3,8 @@ import axios from "axios";
 import { Container, Row, Card, Col, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ClientCal from "../componants/clientCal";
+import ClientServices from "../componants/clientServices";
+
 
 /**
  * Admin Page 
@@ -15,6 +17,7 @@ import ClientCal from "../componants/clientCal";
 function Clients(props) {
   const [clients, setClients] = useState([]);
   const [show, setShow] = useState(false); // state for modal show/hide
+  const [showServices, setShowServices] = useState(false); // state for modal show/hide
   const [selectedClient, setSelectedClient] = useState(null); // state for selected client
 
   const nav = useNavigate();
@@ -44,6 +47,11 @@ function Clients(props) {
   const handleClientClick = (client) => {
     setSelectedClient(client);
     setShow(true);
+  };
+
+  const handleClientClickServices = (client) => {
+    setSelectedClient(client);
+    setShowServices(true);
   };
 
   const allCients =
@@ -93,6 +101,7 @@ function Clients(props) {
           </Card.Body>
             <Card.Footer className="clientName">
               <button className="themeButton" onClick={() => handleClientClick(value)}>View Appointments</button>
+              <button className="themeButton" onClick={() => handleClientClickServices(value)}>View Services</button>
             </Card.Footer>
         </Card>
       </Col>
@@ -115,12 +124,21 @@ function Clients(props) {
                 </Col>
             </Row>
 
-            <Modal show={show} onHide={() => setShow(false)}>
+          <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Client Calendar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <ClientCal user={props.user} client={selectedClient} />
+            </Modal.Body>
+          </Modal>
+
+          <Modal show={showServices} onHide={() => setShowServices(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Client Services</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ClientServices clients={selectedClient}/>
             </Modal.Body>
           </Modal>
 

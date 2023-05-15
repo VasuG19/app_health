@@ -3,7 +3,7 @@ import { MDBCol,MDBContainer,MDBRow,MDBCard,MDBCardText,MDBCardBody,MDBCardImage
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditAdmin from "../componants/editAdmin";
-import ServicesPage from "./services";
+import ServicesPage from "../componants/services";
 /**
  * Admin Page 
  * 
