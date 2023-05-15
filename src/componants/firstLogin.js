@@ -32,7 +32,7 @@ const FirstLogin = (props) => {
       console.error(error);
       alert("Incorrect username or password")
     }
-    nav("/client-details"); // redirect user to login page once registered
+    nav("/userTitle"); // redirect user to login page once registered
   }
 
   return (
