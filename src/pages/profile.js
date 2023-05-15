@@ -50,7 +50,7 @@ const Profile = (props) => {
   },[nav, props.user, props.patient]);
 
   // calculate the users BMI using the height and weight properties
-  const bmi = (props.user.weight / props.user.height)^2
+  const bmi = (props.patient.weight / props.patient.height)^2
 
  // return the profile page as well as calling the edit page when the edit button is selected 
   return (
@@ -220,7 +220,7 @@ const Profile = (props) => {
                 <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="textTheme me-1">Prescriptions</span></MDBCardText>
-                    <MDBCardText className="text-muted">{props.user.prescriptions}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.prescriptions}</MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
@@ -229,7 +229,7 @@ const Profile = (props) => {
                 <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="textTheme me-1">Conditions</span></MDBCardText>
-                    <MDBCardText className="text-muted">{props.user.current_conditions}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.current_conditions}</MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
@@ -238,7 +238,7 @@ const Profile = (props) => {
                 <MDBCard className="mb-4 mb-md-0 profile">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="textTheme me-1">Allergies</span></MDBCardText>
-                    <MDBCardText className="text-muted">{props.user.allergies}</MDBCardText>
+                    <MDBCardText className="text-muted">{props.patient.allergies}</MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
