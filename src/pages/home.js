@@ -106,7 +106,7 @@ function HomePage(props){
                             <div className="text-center">
                                 <h2 className="fw-bolder">Our services</h2>
                                 <p className="lead fw-normal text-muted mb-5">
-                                    Providing quality and personalised nutritional guidance
+                                    Showcasing quality health specialists to suit your needs
                                 </p>
                             </div>
                         </div>
