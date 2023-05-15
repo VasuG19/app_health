@@ -60,21 +60,26 @@ function App() {
   }, [userToken]);
 
   useEffect(() => {
-    if (!user ||user.title!== 'client') {
-      setIsAdmin(false)
-      setPatientData({
-     //     id: user.patient.id,
-        })
-      } else {
-        setIsAdmin(true)
+    if (!user || user.title !== 'client') {
+      setIsAdmin(false);
+      if (user && user.patient) {
+        setPatientData({
+          id: user.patient.id,
+        });
+      }
+    } else {
+      setIsAdmin(true);
+      if (user && user.client) {
         setClientData({
           id: user.client.id,
           institute: user.client.institute,
-          address: user.client.address
-        })
-        setServices(user.client)
+          address: user.client.address,
+        });
+        setServices(user.client);
       }
-  },[user]);
+    }
+  }, [user]);
+  
 
 
  // retrieve the user data from the api

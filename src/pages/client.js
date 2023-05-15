@@ -54,10 +54,9 @@ function Clients(props) {
     setShowServices(true);
   };
 
-  const allCients =
-    clients &&
+  const allCients = clients &&
     clients.map((value) => (
-      <Col sm={true} key={value.id}>
+      <Col sm={true} style={{padding:'10px'}} key={value.id}>
         <Card>
           <Card.Body>
             <Row>
@@ -70,7 +69,7 @@ function Clients(props) {
               <Col sm="3">
                 <Card.Text>Institute</Card.Text>
               </Col>
-              <Col sm="9">
+              <Col sm="9" className="clientName">
                 <Card.Text className="text-muted">
                   {value.attributes.institute}
                 </Card.Text>
@@ -81,7 +80,7 @@ function Clients(props) {
               <Col sm="3">
                 <Card.Text>Address</Card.Text>
               </Col>
-              <Col sm="9">
+              <Col sm="9" className="clientName">
                 <Card.Text className="text-muted">
                   {value.attributes.address}
                 </Card.Text>
@@ -92,7 +91,7 @@ function Clients(props) {
               <Col sm="3">
                 <Card.Text>Role</Card.Text>
               </Col>
-              <Col sm="9">
+              <Col sm="9" className="clientName">
                 <Card.Text className="text-muted">
                   {value.attributes.role}
                 </Card.Text>
@@ -100,8 +99,8 @@ function Clients(props) {
             </Row>
           </Card.Body>
             <Card.Footer className="clientName">
-              <button className="themeButton" onClick={() => handleClientClick(value)}>View Appointments</button>
-              <button className="themeButton" onClick={() => handleClientClickServices(value)}>View Services</button>
+            <div className='profileButton'><button className="themeButton" onClick={() => handleClientClick(value)}>View Appointments</button></div>
+            <div className='profileButton'><button className="themeButton" onClick={() => handleClientClickServices(value)}>View Services</button></div>
             </Card.Footer>
         </Card>
       </Col>
