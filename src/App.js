@@ -13,7 +13,7 @@ import Admin from './pages/admin';
 import NotFound from './componants/notFound';
 import ClientRegister from './componants/clientRegister';
 import FirstLogin from './componants/firstLogin';
-import ClientDetails from './componants/clientDetails';
+import UserTitle from './componants/userTitle';
 import Clients from './pages/client';
 import ClientError from './componants/clientError';
 import ForgotPass from './componants/forgotPass';
@@ -113,7 +113,7 @@ function App() {
           <Route path="/profile" element={<Profile authenticated={authenticated} patient={patientData} user={user} handleAuthenticated={setAuthenticated}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Profile authenticated={authenticated} user={user} handleAuthenticated={setAuthenticated}/>} />
-          <Route path="/client-details" element={<ClientDetails user={user} />}/>
+          <Route path="/userTitle" element={<UserTitle user={user} />}/>
           <Route path="/clients" element={<Clients user={user} />}/>
           <Route path='clientError' element={<ClientError/>}/>
           <Route path="/admin" element={<Admin authenticated={authenticated} 
