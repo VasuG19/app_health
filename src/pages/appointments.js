@@ -172,13 +172,13 @@ const [notes, setNotes] = useState({notes:''});
       <div className="d-flex justify-content-around">
         {chunk.map((value) => (
           <Card className="text-center" key={value.id}>
-          <Card.Body className="appointmentCard">
+            <Card.Body className="appointmentCard">
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{value.attributes.patient.data.attributes.username}</Card.Text>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
               <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
             </Card.Body>
-        </Card>
+          </Card>
         ))}
       </div>
     </Carousel.Item>
@@ -192,7 +192,9 @@ const [notes, setNotes] = useState({notes:''});
     <Container className='content'>
 
       <div>
-        <Timetable user={props.user} patient={props.patient} client={props.client}/>
+        <Card className="appointments" style={{padding:"20px"}}>
+          <Timetable user={props.user} patient={props.patient} client={props.client}/>
+        </Card>
       </div>
 
       <div >
@@ -225,8 +227,7 @@ const [notes, setNotes] = useState({notes:''});
         </Modal.Header>
         <Modal.Body>
           <p><strong>Patient:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.username}</p>
-          <p><strong>Name:</strong>     {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.first_name}-
-                                        {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.last_name}</p>
+          <p><strong>Client:</strong>     {selectedAppointment && selectedAppointment.attributes.client.data.attributes.username}</p>
           <p><strong>Title:</strong>    {selectedAppointment && selectedAppointment.attributes.title}</p>
           <p><strong>Start:</strong>    {selectedAppointment && new Date(selectedAppointment.attributes.start).toLocaleString()}</p>
           <p><strong>End:</strong>      {selectedAppointment && new Date(selectedAppointment.attributes.end).toLocaleString()}</p>
