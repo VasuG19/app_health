@@ -151,8 +151,8 @@ const [notes, setNotes] = useState({notes:''});
         {chunk.map((value) => (
           <Card className="text-center" key={value.id}>
             <Card.Body className="appointmentCard">
-              <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
-              <Card.Text>{value.attributes.title}</Card.Text>
+              <Card.Title>{value.attributes.title}</Card.Title>
+              <Card.Text>{value.attributes.patient.data.attributes.username}</Card.Text>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
               <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
             </Card.Body>
@@ -173,11 +173,11 @@ const [notes, setNotes] = useState({notes:''});
         {chunk.map((value) => (
           <Card className="text-center" key={value.id}>
           <Card.Body className="appointmentCard">
-            <Card.Title>{value.attributes.patient.data.attributes.username}</Card.Title>
-            <Card.Text>{value.attributes.title}</Card.Text>
-            <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-            <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
-          </Card.Body>
+              <Card.Title>{value.attributes.title}</Card.Title>
+              <Card.Text>{value.attributes.patient.data.attributes.username}</Card.Text>
+              <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
+              <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
+            </Card.Body>
         </Card>
         ))}
       </div>

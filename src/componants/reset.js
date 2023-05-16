@@ -3,10 +3,9 @@ import axios from 'axios';
 import { Form, Col, Row, Container, Card } from 'react-bootstrap';
 
 /**
- * edit componant
+ * reset componant
  * 
- * this componant is called within the profile page to allow the user to edit and add their personal health data
- * also allows the user to change their password if they choose to
+ * This componant is called to reset the users password if they forget it
  * 
  * @author Mehtab Gill
  */
@@ -15,11 +14,8 @@ const Reset = (props) => {
 
     // declare variables
   const [updateData, setUpdateData] = useState({username:props.username, email: props.email, password: '', passwordConfirmation: '' });
-
   const { username, email, password, passwordConfirmation} = updateData; 
-
   const handleChange = e => setUpdateData({ ...updateData, [e.target.name]: e.target.value });
-
   const code = localStorage.getItem('token');
 
    // handle submitting updated data

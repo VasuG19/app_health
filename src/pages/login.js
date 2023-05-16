@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
  */
 
 const Login = (props) => {
+
+  // username and password variables
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,7 +26,7 @@ const Login = (props) => {
         password: password,
       });
       localStorage.setItem('token', response.data.jwt);
-      props.handleAuthenticated(true)
+      props.handleAuthenticated(true) // set the user to authenticated
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -32,6 +34,7 @@ const Login = (props) => {
     }
   }
 
+  // return the login form componant 
   return (
       <Container className='content'>
         <div className='login'>

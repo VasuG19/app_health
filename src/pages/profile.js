@@ -7,24 +7,26 @@ import { useNavigate } from "react-router-dom";
 /**
  * Profile Page 
  * 
- * profile page displays all of the user info or redicects the admin to the admin page
+ * profile page displays all of the user info or 
+ * redicects the admin to the admin page
  * 
  * @author Mehtab Gill
  */
 
 const Profile = (props) => {
 
+  //declare variables
   const [patient, setPatientData]  = useState([]);
-  const [isEditing, setIsEditing]  = useState(false);
+  const [isEditing, setIsEditing]  = useState(false); // check whether or not the page is in edit mode
 
-  // log out the current user
+  // function to log out the current user
   const handleSignOut = () => {
     props.handleAuthenticated(false)
     localStorage.removeItem('token')
     nav("/login");
   }
 
-  // if the user is the admin, redirect to the admin page
+  // if the user is a patient, store and set the patient data
   const nav = useNavigate();
   useEffect(() => {
   if (!props.user ||props.user.title!== 'client') {
@@ -44,7 +46,7 @@ const Profile = (props) => {
       pregnant: props.patient.pregnant,
       current_conditions: props.patient.current_conditions,
     });
-  } else {
+  } else { // or if the user is a client, redirect the user to the admin page
     nav("/admin");
   }
   },[nav, props.user, props.patient]);
@@ -52,7 +54,7 @@ const Profile = (props) => {
   // calculate the users BMI using the height and weight properties
   const bmi = (props.patient.weight / props.patient.height)^2
 
- // return the profile page as well as calling the edit page when the edit button is selected 
+ // display the profile page componants and the edit page when the edit button is selected 
   return (
     <div>
       {isEditing && 

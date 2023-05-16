@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 /**
  * Home Page
  * 
- * function to return home page data with relevant information and images
+ * function to return home page data 
+ * with relevant information and images
  * 
  * @author Mehtab Gill
  */
 
 function HomePage(props){
 
-    // map the services retrieved from app.js and display them on the home page
+    // map the 3 services retrieved from app.js and display them on the home page
     const service = props.services && props.services.map((value) => (
             <div  key={value.id} className="col-lg-4 mb-5">
                 <Card className="card h-100  shadow border-0">
@@ -35,7 +36,7 @@ function HomePage(props){
         )
     )
 
-    // return the home page
+    // return the home page componant
     return(
         <div>
             <div className='p-5 text-center bg-image jumbotron'>

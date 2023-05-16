@@ -7,9 +7,11 @@ import ClientServices from "../componants/clientServices";
 
 
 /**
- * Admin Page 
+ * client Page 
  * 
- * Retrieves and displays relevant admin data for the admin
+ * Retrieves and displays all clients and data
+ * Gives the use an option to view client data 
+ * and book appointments through calendar componants
  * 
  * @author Mehtab Gill
  */
@@ -22,16 +24,11 @@ function Clients(props) {
 
   const nav = useNavigate();
 
+  // if the user is a patient, retrieve all clients from the database 
   useEffect(() => {
     if (!props.user || props.user.title !== "client") {
       nav("/clients");
-    } else {
-      nav("/clientError");
-    }
-  }, [nav, props.user]);
-
-  useEffect(() => {
-    try {
+      try {
       const getUserData = async () => {
         const response = await axios.get(
           "http://localhost:1337/api/clients?populate=*"
@@ -39,23 +36,28 @@ function Clients(props) {
         setClients(response.data.data);
       };
       getUserData();
-    } catch (error) {
-      console.error(error.message);
+      } catch (error) {
+        console.error(error.message);
+      }
+    } else { // if the user is a client, redirect to an error page as the user must be a patient to book an appointment
+      nav("/clientError");
     }
-  }, [props.user]);
+  }, [nav, props.user]);
 
+  // show the calendar popup when the button is clicked
   const handleClientClick = (client) => {
     setSelectedClient(client);
     setShow(true);
   };
 
+  // show the services popup when the button is clicked
   const handleClientClickServices = (client) => {
     setSelectedClient(client);
     setShowServices(true);
   };
 
-  const allCients = clients &&
-    clients.map((value) => (
+  // map the client data for each client, calling the relevant client data from the array
+  const allCients = clients && clients.map((value) => (
       <Col sm={true} style={{padding:'10px'}} key={value.id}>
         <Card>
           <Card.Body>
@@ -66,10 +68,10 @@ function Clients(props) {
             </Row>
             <hr />
             <Row>
-              <Col sm="3">
+              <Col sm="5">
                 <Card.Text>Institute</Card.Text>
               </Col>
-              <Col sm="9" className="clientName">
+              <Col sm="5" className="clientName">
                 <Card.Text className="text-muted">
                   {value.attributes.institute}
                 </Card.Text>
@@ -77,10 +79,10 @@ function Clients(props) {
             </Row>
             <hr />
             <Row>
-              <Col sm="3">
+              <Col sm="5">
                 <Card.Text>Address</Card.Text>
               </Col>
-              <Col sm="9" className="clientName">
+              <Col sm="5" className="clientName">
                 <Card.Text className="text-muted">
                   {value.attributes.address}
                 </Card.Text>
@@ -88,10 +90,10 @@ function Clients(props) {
             </Row>
             <hr />
             <Row>
-              <Col sm="3">
+              <Col sm="5">
                 <Card.Text>Role</Card.Text>
               </Col>
-              <Col sm="9" className="clientName">
+              <Col sm="5" className="clientName">
                 <Card.Text className="text-muted">
                   {value.attributes.role}
                 </Card.Text>
@@ -106,7 +108,7 @@ function Clients(props) {
       </Col>
     ));
 
-    // Render admin dashboard
+    // Display all clients with relevant services and calendar
     return(
         <Container className="content">
             <Row>

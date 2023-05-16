@@ -44,6 +44,7 @@ function ServicesPage(props){
         }
     }
 
+    // handle saving the added service to the database 
     const save = async () => {
         if (window.confirm(`Are you sure you want to add these services?`)) {
             try {
@@ -83,6 +84,7 @@ function ServicesPage(props){
         }
     };
 
+    // map all services from the array to render to the componant
     const serviceAdmin = data && data.map((value) => (
         <div  key={value.id} className="col-lg-4 mb-5">
             <div className="card h-100 shadow border-0">
@@ -100,6 +102,7 @@ function ServicesPage(props){
     ));
     
 
+    // return all services
     return(
         <Container className='content'>
                 <div>

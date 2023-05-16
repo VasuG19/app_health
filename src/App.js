@@ -30,7 +30,7 @@ import Reset from './componants/reset';
 // Main App function - calls all componants and routes for the app 
 function App() {
   
-  // declare variables
+  // declare variables and states
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState({});
   const [isAdmin, setIsAdmin]  = useState(false);
@@ -39,10 +39,10 @@ function App() {
   const [clientData, setClientData]  = useState([]);
   const [patientData, setPatientData]  = useState([]);
   
-  // validate whether the user is authenticated
+  // To validate whether the user is authenticated
   const userToken = localStorage.getItem('token');
   
-  // retrieve the user data from the api
+  // retrieve data of the current logged in user from the API
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setAuthenticated(true)
@@ -61,6 +61,7 @@ function App() {
     }
   }, [userToken]);
 
+  // If the user is a patient set and store their patient 
   useEffect(() => {
     if (!user || user.title !== 'client') {
       setIsAdmin(false);
@@ -79,7 +80,7 @@ function App() {
         });
       }
     } else {
-      setIsAdmin(true);
+      setIsAdmin(true); // if the user is the admin set and store their admin data
       if (user && user.client) {
         setClientData({
           id: user.client.id,
@@ -91,9 +92,7 @@ function App() {
     }
   }, [user]);
   
-
-
- // retrieve the user data from the api
+ // retrieve the services from the api 
   useEffect(() => {
     const getServices = async () => {
       fetch(`http://localhost:1337/api/services?populate=*`)
@@ -108,7 +107,8 @@ function App() {
     getServices();
   }, []);
 
-  // return routes to index.js for the different pages of the web-app while calling relevant functions 
+  // return routes to index.js for the different pages and componants of the web-app
+  // return specific routes depending on if the user is authenticated or not
   return (
     <div className="App">
        <div className='nav'>

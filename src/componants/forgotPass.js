@@ -3,10 +3,9 @@ import axios from 'axios';
 import { Form, Col, Row, Container, Card } from 'react-bootstrap';
 
 /**
- * edit componant
+ * forgot componant
  * 
- * this componant is called within the profile page to allow the user to edit and add their personal health data
- * also allows the user to change their password if they choose to
+ * This componant is called when the user has forgot their password
  * 
  * @author Mehtab Gill
  */
@@ -33,7 +32,6 @@ const ForgotPass = (props) => {
     window.location.reload(false);
   }
 
-//window.location.reload(false);
   return (
     <Container className='content'>
         <Row className="loginForm">

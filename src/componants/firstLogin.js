@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 
 /**
- * login componant
+ * First login componant
  * 
- * called to allow the user to login to the webpage
+ * The only purpose for this login componant is to redirect the user to the title page for verification
+ * This componant is only called after a user registers with us and it sends the user to the userTitle.js page
+ * after the user has registered and logged in for the first time
  * 
  * @author Mehtab Gill
  */
@@ -32,7 +34,7 @@ const FirstLogin = (props) => {
       console.error(error);
       alert("Incorrect username or password")
     }
-    nav("/userTitle"); // redirect user to login page once registered
+    nav("/userTitle"); // redirect user to the userTitle page for verification once logged in
   }
 
   return (

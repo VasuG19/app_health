@@ -11,10 +11,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 /**
- * Calendar Page 
+ * Calendar component 
  * 
  * retreieves and displays all of specific appointments depending on whether the user is the admin
  * displays a calendar to visualise and display the appointments for the user and the admin
+ * 
+ * This componant is called on the client page and used to show the individual clients available times and appointments
  * 
  * @author Mehtab Gill
  */

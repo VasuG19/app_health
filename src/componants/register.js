@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 /**
  * register componant
  * 
- * componant called to register a user to the database
+ * componant called to register a new patient
  * 
  * @author Mehtab Gill
  */

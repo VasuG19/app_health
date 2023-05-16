@@ -3,9 +3,10 @@ import { useState } from 'react';
 import {Container, Row, Col, Card} from 'react-bootstrap';
 
 /**
- * popup componant
+ * Services componant
  * 
- * componant to be called and display a popup with relevant appointment data
+ * componant is used to display all services to the relevant client
+ * data is passed down through props
  * 
  * @author Mehtab Gill
  */
