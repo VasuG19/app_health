@@ -1,8 +1,6 @@
-import {React} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 /**
  * Services Page 
@@ -19,13 +17,13 @@ function ServicesPage(props){
 
 
     useEffect(() => {
-        // retrieve the user data from the api
         const getServices = async () => {
           const response = await axios.get(`http://localhost:1337/api/services?populate=*&filters[client][id][$eq]=${props.clientData.id}`);
           setData(response.data.data);
         };
         getServices();
-    }, [props.clientData.id, data]);
+      }, [props.clientData.id]);
+      
 
     // handle submitting updated data
     const addService = async () => {
@@ -35,54 +33,53 @@ function ServicesPage(props){
         console.log(description);
         if (title) {
             setServices({
-            data: {
-                title: title,
-                desc: description,
-                client: props.clientData.id
-            },
-            });
+                data:{ 
+                    title: title,
+                    desc: description,
+                    client: props.clientData.id
+                }
+            });              
         }
     }
 
     // handle saving the added service to the database 
     const save = async () => {
         if (window.confirm(`Are you sure you want to add these services?`)) {
-            try {
-                const config = {
-                    headers: {
-                      'Content-Type': 'application/json',
-                    }
-                  };
-                console.log(services)
-                const service = JSON.stringify(services)
-                const serv = await axios.post(`http://localhost:1337/api/services`, service, config);
-                console.log(serv)
-            } catch (error) {
+          try {
+            const config = {
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            };
+            await axios.post(`http://localhost:1337/api/services`, services, config);
+          } catch (error) {
             console.error(error);
             alert('There was an error adding notes.');
-            }
-            window.location.reload(false);
+          }
+          window.location.reload(false);
         }
-    };
+      };
+      
 
     // handle for when an event is clicked, the user has the option to delete the booking
     const del = async (id) => {
         if (window.confirm(`Are you sure you want to delete this service?`)) {
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                };
-                await axios.delete(`http://localhost:1337/api/services/${id}`, config);
-                alert('Service deleted successfully!');
-                window.location.reload(false);
-            } catch (error) {
-                console.error(error);
-                alert('There was an error deleting the service.');
-            }
+          try {
+            const config = {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            };
+            await axios.delete(`http://localhost:1337/api/services/${id}`, config);
+            alert('Service deleted successfully!');
+            window.location.reload(false);
+          } catch (error) {
+            console.error(error);
+            alert('There was an error deleting the service.');
+          }
         }
-    };
+      };
+      
 
     // map all services from the array to render to the componant
     const serviceAdmin = data && data.map((value) => (
