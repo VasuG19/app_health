@@ -56,7 +56,7 @@ const Login = (props) => {
                 <button className='themeButton' type="submit">Login</button>
               </Form>
               <h6>
-                Click <Link to="/register">Here</Link> to register
+                Click <Link to="/register">Here</Link> to register as a patient
               </h6>
                 or
               <p>
