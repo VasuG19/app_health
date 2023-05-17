@@ -104,7 +104,7 @@ function ServicesPage(props){
 
     // return all services
     return(
-        <Container className='content'>
+        <Container>
                 <div>
                     <Row sm={true}>
                         {serviceAdmin}
