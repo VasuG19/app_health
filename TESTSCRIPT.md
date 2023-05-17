@@ -44,4 +44,3 @@ View the appointments that you have booked in the appointment page
 ## 12
 Browse the home page and the rest of the website
 
-
