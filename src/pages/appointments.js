@@ -23,6 +23,7 @@ const [itemsperslide, setitemsperslide] = useState(3);
 const [upcoming, setUpcoming] = useState([]);
 const [selectedAppointment, setSelectedAppointment] = useState(null);
 const [showModal, setShowModal] = useState(false);
+const [showPatient, setShowPatient] = useState(false);
 const code = localStorage.getItem('token');
 const [notes, setNotes] = useState({notes:''});
 
@@ -59,6 +60,12 @@ const [notes, setNotes] = useState({notes:''});
   const handleViewAppointment = (appointment) => {
     setSelectedAppointment(appointment);
     setShowModal(true);
+  };
+
+   // handle for when the view appointment button is clicked and displays popup with relevant 
+   const handleViewPatient = (appointment) => {
+    setSelectedAppointment(appointment);
+    setShowPatient(true);
   };
 
   // handle for when an event is clicked, the user has the option to delete the booking
@@ -154,7 +161,12 @@ const [notes, setNotes] = useState({notes:''});
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{value.attributes.patient.data.attributes.username}</Card.Text>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
+              <div className='profileButton'>
+                <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
+              </div>
+              <div className='profileButton'>
+                <button className='themeButton' type="button" onClick={() => handleViewPatient(value)}>View Patient</button>
+              </div>
             </Card.Body>
           </Card>
         ))}
@@ -176,7 +188,12 @@ const [notes, setNotes] = useState({notes:''});
               <Card.Title>{value.attributes.title}</Card.Title>
               <Card.Text>{value.attributes.patient.data.attributes.username}</Card.Text>
               <Card.Text>{new Date(value.attributes.start).toLocaleDateString()}</Card.Text>
-              <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
+              <div className='profileButton'>
+                <button className='themeButton' type="button" onClick={() => handleViewAppointment(value)}>View Appointment</button>
+              </div>
+              <div className='profileButton'>
+                <button className='themeButton' type="button" onClick={() => handleViewPatient(value)}>View Patient</button>
+              </div>
             </Card.Body>
           </Card>
         ))}
@@ -240,6 +257,26 @@ const [notes, setNotes] = useState({notes:''});
           <Button variant="danger" onClick={handleEventClick}>Cancel Appointment</Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showPatient} onHide={() => setShowPatient(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Patient Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p><strong>Patient:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.username}</p>
+          <p><strong>Sex:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.sex}</p>
+          <p><strong>Height:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.height}</p>
+          <p><strong>Weight:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.weight}</p>
+          <p><strong>Blood Type:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.blood_type}</p>
+          <p><strong>Diet:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.diet}</p>
+          <p><strong>Pregnant:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.pregnant}</p>
+          <p><strong>Smoke:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.smoke}</p>
+          <p><strong>Allergies:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.allergies}</p>
+          <p><strong>Conditions:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.current_conditions}</p>
+          <p><strong>Prescriptions:</strong>  {selectedAppointment && selectedAppointment.attributes.patient.data.attributes.prescriptions}</p>
+        </Modal.Body>
+      </Modal>
+
     </Container>
   );
 }
