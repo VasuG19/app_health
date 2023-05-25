@@ -58,7 +58,7 @@ function Clients(props) {
 
   // map the client data for each client, calling the relevant client data from the array
   const allCients = clients && clients.map((value) => (
-      <Col sm={6} md={4} lg={3} style={{padding:'10px'}} key={value.id}>
+      <Col sm={6} md={6} lg={4} style={{padding:'10px'}} key={value.id}>
         <Card>
           <Card.Body>
             <Row>
