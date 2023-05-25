@@ -74,6 +74,7 @@ function Admin (props){
           email={props.user.email}
           institute={props.clientData.institute}
           address={props.clientData.address}
+          role={props.clientData.role}
           onProfileUpdate={""}
           onClose={() => setIsEditing(false)}
         />
@@ -96,6 +97,15 @@ function Admin (props){
 
                     <MDBCard className="mb-4 mb-lg-0 profile">
                         <MDBCardBody>
+                            <MDBRow>
+                                <MDBCol sm="5">
+                                    <MDBCardText>Role</MDBCardText>
+                                </MDBCol>
+                                <MDBCol sm="5">
+                                    <MDBCardText className="text-muted">{props.clientData.role}</MDBCardText>
+                                </MDBCol>
+                            </MDBRow>
+                            <hr />
                             <MDBRow>
                                 <MDBCol sm="5">
                                     <MDBCardText>Institute</MDBCardText>

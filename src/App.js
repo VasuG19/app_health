@@ -86,6 +86,7 @@ function App() {
           id: user.client.id,
           institute: user.client.institute,
           address: user.client.address,
+          role: user.client.role
         });
         setServices(user.client);
       }

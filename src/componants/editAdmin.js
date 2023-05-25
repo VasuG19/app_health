@@ -16,9 +16,9 @@ const EditAdmin = (props) => {
     // declare variables
     const [updateData, setUpdateData] = useState({
         username:props.username, email: props.email, password: '', passwordConfirmation: '', 
-        currentPassword: '', institute:props.institute, address:props.address
+        currentPassword: '', institute:props.institute, address:props.address, role: props.role
     });
-    const { username, email,password, passwordConfirmation, currentPassword, institute, address} = updateData; 
+    const { username, email,password, passwordConfirmation, currentPassword, institute, address, role} = updateData; 
     const handleChange = e => setUpdateData({ ...updateData, [e.target.name]: e.target.value });
     const code = localStorage.getItem('token');
 
@@ -33,7 +33,7 @@ const EditAdmin = (props) => {
                     }
                 };
                 const body = JSON.stringify({username, email,  });
-                const CL = JSON.stringify({data:{institute, address,  }});
+                const CL = JSON.stringify({data:{institute, address, role}});
                 const result = await axios.put(`http://localhost:1337/api/users/${props.user.id}`, body, config);
                 const resultCL = await axios.put(`http://localhost:1337/api/clients/${props.user.client.id}`, CL, config);
                 console.log(result)
@@ -95,6 +95,11 @@ const EditAdmin = (props) => {
                 <Col>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                     Address:<Form.Control type="text" name='address' value={address} onChange={handleChange}/>
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    Role:<Form.Control type="text" name='role' value={role} onChange={handleChange}/>
                     </Form.Group>
                 </Col>
             </Row>
